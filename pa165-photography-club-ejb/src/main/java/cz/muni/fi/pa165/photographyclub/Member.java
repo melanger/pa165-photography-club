@@ -5,6 +5,9 @@ import javax.validation.constraints.NotNull;
 import java.awt.image.BufferedImage;
 import java.util.Date;
 
+/**
+ * @author Denis.Figula
+ */
 @Entity
 public class Member {
 
