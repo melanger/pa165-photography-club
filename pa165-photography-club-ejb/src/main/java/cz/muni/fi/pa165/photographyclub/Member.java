@@ -33,7 +33,7 @@ public class Member {
     private Gender gender;
 
     @Column
-    private BufferedImage photo;
+    private String photo;
 
     public Long getId() {
         return id;
@@ -91,11 +91,11 @@ public class Member {
         this.gender = gender;
     }
 
-    public BufferedImage getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(BufferedImage photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
