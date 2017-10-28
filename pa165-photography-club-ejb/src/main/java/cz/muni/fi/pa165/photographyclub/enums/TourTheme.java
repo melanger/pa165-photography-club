@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.photographyclub;
+package cz.muni.fi.pa165.photographyclub.enums;
 
 /**
  * @author Pavel Brousek

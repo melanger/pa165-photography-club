@@ -1,5 +1,6 @@
-package cz.muni.fi.pa165.photographyclub;
+package cz.muni.fi.pa165.photographyclub.dao;
 
+import cz.muni.fi.pa165.photographyclub.entity.Tour;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
