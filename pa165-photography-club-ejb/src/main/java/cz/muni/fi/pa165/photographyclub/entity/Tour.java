@@ -1,5 +1,6 @@
-package cz.muni.fi.pa165.photographyclub;
+package cz.muni.fi.pa165.photographyclub.entity;
 
+import cz.muni.fi.pa165.photographyclub.enums.TourTheme;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;

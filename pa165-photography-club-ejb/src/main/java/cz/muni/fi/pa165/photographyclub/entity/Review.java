@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.photographyclub;
+package cz.muni.fi.pa165.photographyclub.entity;
 
 import java.io.Serializable;
 import javax.persistence.Column;

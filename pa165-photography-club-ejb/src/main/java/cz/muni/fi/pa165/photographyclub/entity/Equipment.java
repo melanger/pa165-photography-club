@@ -1,5 +1,6 @@
-package cz.muni.fi.pa165.photographyclub;
+package cz.muni.fi.pa165.photographyclub.entity;
 
+import cz.muni.fi.pa165.photographyclub.enums.EquipmentType;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,5 +1,6 @@
-package cz.muni.fi.pa165.photographyclub;
+package cz.muni.fi.pa165.photographyclub.entity;
 
+import cz.muni.fi.pa165.photographyclub.enums.Gender;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.awt.image.BufferedImage;

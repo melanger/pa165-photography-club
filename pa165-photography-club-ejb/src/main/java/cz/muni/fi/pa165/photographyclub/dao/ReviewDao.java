@@ -1,5 +1,8 @@
-package cz.muni.fi.pa165.photographyclub;
+package cz.muni.fi.pa165.photographyclub.dao;
 
+import cz.muni.fi.pa165.photographyclub.entity.Member;
+import cz.muni.fi.pa165.photographyclub.entity.Review;
+import cz.muni.fi.pa165.photographyclub.entity.Tour;
 import java.util.List;
 
 /**
