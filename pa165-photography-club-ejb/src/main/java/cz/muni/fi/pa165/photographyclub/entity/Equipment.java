@@ -57,6 +57,14 @@ public class Equipment implements Serializable {
         this.type = type;
     }
 
+    public Member getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Member owner) {
+        this.owner = owner;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;

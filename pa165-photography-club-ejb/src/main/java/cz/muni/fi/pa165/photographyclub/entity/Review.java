@@ -57,6 +57,22 @@ public class Review implements Serializable {
     public void setRating(int rating) {
         this.rating = rating;
     }
+    
+    public Tour getTour() {
+        return tour;
+    }
+
+    public void setTour(Tour tour) {
+        this.tour = tour;
+    }
+
+    public Member getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Member author) {
+        this.author = author;
+    }
 
     @Override
     public int hashCode() {
