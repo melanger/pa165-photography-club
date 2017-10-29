@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -15,6 +16,12 @@ import java.util.Objects;
  */
 @Entity
 public class Review implements Serializable {
+
+    @ManyToOne
+    private Tour tour;
+    
+    @ManyToOne
+    private Member author;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
