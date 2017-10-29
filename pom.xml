@@ -55,6 +55,23 @@
               <artifactId>spring-core</artifactId>
               <version>5.0.0.RELEASE</version>
           </dependency>
+          <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-swing-testng</artifactId>
+            <version>3.8.0</version>
+            <scope>test</scope>
+          </dependency>
+          <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+            <version>6.11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.13.1.1</version>
+        </dependency>
       </dependencies>
     </dependencyManagement>
 </project>

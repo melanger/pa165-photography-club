@@ -3,14 +3,21 @@ package cz.muni.fi.pa165.photographyclub.entity;
 import cz.muni.fi.pa165.photographyclub.enums.Gender;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.awt.image.BufferedImage;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Denis.Figula
  */
 @Entity
+@Table(name = "ClubMember")
 public class Member {
+
+    @OneToMany(mappedBy = "author")
+    private List<Review> reviews;
+    
+    @OneToMany(mappedBy = "owner")
+    private List<Equipment> equipment;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

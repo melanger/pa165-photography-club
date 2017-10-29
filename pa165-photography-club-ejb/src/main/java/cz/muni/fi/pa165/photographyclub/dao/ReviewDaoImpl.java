@@ -7,10 +7,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Pavel Brousek
  */
+@Repository
 public class ReviewDaoImpl implements ReviewDao {
     @PersistenceContext
     private EntityManager em;

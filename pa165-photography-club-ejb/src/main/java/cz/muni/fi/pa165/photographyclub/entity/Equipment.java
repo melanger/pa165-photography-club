@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -16,6 +17,9 @@ import java.util.Objects;
  */
 @Entity
 public class Equipment implements Serializable {
+
+    @ManyToOne
+    private Member owner;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
