@@ -110,6 +110,24 @@ public class Member {
         this.photo = photo;
     }
 
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public List<Equipment> getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(List<Equipment> equipment) {
+        this.equipment = equipment;
+    }
+    
+    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
