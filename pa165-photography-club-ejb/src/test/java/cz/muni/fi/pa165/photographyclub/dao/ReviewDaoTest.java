@@ -79,25 +79,7 @@ public class ReviewDaoTest extends AbstractTestNGSpringContextTests {
                 //reviewDao.create(review);
                 service.createReview(review);
             }
-        }).isInstanceOf(TransactionSystemException.class);  //.isInstanceOf(ConstraintViolationException.class);
-    }
-    
-    @Test
-    public void authorTourCombinationIsUnique(){
-        Review review1 = createFullReview();
-
-        final Review review2 = new Review();
-        review2.setAuthor(createFullMember());
-        review2.setTour(createFullTour());
-        review2.setComment("2");
-
-        assertThatThrownBy(new ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                //reviewDao.create(review2);
-                service.createReview(review2);
-            }
-        }).isInstanceOf(DataAccessException.class);  //.isInstanceOf(DataAccessException.class);
+        }).isInstanceOf(TransactionSystemException.class);
     }
     
     @Test()
