@@ -8,6 +8,7 @@ package cz.muni.fi.pa165.photographyclub.dao;
 import cz.muni.fi.pa165.photographyclub.entity.Member;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
@@ -34,8 +35,14 @@ public class MemberDaoImpl implements MemberDao {
 
     @Override
     public Member findMemberByName(String name) {
-        return entityManager.createQuery("SELECT m FROM Member m WHERE m.name = :name", Member.class)
+        Member result = null;
+        try{
+        result = entityManager.createQuery("SELECT m FROM Member m WHERE m.name = :name", Member.class)
                 .setParameter("name", name).getSingleResult();
+        } catch(NoResultException e) {
+            return null;
+        }
+        return result;
     }
 
     @Override
