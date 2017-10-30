@@ -9,12 +9,14 @@ import cz.muni.fi.pa165.photographyclub.entity.Member;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 
 /**
  * implementation OF data access object for Member entity.
  * 
  * @author Matus Kravec
  */
+@Repository
 public class MemberDaoImpl implements MemberDao {
     
     @PersistenceContext
@@ -48,7 +50,9 @@ public class MemberDaoImpl implements MemberDao {
 
     @Override
     public void remove(Member member) {
-        entityManager.remove(member);
+        Member tmp = entityManager.getReference(Member.class, member.getId());
+        entityManager.remove(tmp);
+        //entityManager.remove(member);
     }
     
 }

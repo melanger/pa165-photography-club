@@ -75,7 +75,7 @@ public class Tour implements Serializable {
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
