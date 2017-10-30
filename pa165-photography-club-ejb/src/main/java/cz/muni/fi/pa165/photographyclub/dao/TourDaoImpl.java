@@ -4,12 +4,14 @@ import cz.muni.fi.pa165.photographyclub.entity.Tour;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Denis.Figula
  *
  * Data access object implementation for Tour entity
  */
+@Repository
 public class TourDaoImpl implements TourDao {
 
     @PersistenceContext
@@ -30,7 +32,9 @@ public class TourDaoImpl implements TourDao {
      */
     @Override
     public void removeTour(Tour tour) {
-        entityManager.remove(tour);
+        Tour tmp = entityManager.getReference(Tour.class, tour.getId());
+        entityManager.remove(tmp);
+        //entityManager.remove(tour);
     }
 
     /**
@@ -69,6 +73,6 @@ public class TourDaoImpl implements TourDao {
     @Override
     public Tour getTourByName(String name) {
         return entityManager.createQuery("select t from Tour t where t.name = :name", Tour.class)
-                .setParameter(":name",name).getSingleResult();
+                .setParameter("name",name).getSingleResult();
     }
 }

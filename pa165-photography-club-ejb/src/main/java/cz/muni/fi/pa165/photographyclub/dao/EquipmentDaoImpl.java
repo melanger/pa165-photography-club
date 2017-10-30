@@ -6,10 +6,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Pavel Brousek
  */
+@Repository
 public class EquipmentDaoImpl implements EquipmentDao {
     @PersistenceContext
     private EntityManager em;
@@ -26,7 +28,9 @@ public class EquipmentDaoImpl implements EquipmentDao {
 
     @Override
     public void remove(Equipment e) {
-        em.remove(e);
+        Equipment tmp = em.getReference(Equipment.class, e.getId());
+        em.remove(tmp);
+        //em.remove(e);
     }
 
     @Override
