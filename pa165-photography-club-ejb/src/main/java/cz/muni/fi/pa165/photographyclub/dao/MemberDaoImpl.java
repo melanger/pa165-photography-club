@@ -35,7 +35,7 @@ public class MemberDaoImpl implements MemberDao {
     @Override
     public Member findMemberByName(String name) {
         return entityManager.createQuery("SELECT m FROM Member m WHERE m.name = :name", Member.class)
-                .setParameter(":name", name).getSingleResult();
+                .setParameter("name", name).getSingleResult();
     }
 
     @Override
