@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.photographyclub.enums.TourTheme;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,6 @@ import javax.validation.constraints.NotNull;
 
 /**
  * @author Pavel Brousek
- * @todo implement
  */
 @Entity
 public class Tour implements Serializable {
@@ -85,15 +85,17 @@ public class Tour implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (this == object) {
+            return true;
+        }
+        if (object == null) {
+            return false;
+        }
         if (!(object instanceof Tour)) {
             return false;
         }
-        Tour other = (Tour) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        final Tour other = (Tour) object;
+        return Objects.equals(this.id, other.getId());
     }
 
     @Override
