@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
@@ -22,6 +23,7 @@ import org.testng.annotations.Test;
  * @author Matus Kravec.
  */
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
+@DirtiesContext
 public class EquipmentDaoTest extends AbstractTestNGSpringContextTests {
     
     @Autowired
