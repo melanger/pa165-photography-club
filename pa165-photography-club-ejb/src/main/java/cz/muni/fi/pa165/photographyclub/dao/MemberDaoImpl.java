@@ -52,7 +52,6 @@ public class MemberDaoImpl implements MemberDao {
     public void remove(Member member) {
         Member tmp = entityManager.getReference(Member.class, member.getId());
         entityManager.remove(tmp);
-        //entityManager.remove(member);
     }
     
 }

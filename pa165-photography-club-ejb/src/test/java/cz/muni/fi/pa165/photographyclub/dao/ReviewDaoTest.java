@@ -8,11 +8,9 @@ import cz.muni.fi.pa165.photographyclub.enums.TourTheme;
 import cz.muni.fi.pa165.photographyclub.service.ServiceImpl;
 import java.sql.Date;
 import java.time.Instant;
-import javax.validation.ConstraintViolationException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.*;
 import org.springframework.test.context.ContextConfiguration;
@@ -25,15 +23,6 @@ import org.springframework.transaction.TransactionSystemException;
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
 public class ReviewDaoTest extends AbstractTestNGSpringContextTests {
     
-    /*@Autowired
-    private ReviewDao reviewDao;
-    
-    @Autowired
-    private MemberDao memberDao;
-    
-    @Autowired
-    private TourDao tourDao;   */
-    
     @Autowired
     private ServiceImpl service;
     
@@ -43,7 +32,6 @@ public class ReviewDaoTest extends AbstractTestNGSpringContextTests {
         Member author = new Member();
         author.setName("Karel");
         author.setBirthDate(new Date(2017, 10, 28));
-        //memberDao.create(author);
         service.createMember(author);
         return author;
     }
@@ -52,7 +40,6 @@ public class ReviewDaoTest extends AbstractTestNGSpringContextTests {
         tour.setName("Landscape 2017");
         tour.setTheme(TourTheme.LANDSCAPE);
         tour.setDate(java.util.Date.from(Instant.now()));
-        //tourDao.createTour(tour);
         service.createTour(tour);
         return tour;
     }
@@ -64,19 +51,17 @@ public class ReviewDaoTest extends AbstractTestNGSpringContextTests {
         review.setAuthor(author);
         review.setTour(tour);
         review.setComment(DEFAULT_COMMENT);
-        //reviewDao.create(review);
         service.createReview(review);
         return review;
     }
     
-    @Test   //asserting exception causes database TransactionSystemException.
+    @Test
     public void nullReviewCommentNotAllowed(){
         final Review review = new Review();
         review.setComment(null);
         assertThatThrownBy(new ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                //reviewDao.create(review);
                 service.createReview(review);
             }
         }).isInstanceOf(TransactionSystemException.class);
@@ -92,9 +77,6 @@ public class ReviewDaoTest extends AbstractTestNGSpringContextTests {
     @Test()
     public void delete(){
         Review review = createFullReview();
-        /*assertThat(reviewDao.findById(review.getId())).isNotNull();
-        reviewDao.remove(review);
-        assertThat(reviewDao.findById(review.getId())).isNull();*/
         assertThat(service.findReviewById(review.getId())).isNotNull();
         service.removeReview(review);
         assertThat(service.findReviewById(review.getId())).isNull();

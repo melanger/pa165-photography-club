@@ -40,16 +40,6 @@ public class TourDaoTest extends AbstractTestNGSpringContextTests {
         
     @Test
     public void createTourTest() {
-        
-        /*EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Tour tour = new Tour();
-        tour.setName("Test");
-        tour.setTheme(TourTheme.PORTRAITS);
-        tour.setDate(Date.from(Instant.now()));
-        em.persist(tour);
-        em.getTransaction().commit();
-        em.close();*/
         Tour tour = makeTour();
         
         EntityManager entityManager = emf.createEntityManager();

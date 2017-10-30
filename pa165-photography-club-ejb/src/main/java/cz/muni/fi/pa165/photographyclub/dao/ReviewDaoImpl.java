@@ -31,7 +31,6 @@ public class ReviewDaoImpl implements ReviewDao {
     public void remove(Review r) {
         Review tmp = em.getReference(Review.class, r.getId());
         em.remove(tmp);
-        //em.remove(r);
     }
 
     @Override

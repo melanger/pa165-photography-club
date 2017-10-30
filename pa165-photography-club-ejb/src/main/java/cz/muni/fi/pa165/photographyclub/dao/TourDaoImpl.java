@@ -34,7 +34,6 @@ public class TourDaoImpl implements TourDao {
     public void removeTour(Tour tour) {
         Tour tmp = entityManager.getReference(Tour.class, tour.getId());
         entityManager.remove(tmp);
-        //entityManager.remove(tour);
     }
 
     /**
