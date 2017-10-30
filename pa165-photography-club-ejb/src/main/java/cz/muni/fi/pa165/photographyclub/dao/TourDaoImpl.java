@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.photographyclub.entity.Tour;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import javax.persistence.NoResultException;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -70,7 +71,13 @@ public class TourDaoImpl implements TourDao {
      */
     @Override
     public Tour getTourByName(String name) {
-        return entityManager.createQuery("select t from Tour t where t.name = :name", Tour.class)
+        Tour result = null;
+        try{
+        result = entityManager.createQuery("select t from Tour t where t.name = :name", Tour.class)
                 .setParameter("name",name).getSingleResult();
+        } catch(NoResultException e) {
+            return null;
+        }
+        return result;
     }
 }
