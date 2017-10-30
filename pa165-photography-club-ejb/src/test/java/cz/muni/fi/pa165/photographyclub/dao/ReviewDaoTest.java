@@ -13,6 +13,7 @@ import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.*;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.transaction.TransactionSystemException;
@@ -21,6 +22,7 @@ import org.springframework.transaction.TransactionSystemException;
  * @author Pavel Brousek
  */
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
+@DirtiesContext
 public class ReviewDaoTest extends AbstractTestNGSpringContextTests {
     
     @Autowired

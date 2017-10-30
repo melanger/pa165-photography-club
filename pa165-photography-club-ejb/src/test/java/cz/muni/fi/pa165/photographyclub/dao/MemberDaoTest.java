@@ -15,11 +15,13 @@ import static org.assertj.core.api.Assertions.*;
 
 
 import java.sql.Date;
+import org.springframework.test.annotation.DirtiesContext;
 
 /**
  * @author Denis.Figula
  */
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
+@DirtiesContext
 public class MemberDaoTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
