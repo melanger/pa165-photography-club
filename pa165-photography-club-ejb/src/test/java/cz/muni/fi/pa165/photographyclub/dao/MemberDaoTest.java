@@ -57,7 +57,7 @@ public class MemberDaoTest extends AbstractTestNGSpringContextTests {
         Member member = createMember();
         service.createMember(member);
         assertThat(service.findMemberById(member.getId())).isNotNull();
-        service.removeMember(createMember());
+        service.removeMember(member);
         assertThat(service.findMemberById(member.getId())).isNull();
     }
 }
