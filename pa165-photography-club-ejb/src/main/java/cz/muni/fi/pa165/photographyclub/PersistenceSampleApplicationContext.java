@@ -19,7 +19,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 
-
+/**
+ * @author Matus Kravec
+ */
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories

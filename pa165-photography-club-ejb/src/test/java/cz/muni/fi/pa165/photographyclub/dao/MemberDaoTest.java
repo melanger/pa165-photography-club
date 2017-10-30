@@ -6,7 +6,6 @@ import cz.muni.fi.pa165.photographyclub.service.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import javax.persistence.EntityManagerFactory;
@@ -61,6 +60,4 @@ public class MemberDaoTest extends AbstractTestNGSpringContextTests {
         service.removeMember(createMember());
         assertThat(service.findMemberById(member.getId())).isNull();
     }
-
-
 }

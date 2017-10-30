@@ -4,7 +4,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-
+/**
+ * @author Matus Kravec
+ */
 public class Main {
     
     private static EntityManagerFactory emf;
