@@ -32,8 +32,7 @@ public class TourDaoImpl implements TourDao {
      */
     @Override
     public void removeTour(Tour tour) {
-        Tour tmp = entityManager.getReference(Tour.class, tour.getId());
-        entityManager.remove(tmp);
+        entityManager.remove(entityManager.merge(tour));
     }
 
     /**

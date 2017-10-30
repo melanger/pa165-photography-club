@@ -28,8 +28,7 @@ public class EquipmentDaoImpl implements EquipmentDao {
 
     @Override
     public void remove(Equipment e) {
-        Equipment tmp = em.getReference(Equipment.class, e.getId());
-        em.remove(tmp);
+        em.remove(em.merge(e));
     }
 
     @Override

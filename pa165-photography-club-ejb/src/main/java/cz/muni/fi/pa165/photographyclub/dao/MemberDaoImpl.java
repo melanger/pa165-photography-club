@@ -50,8 +50,7 @@ public class MemberDaoImpl implements MemberDao {
 
     @Override
     public void remove(Member member) {
-        Member tmp = entityManager.getReference(Member.class, member.getId());
-        entityManager.remove(tmp);
+        entityManager.remove(entityManager.merge(member));
     }
     
 }
