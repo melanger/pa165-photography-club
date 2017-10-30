@@ -1,9 +1,17 @@
 package cz.muni.fi.pa165.photographyclub.dao;
 
+import cz.muni.fi.pa165.photographyclub.PersistenceSampleApplicationContext;
 import cz.muni.fi.pa165.photographyclub.entity.Member;
+import cz.muni.fi.pa165.photographyclub.service.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+
 import static org.assertj.core.api.Assertions.*;
 
 
@@ -12,10 +20,14 @@ import java.sql.Date;
 /**
  * @author Denis.Figula
  */
-public class MemberDaoTest {
+@ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
+public class MemberDaoTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    private MemberDao memberService;
+    private ServiceImpl service;
+
+    @PersistenceUnit
+    private EntityManagerFactory emf;
 
     private Member createMember(){
         Member member = new Member();
@@ -28,26 +40,26 @@ public class MemberDaoTest {
     @Test
     public void getAllMembers(){
         Member member = createMember();
-        memberService.create(member);
-        assertThat(memberService.findAllMembers()).containsExactly(member);
+        service.createMember(member);
+        assertThat(service.findAllMembers()).containsExactly(member);
     }
 
     @Test
     public void updateMember(){
         Member member = createMember();
         member.setName("Cyril");
-        memberService.update(member);
-        assertThat(memberService.findMemberByName("Anton")).isNull();
-        assertThat(memberService.findMemberByName("Cyril")).isNotNull();
+        service.updateMember(member);
+        assertThat(service.findMemberByName("Anton")).isNull();
+        assertThat(service.findMemberByName("Cyril")).isNotNull();
     }
 
     @Test
     public void deleteMember(){
         Member member = createMember();
-        memberService.create(member);
-        assertThat(memberService.findMemberById(member.getId())).isNotNull();
-        memberService.remove(createMember());
-        assertThat(memberService.findMemberById(member.getId())).isNull();
+        service.createMember(member);
+        assertThat(service.findMemberById(member.getId())).isNotNull();
+        service.removeMember(createMember());
+        assertThat(service.findMemberById(member.getId())).isNull();
     }
 
 
