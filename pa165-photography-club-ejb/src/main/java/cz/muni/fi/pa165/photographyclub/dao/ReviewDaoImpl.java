@@ -40,20 +40,20 @@ public class ReviewDaoImpl implements ReviewDao {
     @Override
     public List<Review> findByAuthor(Member m) {
         TypedQuery<Review> query = em.createQuery(
-				"Select r from Review r where r.author = :memberid",
-				Review.class);
-		
-		query.setParameter("memberid", m);
+                "Select r from Review r where r.author = :memberid",
+                Review.class);
+
+        query.setParameter("memberid", m);
         return query.getResultList();
     }
 
     @Override
     public List<Review> findByTour(Tour t) {
         TypedQuery<Review> query = em.createQuery(
-				"Select r from Review r where r.tour = :tourid",
-				Review.class);
-		
-		query.setParameter("tourid", t);
+                "Select r from Review r where r.tour = :tourid",
+                Review.class);
+
+        query.setParameter("tourid", t);
         return query.getResultList();
-    }    
+    }
 }

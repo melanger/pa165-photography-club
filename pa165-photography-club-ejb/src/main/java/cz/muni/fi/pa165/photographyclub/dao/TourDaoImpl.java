@@ -61,7 +61,7 @@ public class TourDaoImpl implements TourDao {
      */
     @Override
     public Tour getTourByID(Long id) {
-        return entityManager.find(Tour.class,id);
+        return entityManager.find(Tour.class, id);
     }
 
     /**
@@ -72,10 +72,10 @@ public class TourDaoImpl implements TourDao {
     @Override
     public Tour getTourByName(String name) {
         Tour result = null;
-        try{
-        result = entityManager.createQuery("select t from Tour t where t.name = :name", Tour.class)
-                .setParameter("name",name).getSingleResult();
-        } catch(NoResultException e) {
+        try {
+            result = entityManager.createQuery("select t from Tour t where t.name = :name", Tour.class)
+                    .setParameter("name", name).getSingleResult();
+        } catch (NoResultException e) {
             return null;
         }
         return result;
