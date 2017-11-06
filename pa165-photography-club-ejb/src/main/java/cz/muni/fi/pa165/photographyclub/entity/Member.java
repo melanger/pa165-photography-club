@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.photographyclub.enums.Gender;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,6 +19,17 @@ public class Member {
     
     @OneToMany(mappedBy = "owner")
     private List<Equipment> equipment;
+    
+    @ManyToMany(mappedBy = "participants")
+    private List<Tour> tours;
+
+    public List<Tour> getTours() {
+        return tours;
+    }
+
+    public void setTours(List<Tour> tours) {
+        this.tours = new LinkedList<>(tours);
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
