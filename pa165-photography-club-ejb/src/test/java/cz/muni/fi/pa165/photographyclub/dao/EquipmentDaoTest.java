@@ -91,8 +91,6 @@ public class EquipmentDaoTest extends AbstractTestNGSpringContextTests {
     
     @Test
     public void findAllEquipmentTest(){
-        Equipment equipment = makeEquipment();
-        
         List<Equipment> euqipList = service.findAllEquipment();
         Assert.assertNotNull(euqipList);
         Assert.assertNotEquals(euqipList.size(), 0);
