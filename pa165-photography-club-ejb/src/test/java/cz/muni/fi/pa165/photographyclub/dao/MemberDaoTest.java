@@ -37,16 +37,22 @@ public class MemberDaoTest extends AbstractTestNGSpringContextTests {
         return member;
     }
 
+    @Test
+    public void createMemberTest(){
+        Member member = createMember();
+        service.createMember(member);
+        assertThat(service.findAllMembers()).contains(member);
+    }
 
     @Test
-    public void getAllMembers(){
+    public void getAllMembersTest(){
         Member member = createMember();
         service.createMember(member);
         assertThat(service.findAllMembers()).containsExactly(member);
     }
 
     @Test
-    public void updateMember(){
+    public void updateMemberTest(){
         Member member = createMember();
         member.setName("Cyril");
         service.updateMember(member);
@@ -55,7 +61,7 @@ public class MemberDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void deleteMember(){
+    public void deleteMemberTest(){
         Member member = createMember();
         service.createMember(member);
         assertThat(service.findMemberById(member.getId())).isNotNull();
