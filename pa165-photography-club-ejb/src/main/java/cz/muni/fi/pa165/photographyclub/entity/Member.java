@@ -144,10 +144,7 @@ public class Member {
         if (this == o) return true;
         if (o == null || !(o instanceof Member)) return false;
         final Member member = (Member) o;
-        if (!Objects.equals(this.id, member.id)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, member.id);
     }
 
     @Override
