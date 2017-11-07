@@ -141,13 +141,14 @@ public class Member {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || !(o instanceof Member)) return false;
         Member member = (Member) o;
         return id.equals(member.id);
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        int hash = 13;
+        return hash + (id != null ? id.hashCode() : 0);
     }
 }
