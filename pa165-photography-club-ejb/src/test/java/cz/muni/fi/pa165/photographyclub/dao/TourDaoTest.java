@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import static org.assertj.core.api.Assertions.*;
 
 /**
  *
@@ -118,5 +119,20 @@ public class TourDaoTest extends AbstractTestNGSpringContextTests {
         Tour tourTmp = service.getTourByName(tour.getName());
         Assert.assertNotNull(tourTmp);
         Assert.assertEquals(tourTmp, tour);       
+    }
+
+    @Test
+    public void getTourByIdNullTest(){
+        assertThat(service.getTourByID(0l)).isNull();
+    }
+
+    @Test
+    public void getTourByNameNullTest(){
+        assertThat(service.getTourByName("Null")).isNull();
+    }
+
+    @Test
+    public void getAllToursEmptyTest(){
+        assertThat(service.getAllTours()).isEmpty();
     }
 }
