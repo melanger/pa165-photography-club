@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Denis.Figula
@@ -142,13 +143,16 @@ public class Member {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || !(o instanceof Member)) return false;
-        Member member = (Member) o;
-        return id.equals(member.id);
+        final Member member = (Member) o;
+        if (!Objects.equals(this.id, member.id)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public int hashCode() {
         int hash = 13;
-        return hash + (id != null ? id.hashCode() : 0);
+        return hash + Objects.hashCode(this.id);
     }
 }
