@@ -4,8 +4,6 @@ import cz.muni.fi.pa165.photographyclub.entity.Member;
 import cz.muni.fi.pa165.photographyclub.entity.Review;
 import cz.muni.fi.pa165.photographyclub.entity.Tour;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
@@ -13,33 +11,20 @@ import org.springframework.stereotype.Repository;
  * @author Pavel Brousek
  */
 @Repository
-public class ReviewDaoImpl implements ReviewDao {
-    @PersistenceContext
-    private EntityManager em;
-    
+public class ReviewDaoImpl extends GenericDaoImpl<Review> implements ReviewDao {
     @Override
     public Review findById(Long id) {
-        return em.find(Review.class, id);
-    }
-
-    @Override
-    public void create(Review r) {
-        em.persist(r);
-    }
-
-    @Override
-    public void remove(Review r) {
-        em.remove(em.merge(r));
+        return entityManager.find(Review.class, id);
     }
 
     @Override
     public List<Review> findAll() {
-        return em.createQuery("SELECT r FROM Review r", Review.class).getResultList();
+        return entityManager.createQuery("SELECT r FROM Review r", Review.class).getResultList();
     }
 
     @Override
     public List<Review> findByAuthor(Member m) {
-        TypedQuery<Review> query = em.createQuery(
+        TypedQuery<Review> query = entityManager.createQuery(
                 "Select r from Review r where r.author = :memberid",
                 Review.class);
 
@@ -49,7 +34,7 @@ public class ReviewDaoImpl implements ReviewDao {
 
     @Override
     public List<Review> findByTour(Tour t) {
-        TypedQuery<Review> query = em.createQuery(
+        TypedQuery<Review> query = entityManager.createQuery(
                 "Select r from Review r where r.tour = :tourid",
                 Review.class);
 

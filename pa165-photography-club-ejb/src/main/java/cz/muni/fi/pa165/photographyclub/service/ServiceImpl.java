@@ -36,27 +36,27 @@ public class ServiceImpl {
     /***********************************TOUR***********************************/
     
     public void createTour(Tour tour){
-        tourDao.createTour(tour);
+        tourDao.create(tour);
     }
     
     public void removeTour(Tour tour) {
-        tourDao.removeTour(tour);
+        tourDao.remove(tour);
     }
  
     public void updateTour(Tour tour) {
-        tourDao.updateTour(tour);
+        tourDao.update(tour);
     }
     
     public List<Tour> getAllTours() {
-        return tourDao.getAllTours();
+        return tourDao.findAll();
     }
     
     public Tour getTourByID(Long id) {
-        return tourDao.getTourByID(id);
+        return tourDao.findById(id);
     }
     
     public Tour getTourByName(String name) {
-        return tourDao.getTourByName(name);
+        return tourDao.findByName(name);
     }
     
     /**********************************REVIEW**********************************/
@@ -92,15 +92,15 @@ public class ServiceImpl {
     }
     
     public Member findMemberById(Long id){
-        return memberDao.findMemberById(id);
+        return memberDao.findById(id);
     }
 
     public Member findMemberByName(String name){
-        return memberDao.findMemberByName(name);
+        return memberDao.findByName(name);
     }
     
     public List<Member> findAllMembers(){
-        return memberDao.findAllMembers();
+        return memberDao.findAll();
     }
     
     public void updateMember(Member member){

@@ -7,28 +7,7 @@ import java.util.List;
 /**
  * @author Pavel Brousek
  */
-public interface EquipmentDao {
-    /**
-     * Retrieve an equipment based on id.
-     * @param id equipment id
-     * @return equipment if found, null otherwise
-     */
-    public Equipment findById(Long id);
-    /**
-     * Create (store) a new equipment.
-     * @param e equipment to be stored
-     */
-    public void create(Equipment e);
-    /**
-     * Remove (delete) an equipment.
-     * @param e equipment to be deleted
-     */
-    public void remove(Equipment e);
-    /**
-     * Get all equipments.
-     * @return list of equipments (might be empty)
-     */
-    public List<Equipment> findAll();
+public interface EquipmentDao extends GenericDao<Equipment> {
     /**
      * Get equipments of a member.
      * @param m member whose equipments should be fetched
