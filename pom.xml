@@ -10,6 +10,7 @@
         <!--<module>pa165-photography-club-ear</module>-->
         <!--<module>pa165-photography-club-web</module>-->
         <module>pa165-photography-club-persistence</module>
+        <module>pa165-photography-club-service</module>
     </modules>
   
     <dependencyManagement>
