@@ -10,3 +10,6 @@ including the [Class diagram](https://github.com/melanger/pa165-photography-club
 - Matúš Kravec (422169) aka @MatthewK286
 
 There are only 3 members on this team (one dropped out).
+
+## Project structure (maven submodules)
+![maven submodules diagram](http://yuml.me/2b0d3e43.png)
