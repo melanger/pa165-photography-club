@@ -9,7 +9,7 @@
     <modules>
         <!--<module>pa165-photography-club-ear</module>-->
         <!--<module>pa165-photography-club-web</module>-->
-        <module>pa165-photography-club-ejb</module>
+        <module>pa165-photography-club-persistence</module>
     </modules>
   
     <dependencyManagement>
