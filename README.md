@@ -4,6 +4,13 @@ Seminar project for PA165 at FI MUNI. The web application allows a photography c
 More information can be found in the [project wiki](https://github.com/melanger/pa165-photography-club/wiki),
 including the [Class diagram](https://github.com/melanger/pa165-photography-club/wiki/Class-diagram) and the [Use Case diagram](https://github.com/melanger/pa165-photography-club/wiki/Use-Case-Diagram).
 
+## Usage
+```
+git clone https://github.com/melanger/pa165-photography-club.git
+cd pa165-photography-club
+mvn clean install
+```
+
 ## Team members
 - Pavel Břoušek (433364) aka @melanger
 - Denis Figula (410335) aka @DenisFigula
@@ -13,3 +20,6 @@ There are only 3 members on this team (one dropped out).
 
 ## Project structure (maven submodules)
 ![maven submodules diagram](http://yuml.me/2b0d3e43.png)
+
+## Simplified class diagram (omitting interfaces and implementations)
+![simplified class diagram](http://yuml.me/da6f290b.png)
