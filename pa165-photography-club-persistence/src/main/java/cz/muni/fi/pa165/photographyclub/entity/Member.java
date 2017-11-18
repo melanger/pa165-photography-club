@@ -1,9 +1,9 @@
 package cz.muni.fi.pa165.photographyclub.entity;
 
 import cz.muni.fi.pa165.photographyclub.enums.Gender;
+import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -42,7 +42,7 @@ public class Member {
 
     @Column(nullable = false)
     @NotNull
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @Column
     private  String address;
@@ -75,12 +75,12 @@ public class Member {
         this.name = name;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = LocalDate.from(birthDate);
     }
 
     public String getAddress() {

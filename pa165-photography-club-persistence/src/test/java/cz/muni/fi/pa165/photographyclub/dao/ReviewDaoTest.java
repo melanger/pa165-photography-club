@@ -8,6 +8,7 @@ import cz.muni.fi.pa165.photographyclub.enums.TourTheme;
 import cz.muni.fi.pa165.photographyclub.service.ServiceImpl;
 import java.sql.Date;
 import java.time.Instant;
+import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class ReviewDaoTest extends AbstractTestNGSpringContextTests {
     private Member createFullMember(){
         Member author = new Member();
         author.setName("Karel");
-        author.setBirthDate(new Date(2017, 10, 28));
+        author.setBirthDate(LocalDate.of(2017, 10, 28));
         service.createMember(author);
         return author;
     }

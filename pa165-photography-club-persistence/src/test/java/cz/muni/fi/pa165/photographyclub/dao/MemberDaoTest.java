@@ -15,6 +15,7 @@ import javax.transaction.Transactional;
 import static org.assertj.core.api.Assertions.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
@@ -34,7 +35,7 @@ public class MemberDaoTest extends AbstractTestNGSpringContextTests {
     private Member createMember() {
         Member member = new Member();
         member.setName("Bernard");
-        member.setBirthDate(new Date(1995, 5, 13));
+        member.setBirthDate(LocalDate.of(1995, 5, 13));
         return member;
     }
 
