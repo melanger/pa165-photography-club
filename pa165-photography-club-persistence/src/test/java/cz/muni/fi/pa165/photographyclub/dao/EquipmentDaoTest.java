@@ -23,7 +23,7 @@ import org.testng.annotations.Test;
  * @author Matus Kravec.
  */
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
-@DirtiesContext
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class EquipmentDaoTest extends AbstractTestNGSpringContextTests {
     
     @Autowired

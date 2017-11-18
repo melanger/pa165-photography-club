@@ -22,7 +22,7 @@ import org.springframework.transaction.TransactionSystemException;
  * @author Pavel Brousek
  */
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
-@DirtiesContext
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ReviewDaoTest extends AbstractTestNGSpringContextTests {
     
     @Autowired

@@ -10,18 +10,19 @@ import org.testng.annotations.Test;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
 
-
 import java.sql.Date;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 /**
  * @author Denis.Figula
  */
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
-@DirtiesContext
+@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class MemberDaoTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
@@ -30,7 +31,7 @@ public class MemberDaoTest extends AbstractTestNGSpringContextTests {
     @PersistenceUnit
     private EntityManagerFactory emf;
 
-    private Member createMember(){
+    private Member createMember() {
         Member member = new Member();
         member.setName("Bernard");
         member.setBirthDate(new Date(1995, 5, 13));
@@ -38,21 +39,21 @@ public class MemberDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void createMemberTest(){
+    public void createMemberTest() {
         Member member = createMember();
         service.createMember(member);
         assertThat(service.findAllMembers()).contains(member);
     }
 
     @Test
-    public void getAllMembersTest(){
+    public void getAllMembersTest() {
         Member member = createMember();
         service.createMember(member);
         assertThat(service.findAllMembers()).containsExactly(member);
     }
 
     @Test
-    public void updateMemberTest(){
+    public void updateMemberTest() {
         Member member = createMember();
         member.setName("Cyril");
         service.updateMember(member);
@@ -61,7 +62,7 @@ public class MemberDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void deleteMemberTest(){
+    public void deleteMemberTest() {
         Member member = createMember();
         service.createMember(member);
         assertThat(service.findMemberById(member.getId())).isNotNull();

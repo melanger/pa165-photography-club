@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.*;
  * @author Matus Kravec.
  */
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
-@DirtiesContext
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class TourDaoTest extends AbstractTestNGSpringContextTests {
     
     @Autowired
@@ -96,7 +96,7 @@ public class TourDaoTest extends AbstractTestNGSpringContextTests {
         
         List<Tour> tourList = service.getAllTours();
         Assert.assertNotNull(tourList);
-        Assert.assertEquals(tourList.size(), 3);       
+        Assert.assertEquals(tourList.size(), 2);       
     }
     
     @Test
