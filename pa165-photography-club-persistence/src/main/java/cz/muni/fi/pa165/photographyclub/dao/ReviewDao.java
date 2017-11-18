@@ -8,28 +8,7 @@ import java.util.List;
 /**
  * @author Pavel Brousek
  */
-public interface ReviewDao {
-    /**
-     * Retrieve a review based on id.
-     * @param id review id
-     * @return review if found, null otherwise
-     */
-    public Review findById(Long id);
-    /**
-     * Create (store) a new review.
-     * @param r review to be stored
-     */
-    public void create(Review r);
-    /**
-     * Remove (delete) a review.
-     * @param r review to be deleted
-     */
-    public void remove(Review r);
-    /**
-     * Get all reviews.
-     * @return list of reviews (might be empty)
-     */
-    public List<Review> findAll();
+public interface ReviewDao extends GenericDao<Review> {
     /**
      * Get reviews of a member.
      * @param m member whose reviews should be fetched
