@@ -9,7 +9,7 @@ import java.util.Map;
 
 public interface EquipmentService extends GenericService<Equipment> {
 
-    List<Equipment> findEquipmentByOwner(Member m);
+    List<Equipment> findByOwner(Member m);
 
     /**
      * Method gets all equipment and sort it by type

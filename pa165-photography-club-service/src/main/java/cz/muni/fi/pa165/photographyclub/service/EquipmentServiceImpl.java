@@ -1,44 +1,30 @@
 package cz.muni.fi.pa165.photographyclub.service;
 
 import cz.muni.fi.pa165.photographyclub.dao.EquipmentDao;
+import cz.muni.fi.pa165.photographyclub.dao.GenericDao;
 import cz.muni.fi.pa165.photographyclub.entity.Equipment;
 import cz.muni.fi.pa165.photographyclub.entity.Member;
 import cz.muni.fi.pa165.photographyclub.enums.EquipmentType;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.inject.Inject;
 
-public class EquipmentServiceImpl implements EquipmentService {
+public class EquipmentServiceImpl extends GenericServiceImpl<Equipment> implements EquipmentService {
 
     @Inject
-    EquipmentDao equipmentDao;
-
+    protected EquipmentDao dao;
+    
     @Override
-    public void create(Equipment e) {
-        equipmentDao.create(e);
+    protected GenericDao<Equipment> getDao() {
+        return dao;
     }
 
     @Override
-    public Equipment findById(Long id) {
-        return equipmentDao.findById(id);
-    }
-
-    @Override
-    public List<Equipment> findAll() {
-        return equipmentDao.findAll();
-    }
-
-    @Override
-    public void remove(Equipment e) {
-        equipmentDao.remove(e);
-    }
-
-    @Override
-    public List<Equipment> findEquipmentByOwner(Member m) {
-        return equipmentDao.findByOwner(m);
+    public List<Equipment> findByOwner(Member m) {
+        return dao.findByOwner(m);
     }
 
     @Override
@@ -47,7 +33,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
         for (EquipmentType t : EquipmentType.values()) {
             List<Equipment> equipmentList = new ArrayList<>();
-            for (Equipment e : equipmentDao.findAll())
+            for (Equipment e : dao.findAll())
                 if (e.getType().equals(t)) equipmentList.add(e);
             inventory.put(t,equipmentList);
         }
