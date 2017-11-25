@@ -10,26 +10,25 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public abstract class GenericServiceImpl<T> implements GenericService<T> {
-	@Inject
-	protected GenericDao<T> dao;
+	protected abstract GenericDao<T> getDao();
   
         @Override
 	public void create(T e) {
-		dao.create(e);
+		getDao().create(e);
 	}
 
 	@Override
 	public T findById(Long id) {
-		return dao.findById(id);
+		return getDao().findById(id);
 	}
 
 	@Override
 	public List<T> findAll() {
-		return dao.findAll();
+		return getDao().findAll();
 	}
 
 	@Override
 	public void remove(T e) {
-		dao.remove(e);
+		getDao().remove(e);
 	}
 }
