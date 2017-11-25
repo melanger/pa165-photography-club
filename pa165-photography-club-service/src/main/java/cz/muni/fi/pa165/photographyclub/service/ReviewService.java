@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface ReviewService extends GenericService<Review> {
 
-    List<Review> findReviewByAuthor(Member m);
+    List<Review> findByAuthor(Member m);
 
-    List<Review> findReviewByTour(Tour t);
+    List<Review> findByTour(Tour t);
 
     double getAverageRatingForTour(Tour t);
 }
