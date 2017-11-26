@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.photographyclub.service;
 
 import cz.muni.fi.pa165.photographyclub.ServiceTestApplicationContext;
@@ -12,6 +7,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -51,9 +47,11 @@ public class MemberServiceTest extends AbstractTestNGSpringContextTests{
         
     @Test
     public void findByIdTest(){
-       memberDao.create(member);
+       final long id = 42l;
+        member.setId(id);
+        when(memberDao.findById(member.getId())).thenReturn(member);
        
-       Assert.assertEquals(memberService.findById(member.getId()), member);
+       Assert.assertEquals(memberService.findById(id), member);
     }
     
     @Test
