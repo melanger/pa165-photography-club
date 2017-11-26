@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  *
- * @author Matus Kravec.
+ * @author Matus Kravec. 
  */
 public interface TourFacade {
     
