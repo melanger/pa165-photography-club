@@ -2,7 +2,7 @@ package cz.muni.fi.pa165.photographyclub.entity;
 
 import cz.muni.fi.pa165.photographyclub.enums.TourTheme;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -45,7 +45,7 @@ public class Tour implements Serializable {
     
     @Column(nullable=false)
     @NotNull
-    private Date date;
+    private LocalDate date;
     
     @OneToMany(mappedBy = "tour")
     private List<Review> reviews;
@@ -66,11 +66,11 @@ public class Tour implements Serializable {
         this.theme = theme;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

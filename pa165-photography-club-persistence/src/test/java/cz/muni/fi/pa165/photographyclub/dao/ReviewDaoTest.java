@@ -6,9 +6,8 @@ import cz.muni.fi.pa165.photographyclub.entity.Review;
 import cz.muni.fi.pa165.photographyclub.entity.Tour;
 import cz.muni.fi.pa165.photographyclub.enums.TourTheme;
 import cz.muni.fi.pa165.photographyclub.service.ServiceImpl;
-import java.sql.Date;
-import java.time.Instant;
 import java.time.LocalDate;
+import java.time.Month;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +41,7 @@ public class ReviewDaoTest extends AbstractTestNGSpringContextTests {
         Tour tour = new Tour();
         tour.setName("Landscape 2017");
         tour.setTheme(TourTheme.LANDSCAPE);
-        tour.setDate(java.util.Date.from(Instant.now()));
+        tour.setDate(LocalDate.of(2017, Month.NOVEMBER, 26));
         service.createTour(tour);
         return tour;
     }

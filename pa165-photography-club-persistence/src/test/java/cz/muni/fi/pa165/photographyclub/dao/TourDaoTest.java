@@ -4,8 +4,8 @@ import cz.muni.fi.pa165.photographyclub.PersistenceSampleApplicationContext;
 import cz.muni.fi.pa165.photographyclub.entity.Tour;
 import cz.muni.fi.pa165.photographyclub.enums.TourTheme;
 import cz.muni.fi.pa165.photographyclub.service.ServiceImpl;
-import java.time.Instant;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -36,7 +36,7 @@ public class TourDaoTest extends AbstractTestNGSpringContextTests {
         Tour tour = new Tour();
         tour.setName("Test");
         tour.setTheme(TourTheme.PORTRAITS);
-        tour.setDate(Date.from(Instant.now()));
+        tour.setDate(LocalDate.of(2017, Month.NOVEMBER, 26));
         service.createTour(tour);
         return tour;
     }
@@ -86,11 +86,11 @@ public class TourDaoTest extends AbstractTestNGSpringContextTests {
         Tour tour2 = new Tour();
         tour2.setName("Test2");
         tour2.setTheme(TourTheme.PORTRAITS);
-        tour2.setDate(Date.from(Instant.now()));
+        tour2.setDate(LocalDate.of(2017, Month.NOVEMBER, 26));
         Tour tour3 = new Tour();
         tour3.setName("Test3");
         tour3.setTheme(TourTheme.PORTRAITS);
-        tour3.setDate(Date.from(Instant.now()));
+        tour3.setDate(LocalDate.of(2017, Month.NOVEMBER, 26));
         service.createTour(tour2);
         service.createTour(tour3);
         
@@ -113,7 +113,7 @@ public class TourDaoTest extends AbstractTestNGSpringContextTests {
         Tour tour = new Tour();
         tour.setName("NameTest");
         tour.setTheme(TourTheme.PORTRAITS);
-        tour.setDate(Date.from(Instant.now()));
+        tour.setDate(LocalDate.of(2017, Month.NOVEMBER, 26));
         service.createTour(tour);
         
         Tour tourTmp = service.getTourByName(tour.getName());
