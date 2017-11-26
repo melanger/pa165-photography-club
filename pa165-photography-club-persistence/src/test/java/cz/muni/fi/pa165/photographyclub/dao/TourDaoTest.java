@@ -3,13 +3,13 @@ package cz.muni.fi.pa165.photographyclub.dao;
 import cz.muni.fi.pa165.photographyclub.PersistenceSampleApplicationContext;
 import cz.muni.fi.pa165.photographyclub.entity.Tour;
 import cz.muni.fi.pa165.photographyclub.enums.TourTheme;
-import cz.muni.fi.pa165.photographyclub.service.ServiceImpl;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -24,10 +24,11 @@ import static org.assertj.core.api.Assertions.*;
  */
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@Transactional
 public class TourDaoTest extends AbstractTestNGSpringContextTests {
     
     @Autowired
-    private ServiceImpl service;
+    private TourDao tourDao;
     
     @PersistenceUnit
     private EntityManagerFactory emf;
@@ -37,7 +38,7 @@ public class TourDaoTest extends AbstractTestNGSpringContextTests {
         tour.setName("Test");
         tour.setTheme(TourTheme.PORTRAITS);
         tour.setDate(LocalDate.of(2017, Month.NOVEMBER, 26));
-        service.createTour(tour);
+        tourDao.create(tour);
         return tour;
     }
         
@@ -57,7 +58,7 @@ public class TourDaoTest extends AbstractTestNGSpringContextTests {
     @Test
     public void removeTourTest() {
         Tour tour = makeTour();
-        service.removeTour(tour);
+        tourDao.remove(tour);
         
         EntityManager entityManager = emf.createEntityManager();
         entityManager.getTransaction().begin();
@@ -71,7 +72,7 @@ public class TourDaoTest extends AbstractTestNGSpringContextTests {
     public void updateTourTest() {
         Tour tour = makeTour();
         tour.setName("TestUpdate");
-        service.updateTour(tour);
+        tourDao.update(tour);
         
         EntityManager entityManager = emf.createEntityManager();
         entityManager.getTransaction().begin();
@@ -91,10 +92,10 @@ public class TourDaoTest extends AbstractTestNGSpringContextTests {
         tour3.setName("Test3");
         tour3.setTheme(TourTheme.PORTRAITS);
         tour3.setDate(LocalDate.of(2017, Month.NOVEMBER, 26));
-        service.createTour(tour2);
-        service.createTour(tour3);
+        tourDao.create(tour2);
+        tourDao.create(tour3);
         
-        List<Tour> tourList = service.getAllTours();
+        List<Tour> tourList = tourDao.findAll();
         Assert.assertNotNull(tourList);
         Assert.assertEquals(tourList.size(), 2);       
     }
@@ -103,7 +104,7 @@ public class TourDaoTest extends AbstractTestNGSpringContextTests {
     public void getTourByIdTest() {
         Tour tour = makeTour();
         
-        Tour tourTmp = service.getTourByID(tour.getId());
+        Tour tourTmp = tourDao.findById(tour.getId());
         Assert.assertNotNull(tourTmp);
         Assert.assertEquals(tourTmp, tour);       
     }
@@ -114,25 +115,25 @@ public class TourDaoTest extends AbstractTestNGSpringContextTests {
         tour.setName("NameTest");
         tour.setTheme(TourTheme.PORTRAITS);
         tour.setDate(LocalDate.of(2017, Month.NOVEMBER, 26));
-        service.createTour(tour);
+        tourDao.create(tour);
         
-        Tour tourTmp = service.getTourByName(tour.getName());
+        Tour tourTmp = tourDao.findByName(tour.getName());
         Assert.assertNotNull(tourTmp);
         Assert.assertEquals(tourTmp, tour);       
     }
 
     @Test
     public void getTourByIdNullTest(){
-        assertThat(service.getTourByID(0l)).isNull();
+        assertThat(tourDao.findById(0l)).isNull();
     }
 
     @Test
     public void getTourByNameNullTest(){
-        assertThat(service.getTourByName("Null")).isNull();
+        assertThat(tourDao.findByName("Null")).isNull();
     }
 
     @Test
     public void getAllToursEmptyTest(){
-        assertThat(service.getAllTours()).isEmpty();
+        assertThat(tourDao.findAll()).isEmpty();
     }
 }
