@@ -5,17 +5,14 @@ import cz.muni.fi.pa165.photographyclub.dao.EquipmentDao;
 import cz.muni.fi.pa165.photographyclub.entity.Equipment;
 import cz.muni.fi.pa165.photographyclub.entity.Member;
 import cz.muni.fi.pa165.photographyclub.enums.EquipmentType;
-import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.*;
@@ -82,7 +79,7 @@ public class EquipmentServiceTest extends AbstractTransactionalTestNGSpringConte
     public void findById(){
         equipmentService.create(testEquipment);
         when(equipmentDao.findById(testEquipment.getId())).thenReturn(testEquipment);
-        assertThat(equipmentDao.findById(testEquipment.getId())).isEqualToComparingFieldByField(testEquipment);
+        assertThat(equipmentService.findById(testEquipment.getId())).isEqualToComparingFieldByField(testEquipment);
     }
 
     @Test

@@ -30,7 +30,7 @@ public class ReviewServiceImpl extends GenericServiceImpl<Review> implements Rev
 
     @Override
     public double getAverageRatingForTour(Tour t) {
-        List<Review> reviewList = findByTour(t);
+        List<Review> reviewList = dao.findByTour(t);
         if (reviewList.isEmpty()){
             return 0;
         }
