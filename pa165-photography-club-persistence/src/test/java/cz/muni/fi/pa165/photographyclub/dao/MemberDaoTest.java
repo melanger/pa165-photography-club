@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.photographyclub.dao;
 
 import cz.muni.fi.pa165.photographyclub.PersistenceSampleApplicationContext;
 import cz.muni.fi.pa165.photographyclub.entity.Member;
-import cz.muni.fi.pa165.photographyclub.service.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -24,10 +23,11 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
  */
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
+@Transactional
 public class MemberDaoTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    private ServiceImpl service;
+    private MemberDao memberDao;
 
     @PersistenceUnit
     private EntityManagerFactory emf;
@@ -42,32 +42,32 @@ public class MemberDaoTest extends AbstractTestNGSpringContextTests {
     @Test
     public void createMemberTest() {
         Member member = createMember();
-        service.createMember(member);
-        assertThat(service.findAllMembers()).contains(member);
+        memberDao.create(member);
+        assertThat(memberDao.findAll()).contains(member);
     }
 
     @Test
     public void getAllMembersTest() {
         Member member = createMember();
-        service.createMember(member);
-        assertThat(service.findAllMembers()).containsExactly(member);
+        memberDao.create(member);
+        assertThat(memberDao.findAll()).containsExactly(member);
     }
 
     @Test
     public void updateMemberTest() {
         Member member = createMember();
         member.setName("Cyril");
-        service.updateMember(member);
-        assertThat(service.findMemberByName("Anton")).isNull();
-        assertThat(service.findMemberByName("Cyril")).isNotNull();
+        memberDao.update(member);
+        assertThat(memberDao.findByName("Anton")).isNull();
+        assertThat(memberDao.findByName("Cyril")).isNotNull();
     }
 
     @Test
     public void deleteMemberTest() {
         Member member = createMember();
-        service.createMember(member);
-        assertThat(service.findMemberById(member.getId())).isNotNull();
-        service.removeMember(member);
-        assertThat(service.findMemberById(member.getId())).isNull();
+        memberDao.create(member);
+        assertThat(memberDao.findById(member.getId())).isNotNull();
+        memberDao.remove(member);
+        assertThat(memberDao.findById(member.getId())).isNull();
     }
 }

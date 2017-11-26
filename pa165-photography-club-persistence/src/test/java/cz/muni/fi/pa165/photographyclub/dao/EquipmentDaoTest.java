@@ -4,13 +4,13 @@ import cz.muni.fi.pa165.photographyclub.PersistenceSampleApplicationContext;
 import cz.muni.fi.pa165.photographyclub.entity.Equipment;
 import cz.muni.fi.pa165.photographyclub.entity.Member;
 import cz.muni.fi.pa165.photographyclub.enums.EquipmentType;
-import cz.muni.fi.pa165.photographyclub.service.ServiceImpl;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -24,10 +24,14 @@ import org.testng.annotations.Test;
  */
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@Transactional
 public class EquipmentDaoTest extends AbstractTestNGSpringContextTests {
+        
+    @Autowired
+    private EquipmentDao equipmentDao;
     
     @Autowired
-    private ServiceImpl service;
+    private MemberDao memberDao;
     
     @PersistenceUnit
     private EntityManagerFactory emf;
@@ -40,8 +44,8 @@ public class EquipmentDaoTest extends AbstractTestNGSpringContextTests {
         owner.setBirthDate(LocalDate.of(1990, Month.NOVEMBER, 11));
         equipment.setOwner(owner);
         equipment.setType(EquipmentType.CAMERA);
-        service.createMember(owner);
-        service.createEquipment(equipment);
+        memberDao.create(owner);
+        equipmentDao.create(equipment);
         return equipment;
     }
         
@@ -62,7 +66,7 @@ public class EquipmentDaoTest extends AbstractTestNGSpringContextTests {
     @Test
     public void removeEquipmentTest(){
         Equipment equipment = makeEquipment();
-        service.removeEquipment(equipment);
+        equipmentDao.remove(equipment);
         
         EntityManager entityManager = emf.createEntityManager();
         entityManager.getTransaction().begin();
@@ -75,7 +79,7 @@ public class EquipmentDaoTest extends AbstractTestNGSpringContextTests {
     public void findEquipmentByIdTest(){
         Equipment equipment = makeEquipment();
         
-        Equipment equipmentTmp = service.findEquipmentById(equipment.getId());
+        Equipment equipmentTmp = equipmentDao.findById(equipment.getId());
         Assert.assertNotNull(equipmentTmp);
         Assert.assertEquals(equipmentTmp, equipment);       
     }
@@ -84,7 +88,7 @@ public class EquipmentDaoTest extends AbstractTestNGSpringContextTests {
     public void findEquipmentByOwnerTest(){
         Equipment equipment = makeEquipment();
         
-        List<Equipment> euqipList = service.findEquipmentByOwner(equipment.getOwner());
+        List<Equipment> euqipList = equipmentDao.findByOwner(equipment.getOwner());
         Assert.assertNotNull(euqipList);
         Assert.assertNotEquals(euqipList.size(), 0);
     }    
@@ -93,7 +97,7 @@ public class EquipmentDaoTest extends AbstractTestNGSpringContextTests {
     public void findAllEquipmentTest(){
         makeEquipment();
         
-        List<Equipment> euqipList = service.findAllEquipment();
+        List<Equipment> euqipList = equipmentDao.findAll();
         Assert.assertNotNull(euqipList);
         Assert.assertNotEquals(euqipList.size(), 0);
     }
