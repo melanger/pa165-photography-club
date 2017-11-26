@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 
+/**
+ * Implementation of EquipmentService
+ * @author Denis.Figula
+ */
 public class EquipmentServiceImpl extends GenericServiceImpl<Equipment> implements EquipmentService {
 
     @Inject
@@ -32,9 +36,11 @@ public class EquipmentServiceImpl extends GenericServiceImpl<Equipment> implemen
         Map<EquipmentType, List<Equipment>> inventory = new HashMap<>();
 
         for (EquipmentType t : EquipmentType.values()) {
-            List<Equipment> equipmentList = new ArrayList<>();
+            List<Equipment> equipmentList = new ArrayList<Equipment>();
             for (Equipment e : dao.findAll())
-                if (e.getType().equals(t)) equipmentList.add(e);
+                if (e.getType() == t){
+                    equipmentList.add(e);
+                }
             inventory.put(t,equipmentList);
         }
         return inventory;

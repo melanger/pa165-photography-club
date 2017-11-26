@@ -7,6 +7,11 @@ import cz.muni.fi.pa165.photographyclub.enums.EquipmentType;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Service for equipment handling
+ * @author Denis.Figula
+ *
+ */
 public interface EquipmentService extends GenericService<Equipment> {
 
     List<Equipment> findByOwner(Member m);
