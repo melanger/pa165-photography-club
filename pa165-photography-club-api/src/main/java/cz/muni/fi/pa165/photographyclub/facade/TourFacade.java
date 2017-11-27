@@ -20,9 +20,9 @@ public interface TourFacade {
     
     public void removeTour(Long id);
     
-    public List<ReviewDTO> getTourReviews();
+    public List<ReviewDTO> getTourReviews(Long tourId);
     
-    public List<MemberDTO> getTourParticipants();
+//    public List<MemberDTO> getTourParticipants(Long tourId);
     
-    public double getTourRating();
+    public double getTourRating(Long tourId);
 }
