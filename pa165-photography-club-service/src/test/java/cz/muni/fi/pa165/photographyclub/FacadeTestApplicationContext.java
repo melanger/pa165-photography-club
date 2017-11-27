@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"cz.muni.fi.pa165.photographyclub.service.dummy"}, lazyInit = true)
-public class ServiceTestApplicationContext {
+@ComponentScan(basePackages = "cz.muni.fi.pa165.photographyclub.facade.dummy", lazyInit = true)
+public class FacadeTestApplicationContext {
 
 }
