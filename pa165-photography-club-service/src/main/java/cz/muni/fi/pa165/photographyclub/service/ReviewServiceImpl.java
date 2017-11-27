@@ -7,7 +7,9 @@ import cz.muni.fi.pa165.photographyclub.entity.Review;
 import cz.muni.fi.pa165.photographyclub.entity.Tour;
 import java.util.List;
 import javax.inject.Inject;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ReviewServiceImpl extends GenericServiceImpl<Review> implements ReviewService {
     
     @Inject

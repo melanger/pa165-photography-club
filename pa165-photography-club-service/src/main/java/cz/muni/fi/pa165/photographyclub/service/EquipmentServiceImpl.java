@@ -11,11 +11,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
+import org.springframework.stereotype.Service;
 
 /**
  * Implementation of EquipmentService
  * @author Denis.Figula
  */
+@Service
 public class EquipmentServiceImpl extends GenericServiceImpl<Equipment> implements EquipmentService {
 
     @Inject
