@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 /**
- *
+ * Implementation of MemberService.
  * @author Matus Kravec
  */
 @Service
