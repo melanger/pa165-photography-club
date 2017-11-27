@@ -26,27 +26,29 @@ import org.testng.annotations.Test;
 
 /**
  * Tests for MemberFacadeImpl
+ *
  * @author Pavel Brousek
  */
 @ContextConfiguration(classes = FacadeTestApplicationContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class MemberFacadeTest extends AbstractTestNGSpringContextTests {
+
     @Mock
     private MemberService memberService;
-    
+
     @Mock
     private BeanMappingService beanMappingService;
-    
+
     @InjectMocks
     private MemberFacadeImpl memberFacade;
-    
+
     @BeforeClass
-    public void setup(){
+    public void setup() {
         MockitoAnnotations.initMocks(this);
     }
-    
+
     @Test
-    public void createMemberTest(){
+    public void createMemberTest() {
         MemberCreateDTO m = new MemberCreateDTO();
         final String name = "Test";
         m.setName(name);
@@ -54,9 +56,9 @@ public class MemberFacadeTest extends AbstractTestNGSpringContextTests {
         m.setBirthDate(birthDate);
         final String address = null;
         m.setAddress(address);
-        
+
         memberFacade.createMember(m);
-        
+
         ArgumentCaptor<Member> argumentCaptor = ArgumentCaptor.forClass(Member.class);
         verify(memberService, times(1)).create(argumentCaptor.capture());
         Member arg = argumentCaptor.getValue();
@@ -65,21 +67,21 @@ public class MemberFacadeTest extends AbstractTestNGSpringContextTests {
                 .hasFieldOrPropertyWithValue("birthDate", birthDate)
                 .hasFieldOrPropertyWithValue("address", address);
     }
-    
+
     @Test
     public void removeMemberTest() {
         final long memberId = 42l;
         MemberDTO member = new MemberDTO();
         member.setId(memberId);
-        
+
         memberFacade.removeMember(member);
-        
+
         ArgumentCaptor<Member> argumentCaptor = ArgumentCaptor.forClass(Member.class);
         verify(memberService, times(1)).remove(argumentCaptor.capture());
         Member arg = argumentCaptor.getValue();
         assertThat(arg).hasFieldOrPropertyWithValue("id", memberId);
     }
-    
+
     @Test
     public void getAllMembersTest() {
         final List<Member> members = new LinkedList<>();
@@ -88,10 +90,10 @@ public class MemberFacadeTest extends AbstractTestNGSpringContextTests {
         memberDTOs.add(new MemberDTO());
         when(memberService.findAll()).thenReturn(members);
         when(beanMappingService.mapTo(members, MemberDTO.class)).thenReturn(memberDTOs);
-        
+
         assertThat(memberFacade.findAllMembers()).isEqualTo(memberDTOs);
     }
-    
+
     @Test
     public void getMemberById() {
         final long memberId = 42l;
@@ -100,10 +102,10 @@ public class MemberFacadeTest extends AbstractTestNGSpringContextTests {
         member.setId(memberId);
         when(memberService.findById(memberId)).thenReturn(member);
         when(beanMappingService.mapTo(member, MemberDTO.class)).thenReturn(memberDTO);
-        
+
         assertThat(memberFacade.findById(memberId)).isEqualTo(memberDTO);
     }
-    
+
     @Test
     public void getMemberByName() {
         final String name1 = "Franta";
@@ -111,22 +113,22 @@ public class MemberFacadeTest extends AbstractTestNGSpringContextTests {
         final Member m1 = new Member();
         m1.setName(name1);
         m1.setId(id1);
-        
+
         final long id2 = 2l;
         final String name2 = "Karel";
         final Member m2 = new Member();
         m2.setName(name2);
-        
+
         final MemberDTO dto1 = new MemberDTO();
         dto1.setId(id1);
         final MemberDTO dto2 = new MemberDTO();
         dto2.setId(id2);
-        
+
         when(memberService.findByName(name1)).thenReturn(m1);
         when(memberService.findByName(name2)).thenReturn(m2);
         when(beanMappingService.mapTo(m1, MemberDTO.class)).thenReturn(dto1);
         when(beanMappingService.mapTo(m2, MemberDTO.class)).thenReturn(dto2);
-        
+
         assertThat(memberFacade.findByName(name1)).hasFieldOrPropertyWithValue("id", id1);
         assertThat(memberFacade.findByName(name2)).hasFieldOrPropertyWithValue("id", id2);
         assertThat(memberFacade.findByName("Other string")).isNull();

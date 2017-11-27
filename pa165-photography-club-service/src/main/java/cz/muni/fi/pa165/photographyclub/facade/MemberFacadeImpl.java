@@ -13,15 +13,17 @@ import javax.inject.Inject;
 
 /**
  * Implementation of MemberFacade
+ *
  * @author Pavel Brousek
  */
 public class MemberFacadeImpl implements MemberFacade {
+
     @Inject
     private MemberService memberService;
-    
+
     @Inject
     private BeanMappingService beanMappingService;
-    
+
     @Override
     public void createMember(MemberCreateDTO member) {
         Member m = new Member();
@@ -61,5 +63,5 @@ public class MemberFacadeImpl implements MemberFacade {
         Member m = memberService.findByName(name);
         return (m == null) ? null : beanMappingService.mapTo(m, MemberDTO.class);
     }
-    
+
 }
