@@ -2,9 +2,11 @@ package cz.muni.fi.pa165.photographyclub.facade;
 
 import cz.muni.fi.pa165.photographyclub.FacadeTestApplicationContext;
 import cz.muni.fi.pa165.photographyclub.beanmapping.BeanMappingService;
+import cz.muni.fi.pa165.photographyclub.dto.MemberDTO;
 import cz.muni.fi.pa165.photographyclub.dto.ReviewDTO;
 import cz.muni.fi.pa165.photographyclub.dto.TourCreateDTO;
 import cz.muni.fi.pa165.photographyclub.dto.TourDTO;
+import cz.muni.fi.pa165.photographyclub.entity.Member;
 import cz.muni.fi.pa165.photographyclub.entity.Review;
 import cz.muni.fi.pa165.photographyclub.entity.Tour;
 import cz.muni.fi.pa165.photographyclub.enums.TourTheme;
@@ -29,6 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.filter;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -119,23 +122,6 @@ public class TourFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void getTourReviewsTest(){
-//        final Tour tour = new Tour();
-//        tour.setId(45l);
-//        final Review review1 = new Review();
-//        review1.setRating(50);
-//        review1.setId(23l);
-//        review1.setTour(tour);
-//        final Review review2 = new Review();
-//        review2.setRating(60);
-//        review2.setId(32l);
-//        review2.setTour(tour);
-//        final List<Review> reviews = new ArrayList<>();
-//        reviews.add(review1);
-//        reviews.add(review2);
-//        tour.setReviews(reviews);
-//        when(tourService.findById(tour.getId())).thenReturn(tour);
-//        when(reviewService.findByTour(tour)).thenReturn(reviews);
-//        assertThat(tourFacade.getTourReviews(tour.getId())).isEqualTo(reviews);
         final long tourId = 42l;
         final Tour tour = new Tour();
         tour.setId(tourId);
@@ -178,5 +164,29 @@ public class TourFacadeTest extends AbstractTestNGSpringContextTests {
         when(tourService.findById(tourId)).thenReturn(tour1);
         when(reviewService.getAverageRatingForTour(tour1)).thenReturn(55d);
         assertThat(tourFacade.getTourRating(tourId)).isEqualTo(55);
+    }
+
+    @Test
+    public void getTourParticipantsTest(){
+        final Tour tour = new Tour();
+        final Long tourId = 55l;
+        tour.setId(tourId);
+        final Member member1 = new Member();
+        final Member member2 = new Member();
+        final List<Member> members = new ArrayList<>();
+        members.add(member1);
+        members.add(member2);
+        tour.setParticipants(members);
+        List<MemberDTO> memberDTOS = new ArrayList<>();
+        final MemberDTO dto1 = new MemberDTO();
+        final MemberDTO dto2 = new MemberDTO();
+        memberDTOS.add(dto1);
+        memberDTOS.add(dto2);
+
+        when(tourService.findById(tourId)).thenReturn(tour);
+        when(beanMappingService.mapTo(members,MemberDTO.class)).thenReturn(memberDTOS);
+
+        assertThat(tourFacade.getTourParticipants(tour.getId())).isEqualTo(memberDTOS);
+
     }
 }
