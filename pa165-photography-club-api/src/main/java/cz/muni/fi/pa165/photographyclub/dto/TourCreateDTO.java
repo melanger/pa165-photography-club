@@ -46,6 +46,7 @@ public class TourCreateDTO {
         this.date = date;
     }
 
+
     @Override
     public int hashCode() {
         int hash = 7;
