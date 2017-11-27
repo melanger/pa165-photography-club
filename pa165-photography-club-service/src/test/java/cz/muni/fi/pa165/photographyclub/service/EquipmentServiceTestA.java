@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -22,13 +21,14 @@ import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 /**Tests for Equipment service
  * @author Denis.Figula
  */
 @ContextConfiguration(classes = ServiceTestApplicationContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class EquipmentServiceTest extends AbstractTransactionalTestNGSpringContextTests {
+public class EquipmentServiceTestA extends AbstractTestNGSpringContextTests {
 
     @Mock
     private EquipmentDao equipmentDao;

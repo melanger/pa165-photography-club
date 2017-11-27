@@ -9,8 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author Pavel Brousek
  */
 @Configuration
-@EnableTransactionManagement
-@ComponentScan(basePackages = {"cz.muni.fi.pa165.photographyclub.service.dummy"}, lazyInit = true)
+@ComponentScan(basePackages = {"cz.muni.fi.pa165.photographyclub.service.dummy"})
 public class ServiceTestApplicationContext {
 
 }

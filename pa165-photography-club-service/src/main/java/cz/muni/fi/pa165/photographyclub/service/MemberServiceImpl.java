@@ -14,16 +14,16 @@ import org.springframework.stereotype.Service;
 public class MemberServiceImpl extends GenericServiceImpl<Member> implements MemberService {
 
     @Inject
-    protected MemberDao dao;
+    private MemberDao memberDao;
     
     @Override
     protected GenericDao<Member> getDao() {
-        return dao;
+        return memberDao;
     }
 
     @Override
     public Member findByName(String name) {
-        return dao.findByName(name);
+        return memberDao.findByName(name);
     }
     
 }

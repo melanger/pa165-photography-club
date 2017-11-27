@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class TourServiceImpl extends GenericServiceImpl<Tour> implements TourService {
     @Inject
-    protected TourDao dao;
+    private TourDao tourDao;
 
     @Override
     protected GenericDao<Tour> getDao() {
-        return dao;
+        return tourDao;
     }
 }

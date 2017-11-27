@@ -21,16 +21,16 @@ import org.springframework.stereotype.Service;
 public class EquipmentServiceImpl extends GenericServiceImpl<Equipment> implements EquipmentService {
 
     @Inject
-    protected EquipmentDao dao;
+    private EquipmentDao equipmentDao;
     
     @Override
     protected GenericDao<Equipment> getDao() {
-        return dao;
+        return equipmentDao;
     }
 
     @Override
     public List<Equipment> findByOwner(Member m) {
-        return dao.findByOwner(m);
+        return equipmentDao.findByOwner(m);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class EquipmentServiceImpl extends GenericServiceImpl<Equipment> implemen
 
         for (EquipmentType t : EquipmentType.values()) {
             List<Equipment> equipmentList = new ArrayList<Equipment>();
-            for (Equipment e : dao.findAll())
+            for (Equipment e : equipmentDao.findAll())
                 if (e.getType() == t){
                     equipmentList.add(e);
                 }

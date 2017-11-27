@@ -8,15 +8,12 @@ import cz.muni.fi.pa165.photographyclub.entity.Tour;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +23,7 @@ import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 /** Tests for Review service
  * @author Denis.Figula
@@ -33,7 +31,7 @@ import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = ServiceTestApplicationContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class ReviewServiceTest extends AbstractTransactionalTestNGSpringContextTests {
+public class ReviewServiceTest extends AbstractTestNGSpringContextTests {
     
     @Mock
     private ReviewDao reviewDao;

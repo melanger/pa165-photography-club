@@ -13,26 +13,26 @@ import org.springframework.stereotype.Service;
 public class ReviewServiceImpl extends GenericServiceImpl<Review> implements ReviewService {
     
     @Inject
-    protected ReviewDao dao;
+    private ReviewDao reviewDao;
     
     @Override
     protected GenericDao<Review> getDao() {
-        return dao;
+        return reviewDao;
     }
 
     @Override
     public List<Review> findByAuthor(Member m) {
-        return dao.findByAuthor(m);
+        return reviewDao.findByAuthor(m);
     }
 
     @Override
     public List<Review> findByTour(Tour t) {
-        return dao.findByTour(t);
+        return reviewDao.findByTour(t);
     }
 
     @Override
     public double getAverageRatingForTour(Tour t) {
-        List<Review> reviewList = dao.findByTour(t);
+        List<Review> reviewList = reviewDao.findByTour(t);
         if (reviewList.isEmpty()){
             return 0;
         }

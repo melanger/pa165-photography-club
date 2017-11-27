@@ -31,7 +31,7 @@ import org.testng.annotations.Test;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class TourServiceTest extends AbstractTestNGSpringContextTests {
     @Mock
-    private TourDao dao;
+    private TourDao tourDao;
     
     @InjectMocks
     private TourServiceImpl service;
@@ -61,21 +61,21 @@ public class TourServiceTest extends AbstractTestNGSpringContextTests {
         tList.add(t1);
         tList.add(t2);
         
-        when(dao.findAll()).thenReturn(tList);
+        when(tourDao.findAll()).thenReturn(tList);
         assertThat(service.findAll()).isSameAs(tList);
     }
     
     @Test
     public void createTest(){
         service.create(t1);
-        verify(dao, times(1)).create(same(t1));
+        verify(tourDao, times(1)).create(same(t1));
     }
     
     @Test
     public void findByIdTest(){
         final long id = 42l;
         t1.setId(id);
-        when(dao.findById(t1.getId())).thenReturn(t1);
+        when(tourDao.findById(t1.getId())).thenReturn(t1);
         
         assertThat(service.findById(id)).isEqualToComparingFieldByField(t1);
     }
@@ -86,6 +86,6 @@ public class TourServiceTest extends AbstractTestNGSpringContextTests {
         t1.setId(id);
         
         service.remove(t1);
-        verify(dao, times(1)).remove(same(t1));
+        verify(tourDao, times(1)).remove(same(t1));
     }
 }
