@@ -7,7 +7,7 @@ import cz.muni.fi.pa165.photographyclub.dto.TourDTO;
 import java.util.List;
 
 /**
- *
+ * Facade interface for functions related to the Tour entity.
  * @author Matus Kravec. 
  */
 public interface TourFacade {

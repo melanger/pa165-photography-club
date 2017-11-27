@@ -5,7 +5,7 @@ import cz.muni.fi.pa165.photographyclub.dto.ReviewDTO;
 import java.util.List;
 
 /**
- *
+ * Facade interface for functions related to the Review entity.
  * @author Matus Kravec.
  */
 public interface ReviewFacade {
