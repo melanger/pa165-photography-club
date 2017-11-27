@@ -4,7 +4,7 @@ import cz.muni.fi.pa165.photographyclub.entity.Member;
 
 /**
  *
- * @author matus
+ * @author Matus Kravec.
  */
 public interface MemberService extends GenericService<Member> {
     
