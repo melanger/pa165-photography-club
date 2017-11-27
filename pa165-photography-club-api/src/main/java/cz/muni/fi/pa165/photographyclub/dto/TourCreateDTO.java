@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.photographyclub.dto;
 
 import cz.muni.fi.pa165.photographyclub.enums.TourTheme;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,6 +22,10 @@ public class TourCreateDTO {
     
     @NotNull
     private LocalDate date;
+
+    private List<ReviewDTO> reviews;
+
+    private List<MemberDTO> participants;
 
     public String getName() {
         return name;
@@ -46,6 +51,21 @@ public class TourCreateDTO {
         this.date = date;
     }
 
+    public List<MemberDTO> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<MemberDTO> participants) {
+        this.participants = participants;
+    }
+
+    public List<ReviewDTO> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ReviewDTO> reviews) {
+        this.reviews = reviews;
+    }
 
     @Override
     public int hashCode() {
