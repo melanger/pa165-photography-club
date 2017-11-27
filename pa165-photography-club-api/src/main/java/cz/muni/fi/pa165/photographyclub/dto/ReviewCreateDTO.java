@@ -6,7 +6,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
- *
+ * DTO for creating Review.
  * @author Matus Kravec.
  */
 public class ReviewCreateDTO {

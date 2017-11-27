@@ -3,7 +3,7 @@ package cz.muni.fi.pa165.photographyclub.dto;
 import java.util.Objects;
 
 /**
- *
+ * DTO for trasnfering Review.
  * @author Matus Kravec.
  */
 public class ReviewDTO {

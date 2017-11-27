@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- *
+ * DTO for creating Tour.
  * @author Matus Kravec.
  */
 public class TourCreateDTO {

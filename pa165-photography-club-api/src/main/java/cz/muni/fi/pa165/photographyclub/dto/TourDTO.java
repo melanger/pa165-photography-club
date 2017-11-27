@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *
+ * DTO for trasnfering Tour.
  * @author Matus Kravec.
  */
 public class TourDTO {
