@@ -127,11 +127,14 @@ public class MemberDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MemberDTO memberDTO = (MemberDTO) o;
-        return Objects.equals(id, memberDTO.id) && Objects.equals(name, memberDTO.name) && Objects.equals(birthDate, memberDTO.birthDate) && Objects.equals(address, memberDTO.address) && Objects.equals(motivation, memberDTO.motivation) && Objects.equals(experience, memberDTO.experience) && gender == memberDTO.gender && Objects.equals(photo, memberDTO.photo) && Objects.equals(reviews, memberDTO.reviews) && Objects.equals(equipment, memberDTO.equipment) && Objects.equals(tours, memberDTO.tours);
+        if (id != null || memberDTO.getId() != null)
+            return Objects.equals(id, memberDTO.getId());
+        else
+            return Objects.equals(name, memberDTO.getName()) && Objects.equals(birthDate, memberDTO.getBirthDate()) && Objects.equals(address, memberDTO.getAddress());
     }
 
     @Override
     public int hashCode() {
-        return  69 + Objects.hash(id, name, birthDate, address);
+        return 69 + ((id == null) ? Objects.hash(name, birthDate, address) : Objects.hashCode(id));
     }
 }

@@ -116,7 +116,7 @@ public class MemberCreateDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MemberCreateDTO that = (MemberCreateDTO) o;
-        return Objects.equals(name, that.name) && Objects.equals(birthDate, that.birthDate) && Objects.equals(address, that.address);
+        return Objects.equals(name, that.getName()) && Objects.equals(birthDate, that.getBirthDate()) && Objects.equals(address, that.getAddress());
     }
 
     @Override
