@@ -5,8 +5,13 @@ import cz.muni.fi.pa165.photographyclub.dao.MemberDao;
 import cz.muni.fi.pa165.photographyclub.entity.Member;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.LinkedList;
+import java.util.List;
 import org.mockito.InjectMocks;
+import static org.mockito.Matchers.same;
 import org.mockito.Mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.annotation.DirtiesContext;
@@ -19,7 +24,7 @@ import org.testng.annotations.Test;
 
 /**
  *
- * @author matus
+ * @author Matus Kravec
  */
 @ContextConfiguration(classes = ServiceTestApplicationContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -48,8 +53,8 @@ public class MemberServiceTest extends AbstractTestNGSpringContextTests{
     @Test
     public void findByIdTest(){
        final long id = 42l;
-        member.setId(id);
-        when(memberDao.findById(member.getId())).thenReturn(member);
+       member.setId(id);
+       when(memberDao.findById(member.getId())).thenReturn(member);
        
        Assert.assertEquals(memberService.findById(id), member);
     }
@@ -57,8 +62,7 @@ public class MemberServiceTest extends AbstractTestNGSpringContextTests{
     @Test
     public void createTest(){
         memberService.create(member);
-        
-        Assert.assertEquals(memberDao.findById(member.getId()), member);
+        verify(memberDao, times(1)).create(same(member));
     }
     
     @Test
@@ -68,6 +72,10 @@ public class MemberServiceTest extends AbstractTestNGSpringContextTests{
         member2.setName("Test");
         member2.setBirthDate(LocalDate.of(1990, Month.MARCH, 5));
         memberService.create(member2);
+        List<Member> members = new LinkedList<>();
+        members.add(member);
+        members.add(member2);
+        when(memberDao.findAll()).thenReturn(members);
         
         Assert.assertEquals(memberService.findAll().size(), 2);
     }
@@ -77,12 +85,13 @@ public class MemberServiceTest extends AbstractTestNGSpringContextTests{
         memberService.create(member);
         memberService.remove(member);
         
-        Assert.assertEquals(memberDao.findAll().size(), 0);        
+        verify(memberDao, times(1)).remove(same(member));       
     }
     
     @Test
     public void findByNameTest(){
         memberService.create(member);
+        when(memberDao.findByName(member.getName())).thenReturn(member);
         
         Assert.assertEquals(memberService.findByName("John Smith"), member);
     }

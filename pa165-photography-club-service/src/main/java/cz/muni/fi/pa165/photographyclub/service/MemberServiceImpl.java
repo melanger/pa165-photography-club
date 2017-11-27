@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 /**
  *
- * @author matus
+ * @author Matus Kravec
  */
 public class MemberServiceImpl extends GenericServiceImpl<Member> implements MemberService {
 
