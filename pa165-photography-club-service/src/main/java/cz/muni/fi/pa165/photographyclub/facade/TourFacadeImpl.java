@@ -8,7 +8,6 @@ import cz.muni.fi.pa165.photographyclub.dto.TourDTO;
 import cz.muni.fi.pa165.photographyclub.entity.Member;
 import cz.muni.fi.pa165.photographyclub.entity.Review;
 import cz.muni.fi.pa165.photographyclub.entity.Tour;
-import cz.muni.fi.pa165.photographyclub.service.MemberService;
 import cz.muni.fi.pa165.photographyclub.service.ReviewService;
 import cz.muni.fi.pa165.photographyclub.service.TourService;
 
@@ -61,10 +60,11 @@ public class TourFacadeImpl implements TourFacade {
         return beanMappingService.mapTo(reviews,ReviewDTO.class);
     }
 
-//    @Override
-//    public List<MemberDTO> getTourParticipants(Long tourId) {
-//        return null;
-//    }
+    @Override
+    public List<MemberDTO> getTourParticipants(Long tourId) {
+        List<Member> participants = tourService.findById(tourId).getParticipants();
+        return beanMappingService.mapTo(participants, MemberDTO.class);
+    }
 
     @Override
     public double getTourRating(Long tourId) {

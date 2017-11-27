@@ -22,7 +22,7 @@ public interface TourFacade {
     
     public List<ReviewDTO> getTourReviews(Long tourId);
     
-//    public List<MemberDTO> getTourParticipants(Long tourId);
+    public List<MemberDTO> getTourParticipants(Long tourId);
     
     public double getTourRating(Long tourId);
 }
