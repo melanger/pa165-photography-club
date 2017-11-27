@@ -32,7 +32,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
- * Tests for TourServiceImpl
+ * Tests for ReviewFacadeImpl
  * @author Pavel Brousek
  */
 @ContextConfiguration(classes = FacadeTestApplicationContext.class)
