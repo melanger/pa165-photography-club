@@ -24,7 +24,7 @@
             <groupId>cz.muni.fi.pa165</groupId>
             <artifactId>pa165-photography-club-api</artifactId>
             <version>${project.parent.version}</version>
-        </dependency> 
+        </dependency>
         <dependency>
             <groupId>cz.muni.fi.pa165</groupId>
             <artifactId>pa165-photography-club-persistence</artifactId>
@@ -33,12 +33,10 @@
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
-            <version>1</version>
         </dependency>
         <dependency>
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer</artifactId>
-            <version>5.5.1</version>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
@@ -106,5 +104,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
