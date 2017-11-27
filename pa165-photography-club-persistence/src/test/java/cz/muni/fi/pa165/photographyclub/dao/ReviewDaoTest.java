@@ -8,15 +8,12 @@ import cz.muni.fi.pa165.photographyclub.enums.TourTheme;
 import java.time.LocalDate;
 import java.time.Month;
 import javax.transaction.Transactional;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.*;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.transaction.TransactionSystemException;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 
 /**
  * @author Pavel Brousek
@@ -24,7 +21,7 @@ import org.springframework.transaction.TransactionSystemException;
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
-public class ReviewDaoTest extends AbstractTestNGSpringContextTests {
+public class ReviewDaoTest extends AbstractTransactionalTestNGSpringContextTests {
     
     @Autowired
     private TourDao tourDao;
@@ -62,18 +59,6 @@ public class ReviewDaoTest extends AbstractTestNGSpringContextTests {
         review.setComment(DEFAULT_COMMENT);
         reviewDao.create(review);
         return review;
-    }
-    
-    @Test
-    public void nullReviewCommentNotAllowed(){
-        final Review review = new Review();
-        review.setComment(null);
-        assertThatThrownBy(new ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                reviewDao.create(review);
-            }
-        }).isInstanceOf(TransactionSystemException.class);
     }
     
     @Test()

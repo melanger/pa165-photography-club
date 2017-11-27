@@ -4,7 +4,6 @@ import cz.muni.fi.pa165.photographyclub.PersistenceSampleApplicationContext;
 import cz.muni.fi.pa165.photographyclub.entity.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
 import javax.persistence.EntityManagerFactory;
@@ -13,10 +12,10 @@ import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 
 /**
  * @author Denis.Figula
@@ -24,13 +23,10 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
-public class MemberDaoTest extends AbstractTestNGSpringContextTests {
+public class MemberDaoTest extends AbstractTransactionalTestNGSpringContextTests {
 
     @Autowired
     private MemberDao memberDao;
-
-    @PersistenceUnit
-    private EntityManagerFactory emf;
 
     private Member createMember() {
         Member member = new Member();
