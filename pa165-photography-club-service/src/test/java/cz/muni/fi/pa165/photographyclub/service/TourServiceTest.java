@@ -21,7 +21,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -137,7 +136,7 @@ public class TourServiceTest extends AbstractTestNGSpringContextTests {
         when(tourDao.findAll()).thenReturn(tours);
         
         Map<Integer, List<Tour>> map = service.getToursByRating();
-        Assert.assertEquals(map.get(2).size(), 1);
-        Assert.assertEquals(map.get(4).size(), 2);
+        assertThat(map.get(2).size()).isEqualTo(1);
+        assertThat(map.get(4).size()).isEqualTo(2);
     }
 }
