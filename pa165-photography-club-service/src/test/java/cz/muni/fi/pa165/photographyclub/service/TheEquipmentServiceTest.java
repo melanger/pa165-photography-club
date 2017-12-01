@@ -28,7 +28,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
  */
 @ContextConfiguration(classes = ServiceTestApplicationContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class EquipmentServiceTestA extends AbstractTestNGSpringContextTests {
+public class TheEquipmentServiceTest extends AbstractTestNGSpringContextTests {
 
     @Mock
     private EquipmentDao equipmentDao;
