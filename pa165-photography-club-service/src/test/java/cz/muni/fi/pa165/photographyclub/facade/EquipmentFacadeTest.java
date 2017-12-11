@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.photographyclub.facade;
 
-import cz.muni.fi.pa165.photographyclub.FacadeTestApplicationContext;
+import cz.muni.fi.pa165.photographyclub.facade.config.FacadeApplicationContext;
 import cz.muni.fi.pa165.photographyclub.beanmapping.BeanMappingService;
 import cz.muni.fi.pa165.photographyclub.dto.EquipmentCreateDTO;
 import cz.muni.fi.pa165.photographyclub.dto.EquipmentDTO;
@@ -32,7 +32,7 @@ import org.testng.annotations.Test;
  *  Tests for EquipmentFacade.
  * @author Matus Kravec.
  */
-@ContextConfiguration(classes = FacadeTestApplicationContext.class)
+@ContextConfiguration(classes = FacadeApplicationContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class EquipmentFacadeTest extends AbstractTestNGSpringContextTests{
 

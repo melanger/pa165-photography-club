@@ -1,8 +1,7 @@
-package cz.muni.fi.pa165.photographyclub;
+package cz.muni.fi.pa165.photographyclub.service.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 /**
@@ -10,6 +9,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @ComponentScan(basePackages = {"cz.muni.fi.pa165.photographyclub.service.dummy"})
-public class ServiceTestApplicationContext {
+public class ServiceApplicationContext {
 
 }

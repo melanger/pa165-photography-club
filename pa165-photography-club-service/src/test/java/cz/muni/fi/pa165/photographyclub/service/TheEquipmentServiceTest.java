@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.photographyclub.service;
 
-import cz.muni.fi.pa165.photographyclub.ServiceTestApplicationContext;
+import cz.muni.fi.pa165.photographyclub.service.config.ServiceApplicationContext;
 import cz.muni.fi.pa165.photographyclub.dao.EquipmentDao;
 import cz.muni.fi.pa165.photographyclub.entity.Equipment;
 import cz.muni.fi.pa165.photographyclub.entity.Member;
@@ -26,7 +26,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 /**Tests for Equipment service
  * @author Denis.Figula
  */
-@ContextConfiguration(classes = ServiceTestApplicationContext.class)
+@ContextConfiguration(classes = ServiceApplicationContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class TheEquipmentServiceTest extends AbstractTestNGSpringContextTests {
 
