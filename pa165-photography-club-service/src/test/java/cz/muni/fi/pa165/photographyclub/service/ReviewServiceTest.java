@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.photographyclub.service;
 
-import cz.muni.fi.pa165.photographyclub.ServiceTestApplicationContext;
+import cz.muni.fi.pa165.photographyclub.service.config.ServiceApplicationContext;
 import cz.muni.fi.pa165.photographyclub.dao.ReviewDao;
 import cz.muni.fi.pa165.photographyclub.entity.Member;
 import cz.muni.fi.pa165.photographyclub.entity.Review;
@@ -29,7 +29,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
  * @author Denis.Figula
  */
 
-@ContextConfiguration(classes = ServiceTestApplicationContext.class)
+@ContextConfiguration(classes = ServiceApplicationContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ReviewServiceTest extends AbstractTestNGSpringContextTests {
     

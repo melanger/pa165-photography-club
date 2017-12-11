@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.photographyclub;
+package cz.muni.fi.pa165.photographyclub.facade.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +11,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages = "cz.muni.fi.pa165.photographyclub.facade.dummy", lazyInit = true)
-public class FacadeTestApplicationContext {
+public class FacadeApplicationContext {
 
 }

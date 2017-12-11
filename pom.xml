@@ -11,6 +11,8 @@
         <module>pa165-photography-club-persistence</module>
         <module>pa165-photography-club-service</module>
         <module>pa165-photography-club-api</module>
+      	<module>pa165-photography-club-data</module>
+        <module>pa165-photography-club-rest</module>
     </modules>
 
     <build>
@@ -151,6 +153,11 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>2.9.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.9.3</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

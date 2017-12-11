@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.photographyclub.facade;
 
-import cz.muni.fi.pa165.photographyclub.FacadeTestApplicationContext;
+import cz.muni.fi.pa165.photographyclub.facade.config.FacadeApplicationContext;
 import cz.muni.fi.pa165.photographyclub.dto.MemberCreateDTO;
 import cz.muni.fi.pa165.photographyclub.dto.MemberDTO;
 import cz.muni.fi.pa165.photographyclub.beanmapping.BeanMappingService;
@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
  *
  * @author Pavel Brousek
  */
-@ContextConfiguration(classes = FacadeTestApplicationContext.class)
+@ContextConfiguration(classes = FacadeApplicationContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class MemberFacadeTest extends AbstractTestNGSpringContextTests {
 

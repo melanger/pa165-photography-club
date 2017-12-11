@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.photographyclub.service;
 
-import cz.muni.fi.pa165.photographyclub.ServiceTestApplicationContext;
+import cz.muni.fi.pa165.photographyclub.service.config.ServiceApplicationContext;
 import cz.muni.fi.pa165.photographyclub.dao.TourDao;
 import cz.muni.fi.pa165.photographyclub.entity.Review;
 import cz.muni.fi.pa165.photographyclub.entity.Tour;
@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
  * Tests for TourServiceImpl
  * @author Pavel Brousek
  */
-@ContextConfiguration(classes = ServiceTestApplicationContext.class)
+@ContextConfiguration(classes = ServiceApplicationContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class TourServiceTest extends AbstractTestNGSpringContextTests {
     @Mock
