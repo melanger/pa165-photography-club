@@ -12,6 +12,7 @@
         <module>pa165-photography-club-persistence</module>
         <module>pa165-photography-club-service</module>
         <module>pa165-photography-club-api</module>
+      	<module>pa165-photography-club-data</module>
         <module>pa165-photography-club-rest</module>
     </modules>
 
