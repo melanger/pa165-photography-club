@@ -7,8 +7,7 @@
     <packaging>pom</packaging>
     <name>pa165-photography-club</name>
     <modules>
-        <!--<module>pa165-photography-club-ear</module>-->
-        <!--<module>pa165-photography-club-web</module>-->
+        <module>pa165-photography-club-web</module>
         <module>pa165-photography-club-persistence</module>
         <module>pa165-photography-club-service</module>
         <module>pa165-photography-club-api</module>

@@ -5,10 +5,16 @@ More information can be found in the [project wiki](https://github.com/melanger/
 including the [Class diagram](https://github.com/melanger/pa165-photography-club/wiki/Class-diagram) and the [Use Case diagram](https://github.com/melanger/pa165-photography-club/wiki/Use-Case-Diagram).
 
 ## Usage
+### Build
 ```
 git clone https://github.com/melanger/pa165-photography-club.git
 cd pa165-photography-club
 mvn clean install
+```
+### Then run the web
+```
+cd pa165-photography-club-web
+mvn tomcat7:run
 ```
 
 ## Team members
@@ -19,7 +25,7 @@ mvn clean install
 There are only 3 members on this team (one dropped out).
 
 ## Project structure (maven submodules)
-![maven submodules diagram](http://yuml.me/2b0d3e43.png)
+![maven submodules diagram](http://yuml.me/bd0c5c16.png)
 
 ## Simplified class diagram (omitting interfaces and implementations)
 ![simplified class diagram](http://yuml.me/da6f290b.png)
