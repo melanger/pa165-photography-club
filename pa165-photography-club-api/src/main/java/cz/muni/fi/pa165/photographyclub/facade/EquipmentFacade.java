@@ -9,13 +9,32 @@ import java.util.List;
  * @author Pavel Brousek
  */
 public interface EquipmentFacade {
-    
+    /**
+     * Get all equipment of a member.
+     * @param memberId id of the member
+     * @return list of equipment (might be empty)
+     */
     public List<EquipmentDTO> getEquipmentByMember(long memberId);
     
+    /**
+     * Get an equipment by its id.
+     * @param id id of the equipment
+     * @return Equipment if found, null otherwise
+     */
     public EquipmentDTO getEquipmentById(long id);
     
+    /**
+     * Add an equipment to a member.
+     * @param memberId id of the member
+     * @param equipment EquipmentCreateDTO
+     */
     public void addEquipmentToMember(long memberId, EquipmentCreateDTO equipment);
     
+    /**
+     * Remove an equipment from a member.
+     * @param memberId id of the member
+     * @param equipmentId EquipmentCreateDTO
+     */
     public void removeEquipmentOfMember(long memberId, long equipmentId);
     
 }
