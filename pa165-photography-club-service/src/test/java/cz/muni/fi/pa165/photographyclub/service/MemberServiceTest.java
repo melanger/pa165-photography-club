@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.photographyclub.service;
 
-import cz.muni.fi.pa165.photographyclub.service.config.ServiceApplicationContext;
+import cz.muni.fi.pa165.photographyclub.service.config.ServiceTestApplicationContext;
 import cz.muni.fi.pa165.photographyclub.dao.MemberDao;
 import cz.muni.fi.pa165.photographyclub.entity.Member;
 import java.time.LocalDate;
@@ -26,7 +26,7 @@ import org.testng.annotations.Test;
  *
  * @author Matus Kravec
  */
-@ContextConfiguration(classes = ServiceApplicationContext.class)
+@ContextConfiguration(classes = ServiceTestApplicationContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class MemberServiceTest extends AbstractTestNGSpringContextTests{
  
