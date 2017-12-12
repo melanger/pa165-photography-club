@@ -35,6 +35,9 @@ public class MemberFacadeImpl implements MemberFacade {
         m.setMotivation(member.getMotivation());
         m.setName(member.getName());
         m.setPhoto(member.getPhoto());
+        m.setUserRole(member.getUserRole());
+        m.setEmail(member.getEmail());
+        m.setPassword(member.getPassword());
         m.setReviews(beanMappingService.mapTo(member.getReviews(), Review.class));
         m.setTours(beanMappingService.mapTo(member.getTours(), Tour.class));
         memberService.create(m);

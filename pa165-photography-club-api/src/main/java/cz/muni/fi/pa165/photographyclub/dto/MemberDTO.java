@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.photographyclub.dto;
 
 import cz.muni.fi.pa165.photographyclub.enums.Gender;
+import cz.muni.fi.pa165.photographyclub.enums.UserRole;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,7 +19,7 @@ public class MemberDTO {
 
     private LocalDate birthDate;
 
-    private  String address;
+    private String address;
 
     private String motivation;
 
@@ -27,6 +28,36 @@ public class MemberDTO {
     private Gender gender;
 
     private String photo;
+    
+    private String email;
+    
+    private String password;
+    
+    private UserRole userRole;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
 
     private List<ReviewDTO> reviews;
 

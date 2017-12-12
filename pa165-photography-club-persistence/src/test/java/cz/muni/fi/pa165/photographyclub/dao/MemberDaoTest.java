@@ -2,12 +2,11 @@ package cz.muni.fi.pa165.photographyclub.dao;
 
 import cz.muni.fi.pa165.photographyclub.PersistenceSampleApplicationContext;
 import cz.muni.fi.pa165.photographyclub.entity.Member;
+import cz.muni.fi.pa165.photographyclub.enums.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.Test;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
 import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -32,6 +31,9 @@ public class MemberDaoTest extends AbstractTransactionalTestNGSpringContextTests
         Member member = new Member();
         member.setName("Bernard");
         member.setBirthDate(LocalDate.of(1995, 5, 13));
+        member.setUserRole(UserRole.USER);
+        member.setEmail("bernard@example.com");
+        member.setPassword("random string");
         return member;
     }
 

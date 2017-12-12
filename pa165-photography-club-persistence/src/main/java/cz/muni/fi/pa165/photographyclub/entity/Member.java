@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.photographyclub.entity;
 
 import cz.muni.fi.pa165.photographyclub.enums.Gender;
+import cz.muni.fi.pa165.photographyclub.enums.UserRole;
 import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -58,6 +59,39 @@ public class Member {
 
     @Column
     private String photo;
+    
+    @Column
+    private UserRole userRole;
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+    
+    @Column
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    @Column
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Long getId() {
         return id;
