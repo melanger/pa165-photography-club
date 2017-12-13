@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.photographyclub.entity;
 
 import cz.muni.fi.pa165.photographyclub.enums.Gender;
 import cz.muni.fi.pa165.photographyclub.enums.UserRole;
+import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,7 +15,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "ClubMember")
-public class Member {
+public class Member implements Serializable, PhotoEntity {
 
     @OneToMany(mappedBy = "author")
     private List<Review> reviews;

@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
  * @author Matus Kravec
  */
 @Entity
-public class Equipment implements Serializable {
+public class Equipment implements Serializable, PhotoEntity {
 
     @ManyToOne
     private Member owner;

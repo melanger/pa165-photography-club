@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.List;
+import org.springframework.dao.DataAccessException;
 
 /**
  * REST controller for equipment
@@ -42,11 +43,9 @@ public class TourController {
      */
     @RequestMapping(value = "/{tour_id}",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final TourDTO getTourById(@PathVariable("tour_id") long tourId) throws Exception{
-        try {
-            return tourFacade.getTourById(tourId);
-        } catch (Exception e){
-            throw new ResourceNotFoundException();
-        }
+        TourDTO tour = tourFacade.getTourById(tourId);
+        if (tour == null) throw new ResourceNotFoundException();
+        return tour;
     }
 
     /**
@@ -54,13 +53,9 @@ public class TourController {
      * @param tourCreateDTO new tour
      * @throws Exception {@link ResourceNotFoundException}
      */
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final void createTour(@RequestBody TourCreateDTO tourCreateDTO) throws Exception{
-        try {
-            tourFacade.createTour(tourCreateDTO);
-        } catch (Exception e){
-            throw new ResourceNotFoundException();
-        }
+        tourFacade.createTour(tourCreateDTO);
     }
 
     /**
@@ -72,7 +67,7 @@ public class TourController {
     public final void deleteTour(@PathVariable("tour_id") long tourId) throws Exception{
         try {
             tourFacade.removeTour(tourId);
-        } catch (Exception e){
+        } catch (DataAccessException e){
             throw new ResourceNotFoundException();
         }
     }
@@ -83,7 +78,7 @@ public class TourController {
      * @return list of tour's reviews
      * @throws Exception {@link ResourceNotFoundException}
      */
-    @RequestMapping(value = "/tourReviews/{tour_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{tour_id}/reviews", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<ReviewDTO> getTourReviews(@PathVariable("tour_id") long tourId) throws Exception{
         try {
             return tourFacade.getTourReviews(tourId);
@@ -98,7 +93,7 @@ public class TourController {
      * @return List of assosiated members
      * @throws Exception {@link ResourceNotFoundException}
      */
-    @RequestMapping(value = "/tourParticipants/{tour_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{tour_id}/members", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<MemberDTO> getTourParticipants(@PathVariable("tour_id") long tourId) throws Exception{
         try {
             return tourFacade.getTourParticipants(tourId);
@@ -113,7 +108,7 @@ public class TourController {
      * @return value of avg. rating
      * @throws Exception {@link ResourceNotFoundException}
      */
-    @RequestMapping(value = "/tourRating/{tour_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{tour_id}/rating", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final double getTourRating(@PathVariable("tour_id") long tourId) throws Exception{
         try {
             return tourFacade.getTourRating(tourId);

@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
  * @author Pavel Brousek
  */
 @Entity
-public class Tour implements Serializable {
+public class Tour implements Serializable, PhotoEntity {
 
     @ManyToMany
     private List<Member> participants;
