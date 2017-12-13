@@ -47,7 +47,7 @@ public class EquipmentController {
      * @return list of equipment
      * @throws Exception ResourceNotFoundException if there is empty result
      */
-    @RequestMapping(value = "member/{member_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "members/{member_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<EquipmentDTO> getEquipmentByMember(@PathVariable("member_id") long memberId) throws Exception{
         List<EquipmentDTO> equipmentDTOList = equipmentFacade.getEquipmentByMember(memberId);
         if (equipmentDTOList == null) { // possible?
@@ -62,7 +62,7 @@ public class EquipmentController {
      * @param memberId id of the member
      * @param equipmentCreateDTO equipment to be added to the member
      */
-    @RequestMapping(value = "/member/{member_id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/members/{member_id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final void addEquipmentToMember(@PathVariable("member_id") long memberId, @RequestBody EquipmentCreateDTO equipmentCreateDTO){
         equipmentFacade.addEquipmentToMember(memberId,equipmentCreateDTO);
     }
@@ -73,7 +73,7 @@ public class EquipmentController {
      * @param memberId id of the member
      * @param equipmentId equipment to be removed from the member
      */
-    @RequestMapping(value = "/{equipment_id}/member/{member_id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{equipment_id}/members/{member_id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final void removeEquipmentFromMember(@PathVariable("member_id") long memberId, @PathVariable("equipment_id") long equipmentId){
         equipmentFacade.removeEquipmentOfMember(memberId,equipmentId);
     }
