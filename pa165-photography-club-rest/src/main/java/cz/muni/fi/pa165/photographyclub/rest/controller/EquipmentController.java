@@ -41,39 +41,39 @@ public class EquipmentController {
     }
 
     /**
-     * Get list of equipment associated to member
+     * Get list of equipment associated to a member
      *
-     * @param memberId id of member
+     * @param memberId id of the member
      * @return list of equipment
      * @throws Exception ResourceNotFoundException if there is empty result
      */
-    @RequestMapping(value = "by_member_id/{member_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "member/{member_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<EquipmentDTO> getEquipmentByMember(@PathVariable("member_id") long memberId) throws Exception{
         List<EquipmentDTO> equipmentDTOList = equipmentFacade.getEquipmentByMember(memberId);
-        if (equipmentDTOList == null) {
+        if (equipmentDTOList == null) { // possible?
             throw new ResourceNotFoundException();
         }
         return equipmentDTOList;
     }
 
     /**
-     * Adds equipment to member
+     * Adds equipment to a member
      *
-     * @param memberId id of member
-     * @param equipmentCreateDTO equipment to be added to member
+     * @param memberId id of the member
+     * @param equipmentCreateDTO equipment to be added to the member
      */
-    @RequestMapping(value = "/{member_id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/member/{member_id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final void addEquipmentToMember(@PathVariable("member_id") long memberId, @RequestBody EquipmentCreateDTO equipmentCreateDTO){
         equipmentFacade.addEquipmentToMember(memberId,equipmentCreateDTO);
     }
 
     /**
-     * Remove equipment from member
+     * Remove equipment from a member
      *
-     * @param memberId id of member
-     * @param equipmentId equipment to be removed from member
+     * @param memberId id of the member
+     * @param equipmentId equipment to be removed from the member
      */
-    @RequestMapping(value = "/{member_id},{equipment_id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{equipment_id}/member/{member_id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final void removeEquipmentFromMember(@PathVariable("member_id") long memberId, @PathVariable("equipment_id") long equipmentId){
         equipmentFacade.removeEquipmentOfMember(memberId,equipmentId);
     }
