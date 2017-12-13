@@ -107,6 +107,12 @@ public class EquipmentFacadeTest extends AbstractTestNGSpringContextTests{
     }
     
     @Test
+    public void getEquipmentByNonExistingMemberIdTest(){
+        long nonExistingId = 7777;
+        Assert.assertEquals(equipmentFacade.getEquipmentByMember(nonExistingId), null);
+    }
+    
+    @Test
     public void getEquipmentByIdTest(){
         Equipment equipment = this.createEquipment();
         EquipmentDTO equipmentDTO = this.createEquipmentDTO();
