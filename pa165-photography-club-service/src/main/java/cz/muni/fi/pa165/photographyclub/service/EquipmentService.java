@@ -13,7 +13,11 @@ import java.util.Map;
  *
  */
 public interface EquipmentService extends GenericService<Equipment> {
-
+    /**
+     * search for member
+     * @param m searched member
+     * @return
+     */
     List<Equipment> findByOwner(Member m);
 
     /**
