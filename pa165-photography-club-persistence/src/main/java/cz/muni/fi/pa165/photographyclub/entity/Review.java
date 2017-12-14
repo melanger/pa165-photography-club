@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
  * @author Matus Kravec
  */
 @Entity
-public class Review implements Serializable {
+public class Review implements Serializable, PhotoEntity {
 
     @ManyToOne
     private Tour tour;

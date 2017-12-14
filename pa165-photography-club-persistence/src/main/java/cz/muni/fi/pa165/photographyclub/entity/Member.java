@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "ClubMember")
-public class Member {
+public class Member implements PhotoEntity {
 
     @OneToMany(mappedBy = "author")
     private List<Review> reviews;
