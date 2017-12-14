@@ -32,8 +32,12 @@ public class EquipmentFacadeImpl implements EquipmentFacade{
     @Override
     public List<EquipmentDTO> getEquipmentByMember(long memberId) {
         Member member = memberService.findById(memberId);
-        List<Equipment> equipList = equipmentService.findByOwner(member);
-        return beanMappingService.mapTo(equipList, EquipmentDTO.class);
+        if (member == null){
+            return null;
+        } else {
+            List<Equipment> equipList = equipmentService.findByOwner(member);
+            return beanMappingService.mapTo(equipList, EquipmentDTO.class);
+        }
     }
 
     @Override
