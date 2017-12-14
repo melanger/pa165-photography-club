@@ -49,11 +49,11 @@ public class EquipmentController {
      */
     @RequestMapping(value = "members/{member_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<EquipmentDTO> getEquipmentByMember(@PathVariable("member_id") long memberId) throws Exception{
-        List<EquipmentDTO> equipmentDTOList = equipmentFacade.getEquipmentByMember(memberId);
-        if (equipmentDTOList == null) { // possible?
+        try{
+            return equipmentFacade.getEquipmentByMember(memberId);
+        } catch (Exception e){
             throw new ResourceNotFoundException();
         }
-        return equipmentDTOList;
     }
 
     /**
@@ -64,7 +64,11 @@ public class EquipmentController {
      */
     @RequestMapping(value = "/members/{member_id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final void addEquipmentToMember(@PathVariable("member_id") long memberId, @RequestBody EquipmentCreateDTO equipmentCreateDTO){
-        equipmentFacade.addEquipmentToMember(memberId,equipmentCreateDTO);
+        try {
+            equipmentFacade.addEquipmentToMember(memberId, equipmentCreateDTO);
+        } catch (Exception e){
+            throw  new ResourceNotFoundException();
+        }
     }
 
     /**
@@ -75,7 +79,11 @@ public class EquipmentController {
      */
     @RequestMapping(value = "/{equipment_id}/members/{member_id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final void removeEquipmentFromMember(@PathVariable("member_id") long memberId, @PathVariable("equipment_id") long equipmentId){
-        equipmentFacade.removeEquipmentOfMember(memberId,equipmentId);
+        try {
+            equipmentFacade.removeEquipmentOfMember(memberId, equipmentId);
+        } catch (Exception e){
+            throw new ResourceNotFoundException();
+        }
     }
 
 }
