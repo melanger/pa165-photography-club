@@ -52,11 +52,14 @@ public class EquipmentController {
      */
     @RequestMapping(value = "members/{member_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<EquipmentDTO> getEquipmentByMember(@PathVariable("member_id") long memberId) throws Exception{
-        try{
-            return equipmentFacade.getEquipmentByMember(memberId);
-        } catch (Exception e){
-            throw new ResourceNotFoundException();
-        }
+//        try{
+//            return equipmentFacade.getEquipmentByMember(memberId);
+//        } catch (Exception e){
+//            throw new ResourceNotFoundException();
+//        }
+        List<EquipmentDTO> equipmentDTOList = equipmentFacade.getEquipmentByMember(memberId);
+        if (equipmentDTOList == null) throw new ResourceNotFoundException();
+        else return equipmentDTOList;
     }
 
     /**
