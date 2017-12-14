@@ -53,14 +53,13 @@ public class EquipmentFacadeImpl implements EquipmentFacade{
     @Override
     public void addEquipmentToMember(long memberId, EquipmentCreateDTO equipment) {
         Member member = memberService.findById(memberId);
+        if (member == null || equipment.getOwner() == null || equipment.getOwner().getId() != memberId) {
+            throw new IllegalArgumentException("Invalid member in arguments");
+        }
         List<Equipment> equipList = member.getEquipment();
         Equipment newEquipment = new Equipment();
         newEquipment.setName(equipment.getName());
-        if(equipment.getOwner() == null){
-            newEquipment.setOwner(null); //throw new IllegalArgumentException();
-        } else {
-            newEquipment.setOwner(beanMappingService.mapTo(equipment.getOwner(), Member.class));
-        }        
+        newEquipment.setOwner(beanMappingService.mapTo(equipment.getOwner(), Member.class));
         newEquipment.setType(equipment.getType());
         equipList.add(newEquipment);
         member.setEquipment(equipList);
@@ -69,8 +68,10 @@ public class EquipmentFacadeImpl implements EquipmentFacade{
     @Override
     public void removeEquipmentOfMember(long memberId, long equipmentId) {
         Member member = memberService.findById(memberId);
+        if (member == null) throw new EntityNotFoundException(Member.class);
         List<Equipment> equipList = member.getEquipment();
         Equipment equipment = equipmentService.findById(equipmentId);
+        if (equipment == null) throw new EntityNotFoundException(Equipment.class);
         equipList.remove(equipment);
         member.setEquipment(equipList);
     }

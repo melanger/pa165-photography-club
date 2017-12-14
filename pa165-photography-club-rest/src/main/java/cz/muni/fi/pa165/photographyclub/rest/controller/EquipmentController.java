@@ -2,8 +2,11 @@ package cz.muni.fi.pa165.photographyclub.rest.controller;
 
 import cz.muni.fi.pa165.photographyclub.dto.EquipmentCreateDTO;
 import cz.muni.fi.pa165.photographyclub.dto.EquipmentDTO;
+import cz.muni.fi.pa165.photographyclub.entity.Equipment;
+import cz.muni.fi.pa165.photographyclub.facade.EntityNotFoundException;
 import cz.muni.fi.pa165.photographyclub.facade.EquipmentFacade;
 import cz.muni.fi.pa165.photographyclub.rest.ApiUris;
+import cz.muni.fi.pa165.photographyclub.rest.exception.InvalidParameterException;
 import cz.muni.fi.pa165.photographyclub.rest.exception.ResourceNotFoundException;
 import javax.inject.Inject;
 
@@ -66,8 +69,8 @@ public class EquipmentController {
     public final void addEquipmentToMember(@PathVariable("member_id") long memberId, @RequestBody EquipmentCreateDTO equipmentCreateDTO){
         try {
             equipmentFacade.addEquipmentToMember(memberId, equipmentCreateDTO);
-        } catch (Exception e){
-            throw  new ResourceNotFoundException();
+        } catch (IllegalArgumentException e){
+            throw new InvalidParameterException();
         }
     }
 
@@ -81,8 +84,12 @@ public class EquipmentController {
     public final void removeEquipmentFromMember(@PathVariable("member_id") long memberId, @PathVariable("equipment_id") long equipmentId){
         try {
             equipmentFacade.removeEquipmentOfMember(memberId, equipmentId);
-        } catch (Exception e){
-            throw new ResourceNotFoundException();
+        } catch (EntityNotFoundException e){
+            if (e.getEntityClass().equals(Equipment.class)) {
+                throw new ResourceNotFoundException();
+            } else {
+                throw new InvalidParameterException();
+            }
         }
     }
 
