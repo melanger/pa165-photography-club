@@ -30,6 +30,7 @@ import java.util.List;
  * Loads some sample data to populate the eshop database.
  *
  * @author Pavel Brousek
+ * @author Denis Figula
  */
 @Component
 @Transactional //transactions are handled on facade layer
@@ -47,6 +48,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     private TourService tourService;
 
     @Override
+    @SuppressWarnings("unused")
     public void loadData() throws IOException {
         Review positive = review("great",10);
         Review neutral = review("ok",5);
@@ -56,7 +58,6 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         log.info("Reviews loaded");
         Tour louvre = tour("Louvre",LocalDate.of(2015,5,5),TourTheme.PORTRAITS, Arrays.asList(reviewsLouvre));
         Tour ufizzi = tour("Ufizzi",LocalDate.of(2016,3,6),TourTheme.LANDSCAPE,Arrays.asList(reviewsUfizzi));
-        Tour louvreArr[] = {louvre};
         Tour ufizziArr[] = {ufizzi};
         Tour allArr[] = {louvre,ufizzi};
         log.info("Tours loaded");
