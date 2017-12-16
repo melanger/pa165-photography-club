@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -70,8 +71,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
                 Gender.MALE,"photolink",UserRole.ADMINISTRATOR,"unknown","anton@mail","AntonIsBest",Arrays.asList(antonEq));
         Member ben = member(Arrays.asList(ufizziArr),Arrays.asList(reviewsUfizzi),"Ben","for fun","beginner",LocalDate.of(1998,3,16),
                 Gender.MALE,"profilepic",UserRole.USER,"address 11 Brno","ben@mail.com","BenisBen",Arrays.asList(benEq));
-        Member cyril = member(null,null,"Cyril","want to try","none",LocalDate.of(1999,5,28),
-                Gender.MALE,"link",UserRole.USER,"V Praze blaze","cyrul@mail","Cyrilko",null);
+        Member cyril = member(Collections.emptyList(),Collections.emptyList(),"Cyril","want to try","none",LocalDate.of(1999,5,28),
+                Gender.MALE,"link",UserRole.USER,"V Praze blaze","cyrul@mail","Cyrilko",Collections.emptyList());
         log.info("Members loaded");
     }
 
