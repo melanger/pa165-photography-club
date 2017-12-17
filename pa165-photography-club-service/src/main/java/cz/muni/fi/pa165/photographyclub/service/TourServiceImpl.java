@@ -26,10 +26,10 @@ public class TourServiceImpl extends GenericServiceImpl<Tour> implements TourSer
     }
     
     @Override
-    public Map<Integer, List<Tour>> getToursByRating(){
+    public Map<Integer, List<Tour>> getToursByAverageRating(){
         Map<Integer, List<Tour>> map = new HashMap<>();
         List<Tour> tours = tourDao.findAll();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i <= 10; i++) {
             map.put(i, new LinkedList<Tour>());
         }
         for (Tour tour : tours) {

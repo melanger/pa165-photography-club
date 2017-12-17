@@ -135,7 +135,7 @@ public class TourServiceTest extends AbstractTestNGSpringContextTests {
         
         when(tourDao.findAll()).thenReturn(tours);
         
-        Map<Integer, List<Tour>> map = service.getToursByRating();
+        Map<Integer, List<Tour>> map = service.getToursByAverageRating();
         assertThat(map.get(2).size()).isEqualTo(1);
         assertThat(map.get(4).size()).isEqualTo(2);
     }

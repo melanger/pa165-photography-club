@@ -23,18 +23,19 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.filter;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 /**
  * @author Denis.Figula
@@ -72,6 +73,15 @@ public class TourFacadeTest extends AbstractTestNGSpringContextTests {
         t.setDate(LocalDate.of(2017,01,01));
         t.setTheme(TourTheme.LANDSCAPE);
 
+        final long id = 1l;
+        doAnswer(new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) {
+                Object[] args = invocation.getArguments();
+                ((Tour)args[0]).setId(id);
+                return null;
+            }})
+        .when(tourService).create(any(Tour.class));
 
         tourFacade.createTour(t);
 
@@ -81,7 +91,8 @@ public class TourFacadeTest extends AbstractTestNGSpringContextTests {
         assertThat(arg)
                 .hasFieldOrPropertyWithValue("name",name)
                 .hasFieldOrPropertyWithValue("date", date)
-                .hasFieldOrProperty("theme");
+                .hasFieldOrProperty("theme")
+                .hasFieldOrPropertyWithValue("id", id);
     }
 
     @Test

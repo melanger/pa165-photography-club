@@ -10,6 +10,12 @@ import java.util.Map;
  */
 public interface TourService extends GenericService<Tour> {
     
-    public Map<Integer, List<Tour>> getToursByRating();
+    /**
+     * Method sorts all tours by rating(only according to integer value 
+     * of rating values after decimal point are not taken into account). 
+     * @return Tours are returned in the form of map where keys are integer 
+     * values from 0 to 10 and values are lists of tours with coresponding rating.
+     */
+    public Map<Integer, List<Tour>> getToursByAverageRating();
     
 }

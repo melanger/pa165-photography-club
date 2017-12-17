@@ -1,0 +1,68 @@
+FORMAT: 1A
+HOST: http://localhost:8080/pa165/rest/
+
+# PA165 Photography club REST API
+
+API allows manipulation of entities.
+
+## Root [/]
+
+### List all other endpoints [GET]
+
++ Response 200 (application/json)
+
+{
+  "equipment_uri": "/equipment",
+  "reviews_uri": "/reviews",
+  "members_uri": "/members",
+  "tours_uri": "/tours"
+}
+
+
+## Tours collection [/tours]
+
+### Get all tours [GET]
+
++ Response 200 (application/json)
+
+        [{"name":"Louvre","theme":"PORTRAITS","date":{"year":2015,"month":"MAY","era":"CE","dayOfMonth":5,"dayOfWeek":"TUESDAY","dayOfYear":125,"leapYear":false,"monthValue":5,"chronology":{"id":"ISO","calendarType":"iso8601"}},"reviews":[],"participants":[],"id":4},{"name":"Ufizzi","theme":"LANDSCAPE","date":{"year":2016,"month":"MARCH","era":"CE","dayOfMonth":6,"dayOfWeek":"SUNDAY","dayOfYear":66,"leapYear":true,"monthValue":3,"chronology":{"id":"ISO","calendarType":"iso8601"}},"reviews":[],"participants":[],"id":5}]
+        
+### Create a tour [POST]
+
++ Request (application/json)
+
+        {"name":"Testovaci","theme":"PORTRAITS","date":"2017-11-11"}
+
++ Response 201 (application/json)
+
+    + Headers
+        Location: /pa165/rest/tours/{id}
+
+
+## Single tour [/tours/{id}]
+
+### Get a tour by ID [GET]
+
++ Response 200 (application/json)
+
+        {"name":"Louvre","theme":"PORTRAITS","date":{"year":2015,"month":"MAY","era":"CE","dayOfMonth":5,"dayOfWeek":"TUESDAY","dayOfYear":125,"leapYear":false,"monthValue":5,"chronology":{"id":"ISO","calendarType":"iso8601"}},"reviews":[],"participants":[],"id":4}
+
+### Delete a tour [DELETE]
+
++ Response 200 (application/json)
+
+## Tour reviews [/tours/{id}/reviews]
+
+### Get reviews of a tour [GET]
+
++ Response 200 (application/json)
+
+        []
+
+## Tour participants [/tours/{id}/members]
+
+### Get participants of a tour [GET]
+
++ Response 200 (application/json)
+
+        []

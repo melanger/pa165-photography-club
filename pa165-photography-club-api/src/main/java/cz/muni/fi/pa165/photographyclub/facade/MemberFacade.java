@@ -9,14 +9,35 @@ import java.util.List;
  * @author Denis.Figula
  */
 public interface MemberFacade {
-
+    /**
+     * creating memeber
+     * @param member to be created
+     */
     void createMember(MemberCreateDTO member);
 
+    /**
+     * deleting member
+     * @param member to be deleted
+     */
     void removeMember(MemberDTO member);
 
+    /**
+     * finding all available members
+     * @return list of existing members
+     */
     List<MemberDTO> findAllMembers();
 
+    /**
+     * getting member by id
+     * @param id of searched member
+     * @return member if found
+     */
     MemberDTO findById(Long id);
 
+    /**
+     * getting member by his name
+     * @param name of searched member
+     * @return member if found
+     */
     MemberDTO findByName(String name);
 }

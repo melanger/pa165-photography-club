@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.*;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 
 /**
@@ -128,5 +129,17 @@ public class TourDaoTest extends AbstractTransactionalTestNGSpringContextTests {
     @Test
     public void getAllToursEmptyTest() {
         assertThat(tourDao.findAll()).isEmpty();
+    }
+    
+    @Test
+    public void deleteNonExistingTourTest() {
+        Tour t = new Tour();
+        t.setId(7777l);
+        try {
+            tourDao.remove(t);
+            failBecauseExceptionWasNotThrown(DataAccessException.class);
+        } catch (DataAccessException e) {
+            //
+        }
     }
 }

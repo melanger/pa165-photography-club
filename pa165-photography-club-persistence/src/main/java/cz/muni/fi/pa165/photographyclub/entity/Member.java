@@ -1,7 +1,9 @@
 package cz.muni.fi.pa165.photographyclub.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import cz.muni.fi.pa165.photographyclub.enums.Gender;
 import cz.muni.fi.pa165.photographyclub.enums.UserRole;
+import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,7 +16,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "ClubMember")
-public class Member implements PhotoEntity {
+public class Member implements Serializable, PhotoEntity {
 
     @OneToMany(mappedBy = "author")
     private List<Review> reviews;
@@ -43,6 +45,7 @@ public class Member implements PhotoEntity {
 
     @Column(nullable = false)
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     @Column

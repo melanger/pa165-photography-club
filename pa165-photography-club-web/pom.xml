@@ -111,7 +111,37 @@
                 <version>2.2</version>
                 <configuration>
                     <path>/pa165</path>
+                    <addContextWarDependencies>true</addContextWarDependencies>
+                    <addWarDependenciesInClassloader>true</addWarDependenciesInClassloader>
+                    <warSourceDirectory>${project.build.directory}/${project.build.finalName}/</warSourceDirectory>
+                    <webapps> 
+                        <webapp> 
+                          <groupId>cz.muni.fi.pa165</groupId> 
+                          <artifactId>pa165-photography-club-web</artifactId> 
+                          <version>${project.version}</version> 
+                          <type>war</type>    
+                          <asWebapp>true</asWebapp>
+                          <contextPath>/pa165</contextPath>
+                        </webapp> 
+                        <webapp> 
+                          <groupId>cz.muni.fi.pa165</groupId> 
+                          <artifactId>pa165-photography-club-rest</artifactId> 
+                          <version>${project.version}</version> 
+                          <type>war</type>    
+                          <asWebapp>true</asWebapp>
+                          <contextPath>/pa165/rest</contextPath>
+                        </webapp>
+                    </webapps>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>cz.muni.fi.pa165</groupId>
+                        <artifactId>pa165-photography-club-rest</artifactId>
+                        <version>${project.version}</version>
+                        <type>war</type>
+                        <!--<scope>tomcat</scope>-->
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

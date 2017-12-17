@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.photographyclub.dao;
 
+import cz.muni.fi.pa165.photographyclub.entity.PhotoEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @param <T> type of entity
  */
 @Repository
-public abstract class GenericDaoImpl<T> implements GenericDao<T> {
+public abstract class GenericDaoImpl<T extends PhotoEntity> implements GenericDao<T> {
     @PersistenceContext
     protected EntityManager entityManager;
     
@@ -26,6 +27,8 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
     
     @Override
     public void remove(T e) {
+        if (this.findById(e.getId()) == null)
+            throw new IllegalArgumentException("Entity to be deleted not found");
         entityManager.remove(entityManager.merge(e));
     }
 }
