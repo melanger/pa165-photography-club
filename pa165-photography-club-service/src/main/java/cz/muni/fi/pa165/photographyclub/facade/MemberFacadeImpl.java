@@ -10,12 +10,16 @@ import cz.muni.fi.pa165.photographyclub.entity.Tour;
 import cz.muni.fi.pa165.photographyclub.service.MemberService;
 import java.util.List;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 /**
  * Implementation of MemberFacade
  *
  * @author Pavel Brousek
  */
+@Transactional
+@Service
 public class MemberFacadeImpl implements MemberFacade {
 
     @Inject

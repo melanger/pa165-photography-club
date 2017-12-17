@@ -13,10 +13,14 @@ import cz.muni.fi.pa165.photographyclub.service.TourService;
 
 import javax.inject.Inject;
 import java.util.List;
+import javax.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 /**Class implementing tour facade
  * @author Denis.Figula
  */
+@Transactional
+@Service
 public class TourFacadeImpl implements TourFacade {
 
     @Inject
