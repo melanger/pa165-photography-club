@@ -44,13 +44,14 @@ public class TourFacadeImpl implements TourFacade {
     }
 
     @Override
-    public void createTour(TourCreateDTO tour) {
+    public long createTour(TourCreateDTO tour) {
         Tour t = new Tour();
         t.setName(tour.getName());
         t.setDate(tour.getDate());
         t.setTheme(tour.getTheme());
-        t.setReviews(reviewService.findByTour(t));
         tourService.create(t);
+        t.setReviews(reviewService.findByTour(t));
+        return t.getId();
     }
 
     @Override

@@ -28,8 +28,9 @@ public interface TourFacade {
     /**
      * Method for creating tour.
      * @param tour to be created.
+     * @return created tour's id
      */
-    public void createTour(TourCreateDTO tour);
+    public long createTour(TourCreateDTO tour);
     
     /**
      * Method for deleting tour.
