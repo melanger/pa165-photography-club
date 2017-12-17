@@ -32,11 +32,7 @@ public class TourController {
      */
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<TourDTO> getTours(){
-        try {
-            return tourFacade.getAllTours();
-        } catch (Exception e){
-            throw new ResourceNotFoundException();
-        }
+        return tourFacade.getAllTours();
     }
 
     /**
