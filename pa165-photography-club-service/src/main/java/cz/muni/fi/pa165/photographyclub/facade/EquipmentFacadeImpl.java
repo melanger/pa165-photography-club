@@ -9,6 +9,7 @@ import cz.muni.fi.pa165.photographyclub.service.EquipmentService;
 import cz.muni.fi.pa165.photographyclub.service.MemberService;
 import java.util.List;
 import javax.inject.Inject;
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -32,22 +33,16 @@ public class EquipmentFacadeImpl implements EquipmentFacade{
     @Override
     public List<EquipmentDTO> getEquipmentByMember(long memberId) {
         Member member = memberService.findById(memberId);
-        if (member == null){
-            return null;
-        } else {
-            List<Equipment> equipList = equipmentService.findByOwner(member);
-            return beanMappingService.mapTo(equipList, EquipmentDTO.class);
-        }
+        if (member == null) throw new EntityNotFoundException();
+        List<Equipment> equipList = equipmentService.findByOwner(member);
+        return beanMappingService.mapTo(equipList, EquipmentDTO.class);
     }
 
     @Override
     public EquipmentDTO getEquipmentById(long id) {
         Equipment equipment = equipmentService.findById(id);
-        if(equipment == null){
-            return null;
-        } else {
-            return beanMappingService.mapTo(equipment, EquipmentDTO.class);
-        }
+        if(equipment == null) throw new EntityNotFoundException();
+        return beanMappingService.mapTo(equipment, EquipmentDTO.class);
     }
 
     @Override
