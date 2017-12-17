@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.photographyclub.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import cz.muni.fi.pa165.photographyclub.enums.Gender;
 import cz.muni.fi.pa165.photographyclub.enums.UserRole;
 import java.io.Serializable;
@@ -44,6 +45,7 @@ public class Member implements Serializable, PhotoEntity {
 
     @Column(nullable = false)
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     @Column

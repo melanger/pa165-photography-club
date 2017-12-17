@@ -1,0 +1,18 @@
+<configuration>
+    <appender name="APP" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date %-5level %logger - %message%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="APP"/>
+    </root>
+
+    <logger name="org" level="info"/>
+    <logger name="org.springframework" level="TRACE" />
+    <logger name="org.springframework.transaction" level="INFO" />
+    <logger name="org.springframework.security" level="INFO" />
+    <logger name="org.springframework.web.servlet.mvc" level="TRACE" />
+
+</configuration>
