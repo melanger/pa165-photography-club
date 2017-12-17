@@ -160,6 +160,11 @@
                 <artifactId>jackson-core</artifactId>
                 <version>2.9.3</version>
             </dependency>
+            <dependency>
+                <groupId>io.craftsman</groupId>
+                <artifactId>dozer-jdk8-support</artifactId>
+                <version>1.0.3</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
