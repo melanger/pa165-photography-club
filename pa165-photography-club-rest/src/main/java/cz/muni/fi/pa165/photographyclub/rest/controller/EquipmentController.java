@@ -54,7 +54,7 @@ public class EquipmentController {
     public final List<EquipmentDTO> getEquipmentByMember(@PathVariable("member_id") long memberId) throws Exception{
         try{
             return equipmentFacade.getEquipmentByMember(memberId);
-        } catch (Exception e){
+        } catch (EntityNotFoundException e){
             throw new ResourceNotFoundException();
         }
     }
