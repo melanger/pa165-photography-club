@@ -6,13 +6,19 @@ import cz.muni.fi.pa165.photographyclub.dto.TourCreateDTO;
 import cz.muni.fi.pa165.photographyclub.dto.TourDTO;
 import cz.muni.fi.pa165.photographyclub.facade.TourFacade;
 import cz.muni.fi.pa165.photographyclub.rest.ApiUris;
+import cz.muni.fi.pa165.photographyclub.rest.exception.ResourceAlreadyExistingException;
 import cz.muni.fi.pa165.photographyclub.rest.exception.ResourceNotFoundException;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.List;
-import org.springframework.dao.DataAccessException;
+import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  * REST controller for equipment
@@ -54,8 +60,16 @@ public class TourController {
      * @throws Exception {@link ResourceNotFoundException}
      */
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final void createTour(@RequestBody TourCreateDTO tourCreateDTO) throws Exception{
-        tourFacade.createTour(tourCreateDTO);
+    public final ResponseEntity<?> createTour(@RequestBody TourCreateDTO tourCreateDTO, UriComponentsBuilder b) throws Exception{
+        long id;
+        try {
+            id = tourFacade.createTour(tourCreateDTO);
+        } catch (EntityExistsException e) {
+            throw new ResourceAlreadyExistingException();
+        }
+        
+        UriComponents uriComponents = b.path(ApiUris.ROOT_URI_TOURS + "/{id}").buildAndExpand(id);
+        return ResponseEntity.created(uriComponents.toUri()).build();
     }
 
     /**
@@ -67,7 +81,7 @@ public class TourController {
     public final void deleteTour(@PathVariable("tour_id") long tourId) throws Exception{
         try {
             tourFacade.removeTour(tourId);
-        } catch (DataAccessException e){
+        } catch (EntityNotFoundException e){
             throw new ResourceNotFoundException();
         }
     }
@@ -82,7 +96,7 @@ public class TourController {
     public final List<ReviewDTO> getTourReviews(@PathVariable("tour_id") long tourId) throws Exception{
         try {
             return tourFacade.getTourReviews(tourId);
-        } catch (Exception e){
+        } catch (EntityNotFoundException e){
             throw new ResourceNotFoundException();
         }
     }
@@ -97,7 +111,7 @@ public class TourController {
     public final List<MemberDTO> getTourParticipants(@PathVariable("tour_id") long tourId) throws Exception{
         try {
             return tourFacade.getTourParticipants(tourId);
-        } catch (Exception e){
+        } catch (EntityNotFoundException e){
             throw new ResourceNotFoundException();
         }
     }
@@ -112,7 +126,7 @@ public class TourController {
     public final double getTourRating(@PathVariable("tour_id") long tourId) throws Exception{
         try {
             return tourFacade.getTourRating(tourId);
-        } catch (Exception e){
+        } catch (EntityNotFoundException e){
             throw new ResourceNotFoundException();
         }
     }

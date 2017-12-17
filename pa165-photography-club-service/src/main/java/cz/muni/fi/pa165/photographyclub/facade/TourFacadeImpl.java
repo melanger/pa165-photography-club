@@ -13,6 +13,7 @@ import cz.muni.fi.pa165.photographyclub.service.TourService;
 
 import javax.inject.Inject;
 import java.util.List;
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -56,23 +57,31 @@ public class TourFacadeImpl implements TourFacade {
 
     @Override
     public void removeTour(Long id) {
-        tourService.remove(tourService.findById(id));
+        Tour tour = tourService.findById(id);
+        if (tour == null) throw new EntityNotFoundException();
+        tourService.remove(tour);
     }
 
     @Override
     public List<ReviewDTO> getTourReviews(Long tourId) {
-        List<Review> reviews = reviewService.findByTour(tourService.findById(tourId));
+        Tour tour = tourService.findById(tourId);
+        if (tour == null) throw new EntityNotFoundException();
+        List<Review> reviews = reviewService.findByTour(tour);
         return beanMappingService.mapTo(reviews,ReviewDTO.class);
     }
 
     @Override
     public List<MemberDTO> getTourParticipants(Long tourId) {
-        List<Member> participants = tourService.findById(tourId).getParticipants();
+        Tour tour = tourService.findById(tourId);
+        if (tour == null) throw new EntityNotFoundException();
+        List<Member> participants = tour.getParticipants();
         return beanMappingService.mapTo(participants, MemberDTO.class);
     }
 
     @Override
     public double getTourRating(Long tourId) {
-        return reviewService.getAverageRatingForTour(tourService.findById(tourId));
+        Tour tour = tourService.findById(tourId);
+        if (tour == null) throw new EntityNotFoundException();
+        return reviewService.getAverageRatingForTour(tour);
     }
 }
