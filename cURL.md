@@ -137,24 +137,6 @@ Content-Length: 2
 
 ## Equipment collection
 
-### Get all equip of member
-
-```
-curl -i 'http://localhost:8080/pa165/rest/members/1'
-```
-
-```
-HTTP/1.1 200 OK
-Server: Apache-Coyote/1.1
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
-ETag: "0a347114d2ac9a83132c38130c1ac6b5b"
-Content-Type: application/json;charset=UTF-8
-Content-Length: 193
-
-[{\"name\":\"TestEquipment\",\"type\":\"CAMERA\",\"ownerId\":\"1\"}]
-```
-
 ### Create equipment
 
 ```

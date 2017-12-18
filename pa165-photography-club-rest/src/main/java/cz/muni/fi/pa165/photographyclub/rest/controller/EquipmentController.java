@@ -48,22 +48,6 @@ public class EquipmentController {
     }
 
     /**
-     * Get list of equipment associated to a member
-     *
-     * @param memberId id of the member
-     * @return list of equipment
-     * @throws Exception ResourceNotFoundException if there is empty result
-     */
-    @RequestMapping(value = "members/{member_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<EquipmentDTO> getEquipmentByMember(@PathVariable("member_id") long memberId) throws Exception{
-        try{
-            return equipmentFacade.getEquipmentByMember(memberId);
-        } catch (EntityNotFoundException e){
-            throw new ResourceNotFoundException();
-        }
-    }
-
-    /**
      * Adds equipment to a member
      *
      * @param equipmentCreateDTO equipment to be added to the member
