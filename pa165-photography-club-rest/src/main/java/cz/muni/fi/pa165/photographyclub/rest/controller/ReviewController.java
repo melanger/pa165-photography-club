@@ -72,12 +72,6 @@ public class ReviewController {
         return reviewFacade.getAllReviews();
     }
     
-    @RequestMapping(value = "/{tourId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<ReviewDTO> getReviewsByTour(@PathVariable("tourId") Long tourId) throws Exception {
-        List<ReviewDTO> reviews = reviewFacade.getReviewsByTour(tourId);
-        return reviews;
-    }
-    
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final ResponseEntity<?> updateReview(@RequestBody ReviewDTO reviewDTO, UriComponentsBuilder builder) throws Exception{
         long id = reviewDTO.getId();

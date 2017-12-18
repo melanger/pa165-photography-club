@@ -79,13 +79,17 @@ public class ReviewFacadeImpl implements ReviewFacade {
 
     @Override
     public List<ReviewDTO> getReviewsByAuthor(Long authorId) {
-        List<Review> reviews = reviewService.findByAuthor(memberService.findById(authorId));
+        Member author = memberService.findById(authorId);
+        if (author == null) throw new EntityNotFoundException();
+        List<Review> reviews = reviewService.findByAuthor(author);
         return beanMappingService.mapTo(reviews, ReviewDTO.class);
     }
 
     @Override
     public List<ReviewDTO> getReviewsByTour(Long tourId) {
-        List<Review> reviews = reviewService.findByTour(tourService.findById(tourId));
+        Tour tour = tourService.findById(tourId);
+        if (tour == null) throw new EntityNotFoundException();
+        List<Review> reviews = reviewService.findByTour(tour);
         return beanMappingService.mapTo(reviews, ReviewDTO.class);
     }
     

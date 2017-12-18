@@ -111,8 +111,11 @@ public class MemberController {
     
     @RequestMapping(value = "/{authorId}/reviews", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<ReviewDTO> getReviewsByAuthor(@PathVariable("authorId") Long authorId) throws Exception {
-        List<ReviewDTO> reviews = reviewFacade.getReviewsByAuthor(authorId);
-        return reviews;
+        try {
+            return reviewFacade.getReviewsByAuthor(authorId);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException();
+        }
     }
     
 }
