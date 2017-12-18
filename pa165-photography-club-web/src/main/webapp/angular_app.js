@@ -154,6 +154,29 @@ pa165photoclubApp.controller('MemberDetailCtrl', function ($scope, $rootScope, $
     });
 });
 
+photoclubControllers.controller('ToursCtrl', function ($scope, $http) {
+    $http.get('/pa165/rest/tours').then(function (response) {
+        $scope.tours = response.data;
+    });
+});
+
+photoclubControllers.controller('TourDetailCtrl', function ($scope, $rootScope, $routeParams, $http) {
+    var tourId = $routeParams.tourId;
+    $http.get('/pa165/rest/tours/' + tourId).then(function success(response) {
+        $scope.tour = response.data;
+        $http.get('/pa165/rest/tours/' + tourId + '/members').then(function (response) {
+            $scope.tour.member = response.data;
+        });
+        $http.get('/pa165/rest/tours/' + tourId + '/reviews').then(function (response) {
+            $scope.tour.review = response.data;
+        })
+    }, function error(response) {
+        console.log(response);
+        $rootScope.warningAlert = 'Tour not found';
+    });
+});
+
+
 
 
 pa165photoclubApp.directive('convertToInt', function () {

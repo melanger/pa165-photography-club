@@ -34,7 +34,7 @@ public class ReviewController {
      * Method for getting review specified by Id parameter.
      * @param id of the review
      * @return found review.
-     * @throws Exception ResourceNotFoundException.
+     * @throws Exception {@link ResourceNotFoundException}
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final ReviewDTO getReviewById(@PathVariable("id") long id) throws Exception {
@@ -45,6 +45,11 @@ public class ReviewController {
         return reviewDTO;
     }
     
+    /**
+     * Method for creating new review.
+     * @param reviewCreateDTO review to be created.
+     * @throws Exception {@link ResourceAlreadyExistingException}
+     */
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final ResponseEntity<?> createReview(@RequestBody ReviewCreateDTO reviewCreateDTO, UriComponentsBuilder builder) throws Exception{
         long id;
@@ -58,6 +63,11 @@ public class ReviewController {
         return ResponseEntity.created(uriComponents.toUri()).build();
     }
     
+    /**
+     * Method for deleting review.
+     * @param reviewrId Id parameter of review.
+     * @throws Exception {@link ResourceNotFoundException}
+     */
     @RequestMapping(value = "/{review_id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final void removeReview(@PathVariable("review_id") long reviewrId) throws Exception{
         try {
@@ -67,11 +77,19 @@ public class ReviewController {
         }
     }
     
+    /**
+     * Method for getting all Reviews.
+     * @return List of all reviews.
+     */
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<ReviewDTO> getAllReviews(){
         return reviewFacade.getAllReviews();
     }
     
+    /**
+     * Method for updating review.
+     * @param reviewDTO review to be updated.
+     */
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final ResponseEntity<?> updateReview(@RequestBody ReviewDTO reviewDTO, UriComponentsBuilder builder) throws Exception{
         long id = reviewDTO.getId();

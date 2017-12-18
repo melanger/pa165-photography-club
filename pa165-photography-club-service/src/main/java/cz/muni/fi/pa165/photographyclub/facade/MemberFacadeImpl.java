@@ -9,6 +9,7 @@ import cz.muni.fi.pa165.photographyclub.entity.Member;
 import cz.muni.fi.pa165.photographyclub.entity.Review;
 import cz.muni.fi.pa165.photographyclub.entity.Tour;
 import cz.muni.fi.pa165.photographyclub.service.MemberService;
+import java.util.LinkedList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
@@ -36,7 +37,11 @@ public class MemberFacadeImpl implements MemberFacade {
         Member m = new Member();
         m.setAddress(member.getAddress());
         m.setBirthDate(member.getBirthDate());
-        m.setEquipment(beanMappingService.mapTo(member.getEquipment(), Equipment.class));
+        if(member.getEquipment() != null){
+            m.setEquipment(beanMappingService.mapTo(member.getEquipment(), Equipment.class));
+        } else {
+            m.setEquipment(new LinkedList<Equipment>());
+        }
         m.setExperience(member.getExperience());
         m.setGender(member.getGender());
         m.setMotivation(member.getMotivation());
@@ -45,8 +50,17 @@ public class MemberFacadeImpl implements MemberFacade {
         m.setUserRole(member.getUserRole());
         m.setEmail(member.getEmail());
         m.setPassword(member.getPassword());
-        m.setReviews(beanMappingService.mapTo(member.getReviews(), Review.class));
-        m.setTours(beanMappingService.mapTo(member.getTours(), Tour.class));
+        if(member.getReviews() != null){
+            m.setReviews(beanMappingService.mapTo(member.getReviews(), Review.class));
+        } else {
+            m.setReviews(new LinkedList<Review>());
+        }        
+        if(member.getTours() != null){
+            m.setTours(beanMappingService.mapTo(member.getTours(), Tour.class));
+        } else {
+            m.setTours(new LinkedList<Tour>());
+        }
+        
         memberService.create(m);
         return m.getId();
     }

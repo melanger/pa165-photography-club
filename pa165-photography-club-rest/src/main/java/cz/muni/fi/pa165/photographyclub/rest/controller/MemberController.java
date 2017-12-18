@@ -49,7 +49,7 @@ public class MemberController {
      * Method for getting member specified by Id parameter.
      * @param id of the member
      * @return found member.
-     * @throws Exception ResourceNotFoundException.
+     * @throws Exception {@link ResourceNotFoundException}
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final MemberDTO getMemberById(@PathVariable("id") long id) throws Exception {
@@ -60,6 +60,11 @@ public class MemberController {
         return memberDTO;
     }
     
+    /**
+     * Method for getting member by Name param or all members if name parameter is null.
+     * @param name Name of the member or null.
+     * @return List containing member with name specified in parameter or list of all members.
+     */
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, params = {})
     public final List<MemberDTO> getMembers(@RequestParam(value = "name", required = false) String name){
         if (name == null)
@@ -72,6 +77,11 @@ public class MemberController {
         return Collections.singletonList(memberDTO);
     }
     
+    /**
+     * Method for creating member.
+     * @param memberCreateDTO member to be created.
+     * @throws Exception {@link ResourceAlreadyExistingException}
+     */
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final ResponseEntity<?> createMember(@RequestBody MemberCreateDTO memberCreateDTO, UriComponentsBuilder builder) throws Exception{
         long id;
@@ -85,6 +95,11 @@ public class MemberController {
         return ResponseEntity.created(uriComponents.toUri()).build();
     }
     
+    /**
+     * Method for deleting member.
+     * @param memberId Id of member to be deleted.
+     * @throws Exception {@link ResourceNotFoundException}
+     */
     @RequestMapping(value = "/{member_id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final void removeMember(@PathVariable("member_id") long memberId) throws Exception{
         try {
@@ -110,6 +125,12 @@ public class MemberController {
         }
     }
     
+    /**
+     * Method for getting Reviews created by same member.
+     * @param authorId id of the member.
+     * @return List of found Reviews.
+     * @throws Exception {@link ResourceNotFoundException}
+     */
     @RequestMapping(value = "/{authorId}/reviews", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<ReviewDTO> getReviewsByAuthor(@PathVariable("authorId") Long authorId) throws Exception {
         try {
