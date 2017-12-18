@@ -1,0 +1,31 @@
+<div>
+    <h1>Tours</h1>
+
+    <a href="#!/admin/tours/new" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        New tour
+    </a>
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>tour name</th>
+                <th>theme</th>
+                <th>date</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="tour in tours">
+                    <td>{{tour.id}}</td>
+                    <td>{{tour.name}}</td>
+                    <td>{{tour.theme}}</td>
+                    <td>{{tour.date}}</td>
+                    <td>
+                        <a href="#!/tours/{{tour.id}}" class="btn btn-primary">Show detail</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

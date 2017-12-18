@@ -79,6 +79,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         camera2.setOwner(ben);
         Member cyril = member(Collections.emptyList(),Collections.emptyList(),"Cyril","want to try","none",LocalDate.of(1999,5,28),
                 Gender.MALE,"link",UserRole.MEMBER,"V Praze blaze","cyrul@mail","Cyrilko",Collections.emptyList());
+        Member members[] = {anton,cyril};
+        louvre.setParticipants(Arrays.asList(members));
         log.info("Members loaded");
     }
 

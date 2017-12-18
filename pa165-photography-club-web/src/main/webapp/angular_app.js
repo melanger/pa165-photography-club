@@ -211,7 +211,46 @@ pa165photoclubApp.controller('TourDetailCtrl', function ($scope, $rootScope, $ro
 });
 
 
+photoclubControllers.controller('AdminToursCtrl', function ($scope, $http) {
+    $http.get('/pa165/rest/tours').then(function (response) {
+        $scope.tours = response.data;
+    });
+});
 
+
+photoclubControllers.controller('AdminCreateTourCtrl',
+    function ($scope, $routeParams, $http, $location, $rootScope) {
+        
+        $scope.themes = ['PORTRAITS', 'LANDSCAPE'];
+        $scope.tour = {
+            'name': '',
+            'theme': $scope.themes[0],
+            'date': ''
+        };
+        
+        $scope.create = function (tour) {
+            $http({
+                method: 'POST',
+                url: '/pa165/rest/tours',
+                data: tour
+            }).then(function success(response) {
+                var createdTour = response.data;
+                $rootScope.successAlert = 'A new tour "' + createdTour.name + '" was created';
+                $location.path("/admin/tours");
+            }, function error(response) {
+                console.log("error when creating tour");
+                console.log(response);
+                switch (response.data.code) {
+                    case 'ResourceAlreadyExistingException':
+                        $rootScope.errorAlert = 'Tour with the same name already exists ! ';
+                        break;
+                    default:
+                        $rootScope.errorAlert = 'Cannot create tour ! Reason given by the server: '+response.data.message;
+                        break;
+                }
+            });
+        };
+    });
 
 pa165photoclubApp.directive('convertToInt', function () {
     return {
