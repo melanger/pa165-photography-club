@@ -136,29 +136,33 @@ pa165photoclubApp.run(function ($rootScope, AUTH_EVENTS, AuthService) {
 });
 
 pa165photoclubApp.controller('AdminMemberProfileCtrl', function ($scope, $http) {
+    if (!$scope.currentUser) {
+      $scope.errorAlert = "You have to be logged in.";
+      return;
+    }
     $scope.equipment = {
             'name': '',
             'type': 'OTHER',
-            'ownerId': $rootScope.currentUser.id
+            'ownerId': $scope.currentUser.id
     };
-    $scope.ownerId = $rootScope.currentUser.id;
+    $scope.ownerId = $scope.currentUser.id;
   
     $scope.create = function (equipment) {
       $http({
           method: 'POST',
-          url: '/pa165/rest/members',
+          url: '/pa165/rest/equipment',
           data: equipment
       }).then(function success(response) {
           var equipment = response.data;
-          $rootScope.successAlert = 'A new equipment "' + equipment.name + '" was added';
-          $location.path("/admin/members/me");
+          $scope.successAlert = 'A new equipment "' + equipment.name + '" was added';
+          $location.path("/admin/profile");
       }, function error(response) {
           switch (response.data.code) {
               case 'InvalidRequestException':
-                  $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                  $scope.errorAlert = 'Sent data were found to be invalid by server ! ';
                   break;
               default:
-                  $rootScope.errorAlert = 'Cannot create equipment ! Reason given by the server: '+response.data.message;
+                  $scope.errorAlert = 'Cannot create equipment ! Reason given by the server: '+response.data.message;
                   break;
           }
       });
