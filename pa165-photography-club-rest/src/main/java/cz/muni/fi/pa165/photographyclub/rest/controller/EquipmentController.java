@@ -73,8 +73,8 @@ public class EquipmentController {
         long id;
         try {
             id = equipmentFacade.createEquipment(equipmentCreateDTO);
-        } catch (EntityExistsException e){
-            throw new ResourceAlreadyExistingException();
+        } catch (EntityNotFoundException e){
+            throw new InvalidParameterException();
         }
         UriComponents uriComponents = b.path(ApiUris.ROOT_URI_EQUIPMENT + "/{id}").buildAndExpand(id);
         return ResponseEntity.created(uriComponents.toUri()).build();
