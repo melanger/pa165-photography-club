@@ -1,0 +1,15 @@
+<div>
+    <h1>Tours</h1>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2" ng-repeat="tour in tourss">
+            <a href="#!/tours/{{tour.id}}">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3>{{tour.name}}</h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
