@@ -3,8 +3,10 @@ package cz.muni.fi.pa165.photographyclub.rest.controller;
 import cz.muni.fi.pa165.photographyclub.dto.EquipmentDTO;
 import cz.muni.fi.pa165.photographyclub.dto.MemberCreateDTO;
 import cz.muni.fi.pa165.photographyclub.dto.MemberDTO;
+import cz.muni.fi.pa165.photographyclub.dto.ReviewDTO;
 import cz.muni.fi.pa165.photographyclub.facade.EquipmentFacade;
 import cz.muni.fi.pa165.photographyclub.facade.MemberFacade;
+import cz.muni.fi.pa165.photographyclub.facade.ReviewFacade;
 import cz.muni.fi.pa165.photographyclub.rest.ApiUris;
 import cz.muni.fi.pa165.photographyclub.rest.exception.ResourceAlreadyExistingException;
 import cz.muni.fi.pa165.photographyclub.rest.exception.ResourceNotFoundException;
@@ -36,6 +38,9 @@ public class MemberController {
     
     @Inject
     private EquipmentFacade equipmentFacade;
+    
+    @Inject
+    private ReviewFacade reviewFacade;
     
     /**
      * Method for getting member specified by Id parameter.
@@ -102,6 +107,12 @@ public class MemberController {
         } catch (EntityNotFoundException e){
             throw new ResourceNotFoundException();
         }
+    }
+    
+    @RequestMapping(value = "/{authorId}/reviews", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final List<ReviewDTO> getReviewsByAuthor(@PathVariable("authorId") Long authorId) throws Exception {
+        List<ReviewDTO> reviews = reviewFacade.getReviewsByAuthor(authorId);
+        return reviews;
     }
     
 }

@@ -67,15 +67,9 @@ public class ReviewController {
         }
     }
     
-     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<ReviewDTO> getAllReviews(){
         return reviewFacade.getAllReviews();
-    }
-    
-    @RequestMapping(value = "/{authorId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<ReviewDTO> getReviewsByAuthor(@PathVariable("authorId") Long authorId) throws Exception {
-        List<ReviewDTO> reviews = reviewFacade.getReviewsByAuthor(authorId);
-        return reviews;
     }
     
     @RequestMapping(value = "/{tourId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
