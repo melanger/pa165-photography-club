@@ -211,14 +211,14 @@ pa165photoclubApp.controller('TourDetailCtrl', function ($scope, $rootScope, $ro
 });
 
 
-photoclubControllers.controller('AdminToursCtrl', function ($scope, $http) {
+pa165photoclubApp.controller('AdminToursCtrl', function ($scope, $http) {
     $http.get('/pa165/rest/tours').then(function (response) {
         $scope.tours = response.data;
     });
 });
 
 
-photoclubControllers.controller('AdminCreateTourCtrl',
+pa165photoclubApp.controller('AdminCreateTourCtrl',
     function ($scope, $routeParams, $http, $location, $rootScope) {
         
         $scope.themes = ['PORTRAITS', 'LANDSCAPE'];
