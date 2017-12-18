@@ -1,7 +1,9 @@
 package cz.muni.fi.pa165.photographyclub.rest.controller;
 
+import cz.muni.fi.pa165.photographyclub.dto.EquipmentDTO;
 import cz.muni.fi.pa165.photographyclub.dto.MemberCreateDTO;
 import cz.muni.fi.pa165.photographyclub.dto.MemberDTO;
+import cz.muni.fi.pa165.photographyclub.facade.EquipmentFacade;
 import cz.muni.fi.pa165.photographyclub.facade.MemberFacade;
 import cz.muni.fi.pa165.photographyclub.rest.ApiUris;
 import cz.muni.fi.pa165.photographyclub.rest.exception.ResourceAlreadyExistingException;
@@ -31,6 +33,9 @@ public class MemberController {
 
     @Inject
     private MemberFacade memberFacade;
+    
+    @Inject
+    private EquipmentFacade equipmentFacade;
     
     /**
      * Method for getting member specified by Id parameter.
@@ -78,6 +83,22 @@ public class MemberController {
     public final void removeMember(@PathVariable("member_id") long memberId) throws Exception{
         try {
             memberFacade.removeMember(memberId);
+        } catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException();
+        }
+    }
+    
+    /**
+     * Get list of equipment associated to a member
+     *
+     * @param memberId id of the member
+     * @return list of equipment
+     * @throws Exception ResourceNotFoundException if the member is not found
+     */
+    @RequestMapping(value = "/{member_id}/equipment", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final List<EquipmentDTO> getEquipmentByMember(@PathVariable("member_id") long memberId) throws Exception{
+        try{
+            return equipmentFacade.getEquipmentByMember(memberId);
         } catch (EntityNotFoundException e){
             throw new ResourceNotFoundException();
         }
