@@ -15,6 +15,7 @@ import java.time.Month;
 import java.util.LinkedList;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
+import javax.persistence.EntityNotFoundException;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -106,6 +107,12 @@ public class EquipmentFacadeTest extends AbstractTestNGSpringContextTests{
         assertThat(equipmentFacade.getEquipmentByMember(member.getId())).isEqualTo(equipDTOList);        
     }
     
+    @Test(expectedExceptions = EntityNotFoundException.class)
+    public void getEquipmentByNonExistingMemberIdTest() throws EntityNotFoundException {
+        long nonExistingId = 7777;
+        equipmentFacade.getEquipmentByMember(nonExistingId);
+    }
+    
     @Test
     public void getEquipmentByIdTest(){
         Equipment equipment = this.createEquipment();
@@ -122,7 +129,7 @@ public class EquipmentFacadeTest extends AbstractTestNGSpringContextTests{
         MemberDTO memberDTO = this.createMemberDTO();
         EquipmentCreateDTO equipmentCreate = new EquipmentCreateDTO();
         equipmentCreate.setName("Nikon D5000");
-        equipmentCreate.setOwner(memberDTO);
+        equipmentCreate.setOwnerId(member.getId());
         equipmentCreate.setType(EquipmentType.CAMERA);
         List<Equipment> equipList = new LinkedList();
         Equipment equipment = this.createEquipment();
@@ -132,7 +139,7 @@ public class EquipmentFacadeTest extends AbstractTestNGSpringContextTests{
         when(memberService.findById(member.getId())).thenReturn(mockMember);
         when(beanMappingService.mapTo(memberDTO, Member.class)).thenReturn(member);
         
-        equipmentFacade.addEquipmentToMember(member.getId(), equipmentCreate);
+        equipmentFacade.createEquipment(equipmentCreate);
         
         ArgumentCaptor<List> argumentCaptor = ArgumentCaptor.forClass(List.class);
         verify(mockMember).setEquipment(argumentCaptor.capture());   
@@ -153,12 +160,8 @@ public class EquipmentFacadeTest extends AbstractTestNGSpringContextTests{
         when(equipmentService.findById(equipment.getId())).thenReturn(equipment);
         when(mockMember.getEquipment()).thenReturn(equipList);
         
-        equipmentFacade.removeEquipmentOfMember(member.getId(), equipment.getId());
+        equipmentFacade.removeEquipment(equipment.getId());
         
-        ArgumentCaptor<List> argumentCaptor = ArgumentCaptor.forClass(List.class);
-        verify(mockMember).setEquipment(argumentCaptor.capture());   
-        List arg = argumentCaptor.getValue();
-        assertThat(arg.size()).isSameAs(0);
-        
+        verify(equipmentService).remove(equipment);       
     }
 }

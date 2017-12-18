@@ -25,16 +25,14 @@ public interface EquipmentFacade {
     
     /**
      * Add an equipment to a member.
-     * @param memberId id of the member
      * @param equipment EquipmentCreateDTO
      */
-    public void addEquipmentToMember(long memberId, EquipmentCreateDTO equipment);
+    public void createEquipment(EquipmentCreateDTO equipment);
     
     /**
      * Remove an equipment from a member.
-     * @param memberId id of the member
      * @param equipmentId EquipmentCreateDTO
      */
-    public void removeEquipmentOfMember(long memberId, long equipmentId);
+    public void removeEquipment(long equipmentId);
     
 }
