@@ -8,7 +8,7 @@ import java.util.Objects;
  * @author Pavel Brousek
  */
 public class EquipmentCreateDTO {
-    private MemberDTO owner;
+    private long ownerId;
 
     private String name;
     
@@ -30,17 +30,17 @@ public class EquipmentCreateDTO {
         this.type = type;
     }
 
-    public MemberDTO getOwner() {
-        return owner;
+    public long getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner(MemberDTO owner) {
-        this.owner = owner;
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
     }
 
     @Override
     public int hashCode() {
-        return 83 * 5 + Objects.hash(owner, name, type);
+        return 83 * 5 + Objects.hash(ownerId, name, type);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class EquipmentCreateDTO {
             return false;
         }
         final EquipmentCreateDTO other = (EquipmentCreateDTO) obj;
-        if (!Objects.equals(this.owner, other.getOwner())) {
+        if (!Objects.equals(this.ownerId, other.getOwnerId())) {
             return false;
         }
         if (!Objects.equals(this.name, other.getName())) {

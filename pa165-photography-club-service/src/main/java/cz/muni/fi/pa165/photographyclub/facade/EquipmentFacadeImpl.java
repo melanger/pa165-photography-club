@@ -9,6 +9,7 @@ import cz.muni.fi.pa165.photographyclub.service.EquipmentService;
 import cz.muni.fi.pa165.photographyclub.service.MemberService;
 import java.util.List;
 import javax.inject.Inject;
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -32,47 +33,42 @@ public class EquipmentFacadeImpl implements EquipmentFacade{
     @Override
     public List<EquipmentDTO> getEquipmentByMember(long memberId) {
         Member member = memberService.findById(memberId);
+        if (member == null) throw new EntityNotFoundException();
         List<Equipment> equipList = equipmentService.findByOwner(member);
-        if(equipList == null){
-            return null;
-        } else {
-            return beanMappingService.mapTo(equipList, EquipmentDTO.class);
-        }
+        return beanMappingService.mapTo(equipList, EquipmentDTO.class);
     }
 
     @Override
     public EquipmentDTO getEquipmentById(long id) {
         Equipment equipment = equipmentService.findById(id);
-        if(equipment == null){
-            return null;
-        } else {
-            return beanMappingService.mapTo(equipment, EquipmentDTO.class);
-        }
+        return equipment == null ? null : beanMappingService.mapTo(equipment, EquipmentDTO.class);
     }
 
     @Override
-    public void addEquipmentToMember(long memberId, EquipmentCreateDTO equipment) {
-        Member member = memberService.findById(memberId);
+    public void createEquipment(EquipmentCreateDTO equipment) {
+        Member member = memberService.findById(equipment.getOwnerId());
+        if (member == null) throw new PhotoEntityNotFoundException(Member.class);
         List<Equipment> equipList = member.getEquipment();
         Equipment newEquipment = new Equipment();
         newEquipment.setName(equipment.getName());
-        if(equipment.getOwner() == null){
-            newEquipment.setOwner(null); //throw new IllegalArgumentException();
-        } else {
-            newEquipment.setOwner(beanMappingService.mapTo(equipment.getOwner(), Member.class));
-        }        
         newEquipment.setType(equipment.getType());
+        equipmentService.create(newEquipment);
+        newEquipment.setOwner(member);
         equipList.add(newEquipment);
         member.setEquipment(equipList);
     }
 
     @Override
-    public void removeEquipmentOfMember(long memberId, long equipmentId) {
-        Member member = memberService.findById(memberId);
-        List<Equipment> equipList = member.getEquipment();
+    public void removeEquipment(long equipmentId) {
         Equipment equipment = equipmentService.findById(equipmentId);
+        if (equipment == null) throw new EntityNotFoundException();
+        
+        Member member = equipment.getOwner();
+        List<Equipment> equipList = member.getEquipment();
+        
         equipList.remove(equipment);
         member.setEquipment(equipList);
+        equipmentService.remove(equipment);
     }
 
 }
