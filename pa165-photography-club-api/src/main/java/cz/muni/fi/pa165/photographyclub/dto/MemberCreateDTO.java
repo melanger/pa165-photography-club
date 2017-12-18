@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.photographyclub.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import cz.muni.fi.pa165.photographyclub.enums.Gender;
 import cz.muni.fi.pa165.photographyclub.enums.UserRole;
 
@@ -55,11 +56,14 @@ public class MemberCreateDTO {
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
     }
-
+    
+    @JsonBackReference(value="review-member")
     private List<ReviewDTO> reviews;
-
+    
+    @JsonBackReference(value="equipment-member")
     private List<EquipmentDTO> equipment;
-
+    
+    @JsonBackReference(value="tour-membercreate")
     private List<TourDTO> tours;
 
     public String getName() {

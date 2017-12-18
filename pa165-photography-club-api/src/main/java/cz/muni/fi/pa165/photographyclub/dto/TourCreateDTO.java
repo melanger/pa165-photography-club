@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.photographyclub.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import cz.muni.fi.pa165.photographyclub.enums.TourTheme;
 import java.time.LocalDate;
 import java.util.List;
@@ -22,9 +24,10 @@ public class TourCreateDTO {
     
     @NotNull
     private LocalDate date;
-
+    
+    @JsonBackReference(value="review-tour")
     private List<ReviewDTO> reviews;
-
+    
     private List<MemberDTO> participants;
 
     public String getName() {

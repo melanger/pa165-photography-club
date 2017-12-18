@@ -60,13 +60,13 @@ public class MemberDTO {
         this.userRole = userRole;
     }
     
-    @JsonBackReference
+    @JsonBackReference(value="review-member")
     private List<ReviewDTO> reviews;
     
-    @JsonBackReference
+    @JsonBackReference(value="equipment-member")
     private List<EquipmentDTO> equipment;
     
-    @JsonBackReference
+    @JsonBackReference(value="tour-member")
     private List<TourDTO> tours;
 
     public Long getId() {
