@@ -19,12 +19,15 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import static org.mockito.Matchers.any;
 import org.mockito.Mock;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -76,6 +79,16 @@ public class ReviewFacadeTest extends AbstractTestNGSpringContextTests {
         Tour t = new Tour();
         t.setId(tourId);
         when(tourService.findById(tourId)).thenReturn(t);
+        
+        final long id = 1l;
+        doAnswer(new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) {
+                Object[] args = invocation.getArguments();
+                ((Review)args[0]).setId(id);
+                return null;
+            }
+        }).when(reviewService).create(any(Review.class));
         
         reviewFacade.createReview(r);
         

@@ -13,11 +13,15 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
+import static org.mockito.Matchers.any;
 import org.mockito.Mock;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -56,6 +60,16 @@ public class MemberFacadeTest extends AbstractTestNGSpringContextTests {
         m.setBirthDate(birthDate);
         final String address = null;
         m.setAddress(address);
+        
+        final long id = 1l;
+        doAnswer(new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) {
+                Object[] args = invocation.getArguments();
+                ((Member)args[0]).setId(id);
+                return null;
+            }
+        }).when(memberService).create(any(Member.class));
 
         memberFacade.createMember(m);
 
@@ -74,7 +88,7 @@ public class MemberFacadeTest extends AbstractTestNGSpringContextTests {
         MemberDTO member = new MemberDTO();
         member.setId(memberId);
 
-        memberFacade.removeMember(member);
+        memberFacade.removeMember(memberId);
 
         ArgumentCaptor<Member> argumentCaptor = ArgumentCaptor.forClass(Member.class);
         verify(memberService, times(1)).remove(argumentCaptor.capture());
