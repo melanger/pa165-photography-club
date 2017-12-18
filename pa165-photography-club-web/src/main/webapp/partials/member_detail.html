@@ -1,0 +1,28 @@
+<div>
+    <h1><a href="mailto:{{member.email}}">{{member.name}}</a></h1>
+    
+    <h2>Profile</h2>
+    <table class="table">
+      <thead><tr><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Birthday</td><td>{{member.birthDate}}</td></tr>
+        <tr><td>Address</td><td>{{member.address}}</td></tr>
+        <tr><td>Motivation</td><td>{{member.motivation}}</td></tr>
+        <tr><td>Experience</td><td>{{member.experience}}</td></tr>
+        <tr><td>Gender</td><td>{{member.experience}}</td></tr>
+        <tr><td>Permissions</td><td>{{member.userRole}}</td></tr>
+      </tbody>
+    </table>
+    
+    <h2>Equipment</h2>
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2" ng-repeat="equip in member.equipment">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>{{equip.name}}</h3>
+                    {{equip.type}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

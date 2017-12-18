@@ -9,9 +9,13 @@ var photoclubControllers = angular.module('photoclubControllers', []);
 pa165photoclubApp.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
-        when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'}).
-        // TODO: add pages
-        otherwise({redirectTo: '/home'});
+        when('/members', {templateUrl: 'partials/members.html', controller: 'MembersCtrl'}).
+        when('/members/:memberId', {templateUrl: 'partials/member_detail.html', controller: 'MemberDetailCtrl'}).
+        when('/tours', {templateUrl: 'partials/tours.html', controller: 'ToursCtrl'}).
+        when('/tours/:tourId', {templateUrl: 'partials/tour_detail.html', controller: 'TourDetailCtrl'}).
+        when('/admin/tours', {templateUrl: 'partials/admin_tours.html', controller: 'AdminToursCtrl'}).
+        when('/admin/tours/new', {templateUrl: 'partials/admin_create_tour.html', controller: 'AdminCreateTourCtrl'}).
+        otherwise({redirectTo: '/members'});
     }]);
 
 /*
@@ -41,11 +45,22 @@ pa165photoclubApp.run(function ($rootScope) {
 /*
  * Home page
  */
-photoclubControllers.controller('HomeCtrl', function ($scope, $http) {
+photoclubControllers.controller('MembersCtrl', function ($scope, $http) {
     $http.get('/pa165/rest/members').then(function (response) {
-        console.log(response.data);
         $scope.members = response.data;
-        // TODO: finish
+    });
+});
+
+photoclubControllers.controller('MemberDetailCtrl', function ($scope, $rootScope, $routeParams, $http) {
+    var memberId = $routeParams.memberId;
+    $http.get('/pa165/rest/members/' + memberId).then(function success(response) {
+        $scope.member = response.data;
+        $http.get('/pa165/rest/members/' + memberId + '/equipment').then(function (response){
+          $scope.member.equipment = response.data;
+        });
+    }, function error(response) {
+        console.log(response);
+        $rootScope.warningAlert = 'Member not found';
     });
 });
 
