@@ -130,3 +130,75 @@ Content-Length: 2
 
 []
 ```
+
+
+
+
+
+## Equipment collection
+
+### Get all equip of member
+
+```
+curl -i 'http://localhost:8080/pa165/rest/members/{member_id}'
+```
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+ETag: "0a347114d2ac9a83132c38130c1ac6b5b"
+Content-Type: application/json;charset=UTF-8
+Content-Length: 193
+
+[{TBU}]
+```
+
+### Create equipment
+
+```
+curl -i -X POST -H 'Content-Type: application/json' -d '{\"name\":\"TestEquipment\",\"type\":\"CAMERA\"}' 'http://localhost:8080/pa165/rest/equipment'
+```
+
+```
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Content-Length: 0
+```
+       
+## Single equipment
+
+### Get a equipment by ID
+
+```
+curl -i 'http://localhost:8080/pa165/rest/equipment/5'
+```
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+ETag: "01a1d67c3badcbd78d42f5631624e7f8f"
+Content-Type: application/json;charset=UTF-8
+Content-Length: 99
+
+{"name":"TestEquipment","type":"CAMERA","date":"2017-11-11","reviews":[],"participants":[],"id":5}
+```
+
+### Delete Equipment
+
+```
+curl -i -X DELETE 'http://localhost:8080/pa165/rest/equipment/5'
+```
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Content-Length: 0
+```

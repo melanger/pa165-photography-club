@@ -5,13 +5,18 @@ import cz.muni.fi.pa165.photographyclub.dto.EquipmentDTO;
 import cz.muni.fi.pa165.photographyclub.facade.EquipmentFacade;
 import cz.muni.fi.pa165.photographyclub.rest.ApiUris;
 import cz.muni.fi.pa165.photographyclub.rest.exception.InvalidParameterException;
+import cz.muni.fi.pa165.photographyclub.rest.exception.ResourceAlreadyExistingException;
 import cz.muni.fi.pa165.photographyclub.rest.exception.ResourceNotFoundException;
 import javax.inject.Inject;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 
 /**
@@ -63,13 +68,16 @@ public class EquipmentController {
      *
      * @param equipmentCreateDTO equipment to be added to the member
      */
-    @RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final void createEquipment(@RequestBody EquipmentCreateDTO equipmentCreateDTO){
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final ResponseEntity<?> createEquipment(@RequestBody EquipmentCreateDTO equipmentCreateDTO, UriComponentsBuilder b) throws Exception{
+        long id;
         try {
-            equipmentFacade.createEquipment(equipmentCreateDTO);
-        } catch (EntityNotFoundException e){
-            throw new InvalidParameterException();
+            id = equipmentFacade.createEquipment(equipmentCreateDTO);
+        } catch (EntityExistsException e){
+            throw new ResourceAlreadyExistingException();
         }
+        UriComponents uriComponents = b.path(ApiUris.ROOT_URI_EQUIPMENT + "/{id}").buildAndExpand(id);
+        return ResponseEntity.created(uriComponents.toUri()).build();
     }
 
     /**

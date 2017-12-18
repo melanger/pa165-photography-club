@@ -27,7 +27,7 @@ public interface EquipmentFacade {
      * Add an equipment to a member.
      * @param equipment EquipmentCreateDTO
      */
-    public void createEquipment(EquipmentCreateDTO equipment);
+    public long createEquipment(EquipmentCreateDTO equipment);
     
     /**
      * Remove an equipment from a member.

@@ -45,7 +45,7 @@ public class EquipmentFacadeImpl implements EquipmentFacade{
     }
 
     @Override
-    public void createEquipment(EquipmentCreateDTO equipment) {
+    public long createEquipment(EquipmentCreateDTO equipment) {
         Member member = memberService.findById(equipment.getOwnerId());
         if (member == null) throw new PhotoEntityNotFoundException(Member.class);
         List<Equipment> equipList = member.getEquipment();
@@ -56,6 +56,7 @@ public class EquipmentFacadeImpl implements EquipmentFacade{
         newEquipment.setOwner(member);
         equipList.add(newEquipment);
         member.setEquipment(equipList);
+        return newEquipment.getId();
     }
 
     @Override
