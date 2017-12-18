@@ -5,5 +5,5 @@ package cz.muni.fi.pa165.photographyclub.enums;
  * @author Pavel Brousek
  */
 public enum UserRole {
-    USER, ADMINISTRATOR
+    MEMBER, MANAGER
 }

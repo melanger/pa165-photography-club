@@ -31,7 +31,7 @@ public class MemberDaoTest extends AbstractTransactionalTestNGSpringContextTests
         Member member = new Member();
         member.setName("Bernard");
         member.setBirthDate(LocalDate.of(1995, 5, 13));
-        member.setUserRole(UserRole.USER);
+        member.setUserRole(UserRole.MEMBER);
         member.setEmail("bernard@example.com");
         member.setPassword("random string");
         return member;
