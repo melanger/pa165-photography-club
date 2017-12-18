@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.photographyclub.facade;
 
+import cz.muni.fi.pa165.photographyclub.entity.Tour;
 import cz.muni.fi.pa165.photographyclub.facade.config.FacadeApplicationContext;
 import cz.muni.fi.pa165.photographyclub.beanmapping.BeanMappingService;
 import cz.muni.fi.pa165.photographyclub.dto.EquipmentCreateDTO;
@@ -15,14 +16,16 @@ import java.time.Month;
 import java.util.LinkedList;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
+
 import javax.persistence.EntityNotFoundException;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -138,7 +141,16 @@ public class EquipmentFacadeTest extends AbstractTestNGSpringContextTests{
         
         when(memberService.findById(member.getId())).thenReturn(mockMember);
         when(beanMappingService.mapTo(memberDTO, Member.class)).thenReturn(member);
-        
+
+        final long id = 1l;
+        doAnswer(new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) {
+                Object[] args = invocation.getArguments();
+                ((Equipment)args[0]).setId(id);
+                return null;
+            }}).when(equipmentService).create(any(Equipment.class));
+
         equipmentFacade.createEquipment(equipmentCreate);
         
         ArgumentCaptor<List> argumentCaptor = ArgumentCaptor.forClass(List.class);
