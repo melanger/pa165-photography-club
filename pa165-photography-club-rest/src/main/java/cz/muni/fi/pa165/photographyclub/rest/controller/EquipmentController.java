@@ -2,8 +2,6 @@ package cz.muni.fi.pa165.photographyclub.rest.controller;
 
 import cz.muni.fi.pa165.photographyclub.dto.EquipmentCreateDTO;
 import cz.muni.fi.pa165.photographyclub.dto.EquipmentDTO;
-import cz.muni.fi.pa165.photographyclub.entity.Equipment;
-import cz.muni.fi.pa165.photographyclub.facade.EntityNotFoundException;
 import cz.muni.fi.pa165.photographyclub.facade.EquipmentFacade;
 import cz.muni.fi.pa165.photographyclub.rest.ApiUris;
 import cz.muni.fi.pa165.photographyclub.rest.exception.InvalidParameterException;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 
 import java.util.List;
+import javax.persistence.EntityNotFoundException;
 
 /**
  * REST Controller for Equipment
@@ -62,14 +61,13 @@ public class EquipmentController {
     /**
      * Adds equipment to a member
      *
-     * @param memberId id of the member
      * @param equipmentCreateDTO equipment to be added to the member
      */
-    @RequestMapping(value = "/members/{member_id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final void addEquipmentToMember(@PathVariable("member_id") long memberId, @RequestBody EquipmentCreateDTO equipmentCreateDTO){
+    @RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final void createEquipment(@RequestBody EquipmentCreateDTO equipmentCreateDTO){
         try {
-            equipmentFacade.addEquipmentToMember(memberId, equipmentCreateDTO);
-        } catch (IllegalArgumentException e){
+            equipmentFacade.createEquipment(equipmentCreateDTO);
+        } catch (EntityNotFoundException e){
             throw new InvalidParameterException();
         }
     }
@@ -77,19 +75,14 @@ public class EquipmentController {
     /**
      * Remove equipment from a member
      *
-     * @param memberId id of the member
      * @param equipmentId equipment to be removed from the member
      */
-    @RequestMapping(value = "/{equipment_id}/members/{member_id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final void removeEquipmentFromMember(@PathVariable("member_id") long memberId, @PathVariable("equipment_id") long equipmentId){
+    @RequestMapping(value = "/{equipment_id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final void removeEquipment(@PathVariable("equipment_id") long equipmentId){
         try {
-            equipmentFacade.removeEquipmentOfMember(memberId, equipmentId);
+            equipmentFacade.removeEquipment(equipmentId);
         } catch (EntityNotFoundException e){
-            if (e.getEntityClass().equals(Equipment.class)) {
-                throw new ResourceNotFoundException();
-            } else {
-                throw new InvalidParameterException();
-            }
+            throw new ResourceNotFoundException();
         }
     }
 

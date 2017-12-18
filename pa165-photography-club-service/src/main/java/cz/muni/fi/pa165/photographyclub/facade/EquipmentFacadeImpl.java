@@ -41,34 +41,34 @@ public class EquipmentFacadeImpl implements EquipmentFacade{
     @Override
     public EquipmentDTO getEquipmentById(long id) {
         Equipment equipment = equipmentService.findById(id);
-        if(equipment == null) throw new EntityNotFoundException();
-        return beanMappingService.mapTo(equipment, EquipmentDTO.class);
+        return equipment == null ? null : beanMappingService.mapTo(equipment, EquipmentDTO.class);
     }
 
     @Override
-    public void addEquipmentToMember(long memberId, EquipmentCreateDTO equipment) {
-        Member member = memberService.findById(memberId);
-        if (member == null || equipment.getOwner() == null || equipment.getOwner().getId() != memberId) {
-            throw new IllegalArgumentException("Invalid member in arguments");
-        }
+    public void createEquipment(EquipmentCreateDTO equipment) {
+        Member member = memberService.findById(equipment.getOwnerId());
+        if (member == null) throw new PhotoEntityNotFoundException(Member.class);
         List<Equipment> equipList = member.getEquipment();
         Equipment newEquipment = new Equipment();
         newEquipment.setName(equipment.getName());
-        newEquipment.setOwner(beanMappingService.mapTo(equipment.getOwner(), Member.class));
         newEquipment.setType(equipment.getType());
+        equipmentService.create(newEquipment);
+        newEquipment.setOwner(member);
         equipList.add(newEquipment);
         member.setEquipment(equipList);
     }
 
     @Override
-    public void removeEquipmentOfMember(long memberId, long equipmentId) {
-        Member member = memberService.findById(memberId);
-        if (member == null) throw new EntityNotFoundException(Member.class);
-        List<Equipment> equipList = member.getEquipment();
+    public void removeEquipment(long equipmentId) {
         Equipment equipment = equipmentService.findById(equipmentId);
-        if (equipment == null) throw new EntityNotFoundException(Equipment.class);
+        if (equipment == null) throw new EntityNotFoundException();
+        
+        Member member = equipment.getOwner();
+        List<Equipment> equipList = member.getEquipment();
+        
         equipList.remove(equipment);
         member.setEquipment(equipList);
+        equipmentService.remove(equipment);
     }
 
 }
