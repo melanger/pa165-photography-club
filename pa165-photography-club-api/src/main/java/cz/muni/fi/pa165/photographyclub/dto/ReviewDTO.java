@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.photographyclub.dto;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Objects;
 
 /**
@@ -10,8 +11,10 @@ public class ReviewDTO {
     
     private Long id;
     
+    @JsonManagedReference
     private TourDTO tour;
     
+    @JsonManagedReference
     private MemberDTO author;
     
     private String comment;

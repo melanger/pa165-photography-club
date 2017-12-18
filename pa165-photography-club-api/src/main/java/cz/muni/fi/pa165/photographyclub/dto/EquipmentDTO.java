@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.photographyclub.dto;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import cz.muni.fi.pa165.photographyclub.enums.EquipmentType;
 import java.util.Objects;
 
@@ -18,6 +19,7 @@ public class EquipmentDTO {
         this.id = id;
     }
     
+    @JsonManagedReference
     private MemberDTO owner;
 
     private String name;

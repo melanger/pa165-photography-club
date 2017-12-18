@@ -69,8 +69,13 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         log.info("Equipments loaded");
         Member anton = member(Arrays.asList(allArr),Arrays.asList(reviewsLouvre),"Anton","to be the best","moderate",LocalDate.of(1995,11,9),
                 Gender.MALE,"photolink",UserRole.ADMINISTRATOR,"unknown","anton@mail","AntonIsBest",Arrays.asList(antonEq));
+        lens.setOwner(anton);
+        camera.setOwner(anton);
+        lighting.setOwner(anton);
         Member ben = member(Arrays.asList(ufizziArr),Arrays.asList(reviewsUfizzi),"Ben","for fun","beginner",LocalDate.of(1998,3,16),
                 Gender.MALE,"profilepic",UserRole.USER,"address 11 Brno","ben@mail.com","BenisBen",Arrays.asList(benEq));
+        flash.setOwner(ben);
+        camera2.setOwner(ben);
         Member cyril = member(Collections.emptyList(),Collections.emptyList(),"Cyril","want to try","none",LocalDate.of(1999,5,28),
                 Gender.MALE,"link",UserRole.USER,"V Praze blaze","cyrul@mail","Cyrilko",Collections.emptyList());
         log.info("Members loaded");

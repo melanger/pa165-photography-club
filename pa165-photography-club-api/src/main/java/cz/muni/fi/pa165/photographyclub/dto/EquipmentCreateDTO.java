@@ -2,12 +2,14 @@ package cz.muni.fi.pa165.photographyclub.dto;
 
 import cz.muni.fi.pa165.photographyclub.enums.EquipmentType;
 import java.util.Objects;
+import javax.validation.constraints.NotNull;
 
 /**
  * DTO for creating Equipment.
  * @author Pavel Brousek
  */
 public class EquipmentCreateDTO {
+    @NotNull
     private long ownerId;
 
     private String name;
