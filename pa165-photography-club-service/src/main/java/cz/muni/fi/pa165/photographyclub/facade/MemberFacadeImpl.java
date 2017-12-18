@@ -10,6 +10,7 @@ import cz.muni.fi.pa165.photographyclub.entity.Tour;
 import cz.muni.fi.pa165.photographyclub.service.MemberService;
 import java.util.List;
 import javax.inject.Inject;
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class MemberFacadeImpl implements MemberFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public void createMember(MemberCreateDTO member) {
+    public long createMember(MemberCreateDTO member) {
         Member m = new Member();
         m.setAddress(member.getAddress());
         m.setBirthDate(member.getBirthDate());
@@ -45,12 +46,13 @@ public class MemberFacadeImpl implements MemberFacade {
         m.setReviews(beanMappingService.mapTo(member.getReviews(), Review.class));
         m.setTours(beanMappingService.mapTo(member.getTours(), Tour.class));
         memberService.create(m);
+        return m.getId();
     }
 
     @Override
-    public void removeMember(MemberDTO member) {
-        Member m = new Member();
-        m.setId(member.getId());
+    public void removeMember(Long memberId) {
+        Member m = memberService.findById(memberId);
+        if (m == null) throw new EntityNotFoundException();
         memberService.remove(m);
     }
 

@@ -14,7 +14,7 @@ public interface ReviewFacade {
      * Method for creating new review.
      * @param review to be created
      */
-    public void createReview(ReviewCreateDTO review);
+    public long createReview(ReviewCreateDTO review);
     
     /**
      * Method for deleting review with id same as in id parameter.

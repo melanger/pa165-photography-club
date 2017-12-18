@@ -11,6 +11,7 @@ import cz.muni.fi.pa165.photographyclub.service.ReviewService;
 import cz.muni.fi.pa165.photographyclub.service.TourService;
 import java.util.List;
 import javax.inject.Inject;
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -31,19 +32,20 @@ public class ReviewFacadeImpl implements ReviewFacade {
     private BeanMappingService beanMappingService;
     
     @Override
-    public void createReview(ReviewCreateDTO review) {
+    public long createReview(ReviewCreateDTO review) {
         Review r = new Review();
         r.setAuthor(memberService.findById(review.getAuthorId()));
         r.setComment(review.getComment());
         r.setRating(review.getRating());
         r.setTour(tourService.findById(review.getTourId()));
         reviewService.create(r);
+        return r.getId();
     }
 
     @Override
     public void removeReview(Long id) {
-        Review r = new Review();
-        r.setId(id);
+        Review r = reviewService.findById(id);
+        if (r == null) throw new EntityNotFoundException();
         reviewService.remove(r);
     }
 

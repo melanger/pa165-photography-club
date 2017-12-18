@@ -13,13 +13,13 @@ public interface MemberFacade {
      * creating memeber
      * @param member to be created
      */
-    void createMember(MemberCreateDTO member);
+    long createMember(MemberCreateDTO member);
 
     /**
      * deleting member
      * @param member to be deleted
      */
-    void removeMember(MemberDTO member);
+    void removeMember(Long memberId);
 
     /**
      * finding all available members
