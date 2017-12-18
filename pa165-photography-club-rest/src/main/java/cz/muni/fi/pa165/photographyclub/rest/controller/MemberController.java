@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -51,8 +52,8 @@ public class MemberController {
         return memberFacade.findAllMembers();
     }
     
-    @RequestMapping(value = "/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final MemberDTO findMemberByName(@PathVariable("name") String name) throws Exception {
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final MemberDTO findMemberByName(@RequestParam("name") String name) throws Exception {
         MemberDTO memberDTO = memberFacade.findByName(name);
         if (memberDTO == null) {
             throw new ResourceNotFoundException();
