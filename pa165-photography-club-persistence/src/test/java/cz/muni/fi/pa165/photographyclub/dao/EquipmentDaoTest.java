@@ -8,11 +8,11 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 import javax.transaction.Transactional;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -49,9 +49,9 @@ public class EquipmentDaoTest extends AbstractTransactionalTestNGSpringContextTe
 
         Equipment equipmentTmp = null;
         equipmentTmp = equipmentDao.findById(equipment.getId());
-        Assert.assertNotNull(equipmentTmp);
-        Assert.assertEquals(equipment.getName(), "Nikon D5");
-        Assert.assertEquals(equipment.getOwner().getName(), "John Smith");
+        assertThat(equipmentTmp).isNotNull();
+        assertThat(equipment.getName()).isEqualTo("Nikon D5");
+        assertThat(equipment.getOwner().getName()).isEqualTo("John Smith");
     }
 
     @Test
@@ -61,7 +61,7 @@ public class EquipmentDaoTest extends AbstractTransactionalTestNGSpringContextTe
 
         Equipment equipmentTmp = null;
         equipmentTmp = equipmentDao.findById(equipment.getId());
-        Assert.assertNull(equipmentTmp);
+        assertThat(equipmentTmp).isNull();
     }
 
     @Test
@@ -69,8 +69,8 @@ public class EquipmentDaoTest extends AbstractTransactionalTestNGSpringContextTe
         Equipment equipment = makeEquipment();
 
         Equipment equipmentTmp = equipmentDao.findById(equipment.getId());
-        Assert.assertNotNull(equipmentTmp);
-        Assert.assertEquals(equipmentTmp, equipment);
+        assertThat(equipmentTmp).isNotNull();
+        assertThat(equipmentTmp).isEqualTo(equipment);
     }
 
     @Test
@@ -78,8 +78,8 @@ public class EquipmentDaoTest extends AbstractTransactionalTestNGSpringContextTe
         Equipment equipment = makeEquipment();
 
         List<Equipment> euqipList = equipmentDao.findByOwner(equipment.getOwner());
-        Assert.assertNotNull(euqipList);
-        Assert.assertNotEquals(euqipList.size(), 0);
+        assertThat(euqipList).isNotNull();
+        assertThat(euqipList.size()).isNotSameAs(0);
     }
 
     @Test
@@ -87,8 +87,8 @@ public class EquipmentDaoTest extends AbstractTransactionalTestNGSpringContextTe
         makeEquipment();
 
         List<Equipment> euqipList = equipmentDao.findAll();
-        Assert.assertNotNull(euqipList);
-        Assert.assertNotEquals(euqipList.size(), 0);
+        assertThat(euqipList).isNotNull();
+        assertThat(euqipList.size()).isNotSameAs(0);
     }
 
 }

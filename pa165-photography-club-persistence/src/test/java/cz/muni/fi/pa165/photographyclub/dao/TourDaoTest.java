@@ -13,7 +13,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.*;
 import org.springframework.dao.DataAccessException;
@@ -49,8 +48,8 @@ public class TourDaoTest extends AbstractTransactionalTestNGSpringContextTests {
 
         Tour tourTmp = null;
         tourTmp = tourDao.findById(tour.getId());
-        Assert.assertNotNull(tourTmp);
-        Assert.assertEquals(tour.getName(), "Test");
+        assertThat(tourTmp).isNotNull();
+        assertThat(tour.getName()).isEqualTo("Test");
     }
 
     @Test
@@ -60,7 +59,7 @@ public class TourDaoTest extends AbstractTransactionalTestNGSpringContextTests {
 
         Tour tourTmp = null;
         tourTmp = tourDao.findById(tour.getId());
-        Assert.assertNull(tourTmp);
+        assertThat(tourTmp).isNull();
 
     }
 
@@ -72,8 +71,8 @@ public class TourDaoTest extends AbstractTransactionalTestNGSpringContextTests {
 
         Tour tourTmp = null;
         tourTmp = tourDao.findById(tour.getId());
-        Assert.assertNotNull(tourTmp);
-        Assert.assertEquals(tour.getName(), "TestUpdate");
+        assertThat(tourTmp).isNotNull();
+        assertThat(tour.getName()).isEqualTo("TestUpdate");
     }
 
     @Test
@@ -90,8 +89,8 @@ public class TourDaoTest extends AbstractTransactionalTestNGSpringContextTests {
         tourDao.create(tour3);
 
         List<Tour> tourList = tourDao.findAll();
-        Assert.assertNotNull(tourList);
-        Assert.assertEquals(tourList.size(), 2);
+        assertThat(tourList).isNotNull();
+        assertThat(tourList.size()).isSameAs(2);
     }
 
     @Test
@@ -99,8 +98,8 @@ public class TourDaoTest extends AbstractTransactionalTestNGSpringContextTests {
         Tour tour = makeTour();
 
         Tour tourTmp = tourDao.findById(tour.getId());
-        Assert.assertNotNull(tourTmp);
-        Assert.assertEquals(tourTmp, tour);
+        assertThat(tourTmp).isNotNull();
+        assertThat(tourTmp).isEqualTo(tour);
     }
 
     @Test
@@ -112,8 +111,8 @@ public class TourDaoTest extends AbstractTransactionalTestNGSpringContextTests {
         tourDao.create(tour);
 
         Tour tourTmp = tourDao.findByName(tour.getName());
-        Assert.assertNotNull(tourTmp);
-        Assert.assertEquals(tourTmp, tour);
+        assertThat(tourTmp).isNotNull();
+        assertThat(tourTmp).isEqualTo(tour);
     }
 
     @Test
