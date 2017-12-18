@@ -21,11 +21,6 @@
     
     <dependencies>
         <dependency>
-            <groupId>cz.muni.fi.pa165</groupId>
-            <artifactId>pa165-photography-club-api</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-api</artifactId>
             <scope>provided</scope>

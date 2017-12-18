@@ -34,5 +34,5 @@ You can also check out the API documentation at [pa165photographyclubrestapi.doc
 There are only 3 members on this team (one dropped out).
 
 ## Project structure (maven submodules)
-![maven submodules diagram](http://yuml.me/4f8d15fd.png)
+![maven submodules diagram](http://yuml.me/1eb17889.png)
 

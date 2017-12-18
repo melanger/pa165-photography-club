@@ -45,7 +45,7 @@
         </dependency>
         <dependency>
             <groupId>cz.muni.fi.pa165</groupId>
-            <artifactId>pa165-photography-club-service</artifactId>
+            <artifactId>pa165-photography-club-api</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
