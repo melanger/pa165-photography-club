@@ -140,7 +140,7 @@ Content-Length: 2
 ### Create equipment
 
 ```
-curl -i -X POST -H 'Content-Type: application/json' -d '{\"name\":\"TestEquipment\",\"type\":\"CAMERA\"}' 'http://localhost:8080/pa165/rest/equipment'
+curl -i -X POST -H 'Content-Type: application/json' -d '{\"name\":\"TestEquipment\",\"type\":\"CAMERA\",\"ownerId\":13}' 'http://localhost:8080/pa165/rest/equipment'
 ```
 
 ```
@@ -148,6 +148,7 @@ HTTP/1.1 201 Created
 Server: Apache-Coyote/1.1
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Location: http://localhost:8080/pa165/rest/equipment/14
 Content-Length: 0
 ```
        
@@ -156,7 +157,7 @@ Content-Length: 0
 ### Get a equipment by ID
 
 ```
-curl -i 'http://localhost:8080/pa165/rest/equipment/5'
+curl -i 'http://localhost:8080/pa165/rest/equipment/6'
 ```
 
 ```
@@ -164,17 +165,17 @@ HTTP/1.1 200 OK
 Server: Apache-Coyote/1.1
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
-ETag: "01a1d67c3badcbd78d42f5631624e7f8f"
+ETag: "04c02652ad443f14e8e4e50146ba1c2d7"
 Content-Type: application/json;charset=UTF-8
-Content-Length: 99
+Content-Length: 281
 
-{"name":"TestEquipment","type":"CAMERA","date":"2017-11-11","reviews":[],"participants":[],"id":5}
+{"id":6,"owner":{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","password":"AntonIsBest","userRole":"ADMINISTRATOR"},"name":"Nikon 4x","type":"LENS"}
 ```
 
 ### Delete Equipment
 
 ```
-curl -i -X DELETE 'http://localhost:8080/pa165/rest/equipment/5'
+curl -i -X DELETE 'http://localhost:8080/pa165/rest/equipment/6'
 ```
 
 ```
