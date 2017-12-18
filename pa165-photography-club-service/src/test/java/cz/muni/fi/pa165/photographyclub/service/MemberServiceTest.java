@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.LinkedList;
 import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.mockito.InjectMocks;
 import static org.mockito.Matchers.same;
 import org.mockito.Mock;
@@ -17,7 +18,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -55,8 +55,7 @@ public class MemberServiceTest extends AbstractTestNGSpringContextTests{
        final long id = 42l;
        member.setId(id);
        when(memberDao.findById(member.getId())).thenReturn(member);
-       
-       Assert.assertEquals(memberService.findById(id), member);
+       assertThat(memberService.findById(id)).isEqualTo(member);
     }
     
     @Test
@@ -76,8 +75,7 @@ public class MemberServiceTest extends AbstractTestNGSpringContextTests{
         members.add(member);
         members.add(member2);
         when(memberDao.findAll()).thenReturn(members);
-        
-        Assert.assertEquals(memberService.findAll().size(), 2);
+        assertThat(memberService.findAll().size()).isSameAs(2);
     }
     
     @Test
@@ -92,8 +90,8 @@ public class MemberServiceTest extends AbstractTestNGSpringContextTests{
     public void findByNameTest(){
         memberService.create(member);
         when(memberDao.findByName(member.getName())).thenReturn(member);
-        
-        Assert.assertEquals(memberService.findByName("John Smith"), member);
+        assertThat(memberService.findByName("John Smith")).isEqualTo(member);
     }
+
     
 }

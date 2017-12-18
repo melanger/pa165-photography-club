@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.LinkedList;
 import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -24,7 +25,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -103,7 +103,7 @@ public class EquipmentFacadeTest extends AbstractTestNGSpringContextTests{
         when(equipmentService.findByOwner(member)).thenReturn(equipList);
         when(beanMappingService.mapTo(equipList, EquipmentDTO.class)).thenReturn(equipDTOList);
         
-        Assert.assertEquals(equipmentFacade.getEquipmentByMember(member.getId()), equipDTOList);
+        assertThat(equipmentFacade.getEquipmentByMember(member.getId())).isEqualTo(equipDTOList);        
     }
     
     @Test
@@ -113,8 +113,7 @@ public class EquipmentFacadeTest extends AbstractTestNGSpringContextTests{
         
         when(equipmentService.findById(equipment.getId())).thenReturn(equipment);
         when(beanMappingService.mapTo(equipment, EquipmentDTO.class)).thenReturn(equipmentDTO);
-        
-        Assert.assertEquals(equipmentFacade.getEquipmentById(equipment.getId()), equipmentDTO);
+        assertThat(equipmentFacade.getEquipmentById(equipment.getId())).isEqualTo(equipmentDTO);  
     }
     
     @Test
@@ -138,7 +137,7 @@ public class EquipmentFacadeTest extends AbstractTestNGSpringContextTests{
         ArgumentCaptor<List> argumentCaptor = ArgumentCaptor.forClass(List.class);
         verify(mockMember).setEquipment(argumentCaptor.capture());   
         List arg = argumentCaptor.getValue();
-        Assert.assertEquals(arg.size(), 1);
+        assertThat(arg.size()).isSameAs(1);
     }
          
     @Test
@@ -159,7 +158,7 @@ public class EquipmentFacadeTest extends AbstractTestNGSpringContextTests{
         ArgumentCaptor<List> argumentCaptor = ArgumentCaptor.forClass(List.class);
         verify(mockMember).setEquipment(argumentCaptor.capture());   
         List arg = argumentCaptor.getValue();
-        Assert.assertEquals(arg.size(), 0);
+        assertThat(arg.size()).isSameAs(0);
         
     }
 }
