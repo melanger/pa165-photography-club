@@ -2,6 +2,12 @@
 
 API allows manipulation of entities.
 
+Note: in Windows PowerShell, you may need to run
+```
+Remove-item alias:curl
+```
+for the true cURL to work.
+
 ## Root
 
 ### List all other endpoints
