@@ -14,7 +14,7 @@ pa165photoclubApp.config(['$routeProvider',
         when('/tours/:tourId', {templateUrl: 'partials/tour_detail.html', controller: 'TourDetailCtrl'}).
         when('/admin/tours', {templateUrl: 'partials/admin_tours.html', controller: 'AdminToursCtrl', roles:['MANAGER']}).
         when('/admin/tours/new', {templateUrl: 'partials/admin_create_tour.html', controller: 'AdminCreateTourCtrl', roles:['MANAGER']}).
-        when('/admin/members/me', {templateUrl: 'partials/admin_member_profile.html', controller: 'AdminMemberProfileCtrl', roles:['MEMBER','MANAGER']}).
+        when('/admin/profile', {templateUrl: 'partials/admin_member_profile.html', controller: 'AdminMemberProfileCtrl', roles:['MEMBER','MANAGER']}).
         when('/login', {templateUrl: 'partials/login.html', controller: 'LoginController'}).
         otherwise({redirectTo: '/members'});
     }]);
@@ -135,6 +135,36 @@ pa165photoclubApp.run(function ($rootScope, AUTH_EVENTS, AuthService) {
   });
 });
 
+pa165photoclubApp.controller('AdminMemberProfileCtrl', function ($scope, $http) {
+    $scope.equipment = {
+            'name': '',
+            'type': 'OTHER',
+            'ownerId': $rootScope.currentUser.id
+    };
+    $scope.ownerId = $rootScope.currentUser.id;
+  
+    $scope.create = function (equipment) {
+      $http({
+          method: 'POST',
+          url: '/pa165/rest/members',
+          data: equipment
+      }).then(function success(response) {
+          var equipment = response.data;
+          $rootScope.successAlert = 'A new equipment "' + equipment.name + '" was added';
+          $location.path("/admin/members/me");
+      }, function error(response) {
+          switch (response.data.code) {
+              case 'InvalidRequestException':
+                  $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                  break;
+              default:
+                  $rootScope.errorAlert = 'Cannot create equipment ! Reason given by the server: '+response.data.message;
+                  break;
+          }
+      });
+    };
+});
+
 pa165photoclubApp.controller('MembersCtrl', function ($scope, $http) {
     $http.get('/pa165/rest/members').then(function (response) {
         $scope.members = response.data;
@@ -154,13 +184,13 @@ pa165photoclubApp.controller('MemberDetailCtrl', function ($scope, $rootScope, $
     });
 });
 
-photoclubControllers.controller('ToursCtrl', function ($scope, $http) {
+pa165photoclubApp.controller('ToursCtrl', function ($scope, $http) {
     $http.get('/pa165/rest/tours').then(function (response) {
         $scope.tours = response.data;
     });
 });
 
-photoclubControllers.controller('TourDetailCtrl', function ($scope, $rootScope, $routeParams, $http) {
+pa165photoclubApp.controller('TourDetailCtrl', function ($scope, $rootScope, $routeParams, $http) {
     var tourId = $routeParams.tourId;
     $http.get('/pa165/rest/tours/' + tourId).then(function success(response) {
         $scope.tour = response.data;
