@@ -135,17 +135,17 @@ pa165photoclubApp.run(function ($rootScope, AUTH_EVENTS, AuthService) {
   });
 });
 
-pa165photoclubApp.controller('AdminMemberProfileCtrl', function ($scope, $http) {
-    if (!$scope.currentUser) {
+pa165photoclubApp.controller('AdminMemberProfileCtrl', function ($scope, $routeParams, $http, $location, $rootScope) {
+    if (!$rootScope.currentUser) {
       $scope.errorAlert = "You have to be logged in.";
       return;
     }
     $scope.equipment = {
             'name': '',
             'type': 'OTHER',
-            'ownerId': $scope.currentUser.id
+            'ownerId': $rootScope.currentUser.id
     };
-    $scope.ownerId = $scope.currentUser.id;
+    $scope.ownerId = $rootScope.currentUser.id;
   
     $scope.create = function (equipment) {
       $http({
@@ -233,9 +233,8 @@ pa165photoclubApp.controller('AdminCreateTourCtrl',
                 method: 'POST',
                 url: '/pa165/rest/tours',
                 data: tour
-            }).then(function success(response) {
-                var createdTour = response.data;
-                $rootScope.successAlert = 'A new tour "' + createdTour.name + '" was created';
+            }).then(function success() {
+                $rootScope.successAlert = 'A new tour was created';
                 $location.path("/admin/tours");
             }, function error(response) {
                 console.log("error when creating tour");
