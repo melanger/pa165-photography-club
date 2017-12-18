@@ -5,19 +5,20 @@ import cz.muni.fi.pa165.photographyclub.dto.EquipmentDTO;
 import cz.muni.fi.pa165.photographyclub.facade.EquipmentFacade;
 import cz.muni.fi.pa165.photographyclub.rest.ApiUris;
 import cz.muni.fi.pa165.photographyclub.rest.exception.InvalidParameterException;
-import cz.muni.fi.pa165.photographyclub.rest.exception.ResourceAlreadyExistingException;
 import cz.muni.fi.pa165.photographyclub.rest.exception.ResourceNotFoundException;
 import javax.inject.Inject;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * REST Controller for Equipment
