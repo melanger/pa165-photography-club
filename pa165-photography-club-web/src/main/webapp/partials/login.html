@@ -1,0 +1,15 @@
+<!-- https://medium.com/opinionated-angularjs/techniques-for-authentication-in-angularjs-applications-7bbf0346acec -->
+<form name="loginForm" ng-controller="LoginController"
+      ng-submit="login(credentials)" novalidate>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email"
+         ng-model="credentials.email">
+
+  <label for="password">Password:</label>
+  <input type="password" id="password"
+         ng-model="credentials.password">
+
+  <button type="submit">Login</button>
+
+</form>

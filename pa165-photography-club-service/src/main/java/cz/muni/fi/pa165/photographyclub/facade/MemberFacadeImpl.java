@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.photographyclub.facade;
 
 import cz.muni.fi.pa165.photographyclub.beanmapping.BeanMappingService;
+import cz.muni.fi.pa165.photographyclub.dto.LoginDTO;
 import cz.muni.fi.pa165.photographyclub.dto.MemberCreateDTO;
 import cz.muni.fi.pa165.photographyclub.dto.MemberDTO;
 import cz.muni.fi.pa165.photographyclub.entity.Equipment;
@@ -12,6 +13,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 /**
@@ -71,6 +73,25 @@ public class MemberFacadeImpl implements MemberFacade {
     public MemberDTO findByName(String name) {
         Member m = memberService.findByName(name);
         return (m == null) ? null : beanMappingService.mapTo(m, MemberDTO.class);
+    }
+
+    @Override
+    public MemberDTO login(LoginDTO loginInfo) {
+        List<Member> members = memberService.findAll();
+        for (Member m : members) {
+            if (m.getEmail().equals(loginInfo.getEmail())) {
+                if (bCryptPasswordCorrect(loginInfo.getPassword(), m.getPassword())) {
+                    return beanMappingService.mapTo(m, MemberDTO.class);
+                } else {
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
+    
+    private boolean bCryptPasswordCorrect(String candidate_password, String stored_hash) {
+        return BCrypt.checkpw(candidate_password, stored_hash);
     }
 
 }

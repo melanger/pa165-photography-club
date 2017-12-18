@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.photographyclub.facade;
 
+import cz.muni.fi.pa165.photographyclub.dto.LoginDTO;
 import cz.muni.fi.pa165.photographyclub.dto.MemberCreateDTO;
 import cz.muni.fi.pa165.photographyclub.dto.MemberDTO;
 
@@ -40,4 +41,11 @@ public interface MemberFacade {
      * @return member if found
      */
     MemberDTO findByName(String name);
+    
+    /**
+     * Authenticate a user.
+     * @param login email and password
+     * @return null if auth fails, member object otherwise
+     */
+    MemberDTO login(LoginDTO login);
 }

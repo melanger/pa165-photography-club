@@ -23,6 +23,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  * Loads some sample data to populate the eshop database.
@@ -103,7 +104,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         member.setPhoto(photo);
         member.setReviews(reviews);
         member.setTours(tours);
-        member.setPassword(password);
+        member.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
         member.setUserRole(userRole);
         memberService.create(member);
         return member;

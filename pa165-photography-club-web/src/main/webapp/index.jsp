@@ -14,7 +14,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/angular_app.js"></script>
 </head>
-<body>
+<body ng-controller="ApplicationController">
 <!-- navigation bar -->
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
@@ -31,6 +31,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="#!/members">Members</a></li>
                 <li><a href="#!/tours">Tours</a></li>
+                <li><a href="#!/login">Login</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -59,6 +60,7 @@
             <button type="button" class="close" aria-label="Close" ng-click="hideSuccessAlert()"> <span aria-hidden="true">&times;</span></button>
             <strong>Success !</strong> <span>{{successAlert}}</span>
         </div>
+        <div class="alert alert-info" role="alert" ng-if="currentUser">Welcome, {{ currentUser.name }}, you're logged in <div ng-if="isAuthorized(userRoles.manager)">as manager</div></div>
 
         <div ng-view></div>
     </div>

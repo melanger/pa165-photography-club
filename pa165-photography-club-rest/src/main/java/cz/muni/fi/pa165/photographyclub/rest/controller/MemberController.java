@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.photographyclub.rest.controller;
 
 import cz.muni.fi.pa165.photographyclub.dto.EquipmentDTO;
+import cz.muni.fi.pa165.photographyclub.dto.LoginDTO;
 import cz.muni.fi.pa165.photographyclub.dto.MemberCreateDTO;
 import cz.muni.fi.pa165.photographyclub.dto.MemberDTO;
 import cz.muni.fi.pa165.photographyclub.dto.ReviewDTO;
@@ -8,6 +9,7 @@ import cz.muni.fi.pa165.photographyclub.facade.EquipmentFacade;
 import cz.muni.fi.pa165.photographyclub.facade.MemberFacade;
 import cz.muni.fi.pa165.photographyclub.facade.ReviewFacade;
 import cz.muni.fi.pa165.photographyclub.rest.ApiUris;
+import cz.muni.fi.pa165.photographyclub.rest.exception.LoginNotSuccessfulException;
 import cz.muni.fi.pa165.photographyclub.rest.exception.ResourceAlreadyExistingException;
 import cz.muni.fi.pa165.photographyclub.rest.exception.ResourceNotFoundException;
 import java.util.Collections;
@@ -117,4 +119,18 @@ public class MemberController {
         }
     }
     
+    /**
+     * Perform a login.
+     * 
+     * @param credentials
+     * @return MemberDTO if credentials are valid, null otherwise.
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final MemberDTO login(@RequestBody LoginDTO credentials) {
+        MemberDTO m = memberFacade.login(credentials);
+        if (m == null) {
+            throw new LoginNotSuccessfulException();
+        }
+        return m;
+    }
 }

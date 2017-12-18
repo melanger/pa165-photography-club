@@ -57,6 +57,10 @@
             <groupId>io.craftsman</groupId>
             <artifactId>dozer-jdk8-support</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
