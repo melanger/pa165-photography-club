@@ -4,7 +4,6 @@ import cz.muni.fi.pa165.photographyclub.dto.MemberDTO;
 import cz.muni.fi.pa165.photographyclub.dto.ReviewDTO;
 import cz.muni.fi.pa165.photographyclub.dto.TourCreateDTO;
 import cz.muni.fi.pa165.photographyclub.dto.TourDTO;
-import cz.muni.fi.pa165.photographyclub.facade.ReviewFacade;
 import cz.muni.fi.pa165.photographyclub.facade.TourFacade;
 import cz.muni.fi.pa165.photographyclub.rest.ApiUris;
 import cz.muni.fi.pa165.photographyclub.rest.exception.ResourceAlreadyExistingException;
@@ -33,9 +32,6 @@ public class TourController {
     @Inject
     private TourFacade tourFacade;
     
-    @Inject
-    private ReviewFacade reviewFacade;
-
     /**
      * Get all tours available
      * @return list of all tours
@@ -134,19 +130,5 @@ public class TourController {
             throw new ResourceNotFoundException();
         }
     }
-    
-    /**
-     * Get reviews of a tour.
-     * @param tourId the ID of the tour
-     * @return List of reviews of the tour, might be empty
-     * @throws Exception ResourceNotFoundException if the tour is not found
-     */
-    @RequestMapping(value = "/{tourId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<ReviewDTO> getReviewsByTour(@PathVariable("tourId") Long tourId) throws Exception {
-        try {
-            return reviewFacade.getReviewsByTour(tourId);
-        } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException();
-        }
-    }
+
 }
