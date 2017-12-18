@@ -84,7 +84,7 @@ public class ReviewController {
         return reviews;
     }
     
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final ResponseEntity<?> updateReview(@RequestBody ReviewDTO reviewDTO, UriComponentsBuilder builder) throws Exception{
         long id = reviewDTO.getId();
         reviewFacade.updateReview(reviewDTO);
