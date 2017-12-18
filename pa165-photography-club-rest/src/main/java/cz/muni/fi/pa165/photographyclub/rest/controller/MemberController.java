@@ -10,6 +10,7 @@ import cz.muni.fi.pa165.photographyclub.facade.ReviewFacade;
 import cz.muni.fi.pa165.photographyclub.rest.ApiUris;
 import cz.muni.fi.pa165.photographyclub.rest.exception.ResourceAlreadyExistingException;
 import cz.muni.fi.pa165.photographyclub.rest.exception.ResourceNotFoundException;
+import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityExistsException;
@@ -57,18 +58,16 @@ public class MemberController {
         return memberDTO;
     }
     
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<MemberDTO> getAllMembers(){
-        return memberFacade.findAllMembers();
-    }
-    
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final MemberDTO findMemberByName(@RequestParam("name") String name) throws Exception {
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, params = {})
+    public final List<MemberDTO> getMembers(@RequestParam(value = "name", required = false) String name){
+        if (name == null)
+            return memberFacade.findAllMembers();
+        
         MemberDTO memberDTO = memberFacade.findByName(name);
         if (memberDTO == null) {
             throw new ResourceNotFoundException();
         }
-        return memberDTO;
+        return Collections.singletonList(memberDTO);
     }
     
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
