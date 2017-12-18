@@ -211,11 +211,35 @@ pa165photoclubApp.controller('TourDetailCtrl', function ($scope, $rootScope, $ro
 });
 
 
-pa165photoclubApp.controller('AdminToursCtrl', function ($scope, $http) {
+function loadAdminTours($http, $scope) {
     $http.get('/pa165/rest/tours').then(function (response) {
         $scope.tours = response.data;
     });
+}
+
+pa165photoclubApp.controller('AdminToursCtrl', function ($scope, $http, $rootScope) {
+    loadAdminTours($http, $scope);
+    $scope.deleteTour = function (tour) {           
+        $http.delete('/pa165/rest/tours/' + tour.id).then(
+            function success(response) {
+                $rootScope.successAlert = 'Deleted tour "' + tour.name + '"';
+                loadAdminTours($http, $scope);
+            },
+            function error(response) {
+                console.log(response);
+                switch (response.data.code) {
+                    case 'ResourceNotFoundException':
+                        $rootScope.errorAlert = 'Cannot delete non-existent tour ! ';
+                        break;
+                    default:
+                        $rootScope.errorAlert = 'Cannot delete tour ! Reason given by the server: '+response.data.message;
+                        break;
+                }
+            }
+        );
+    };
 });
+
 
 
 pa165photoclubApp.controller('AdminCreateTourCtrl',
