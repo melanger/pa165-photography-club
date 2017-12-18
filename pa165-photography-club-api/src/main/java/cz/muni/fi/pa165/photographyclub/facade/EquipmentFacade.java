@@ -23,9 +23,11 @@ public interface EquipmentFacade {
      */
     public EquipmentDTO getEquipmentById(long id);
     
+
     /**
      * Add an equipment to a member.
      * @param equipment EquipmentCreateDTO
+     * @return new equipment id
      */
     public long createEquipment(EquipmentCreateDTO equipment);
     
