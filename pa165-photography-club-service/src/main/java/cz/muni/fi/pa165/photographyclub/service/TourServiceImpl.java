@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.photographyclub.service;
 
 import cz.muni.fi.pa165.photographyclub.dao.GenericDao;
 import cz.muni.fi.pa165.photographyclub.dao.TourDao;
+import cz.muni.fi.pa165.photographyclub.entity.Member;
 import cz.muni.fi.pa165.photographyclub.entity.Review;
 import cz.muni.fi.pa165.photographyclub.entity.Tour;
 import java.util.HashMap;
@@ -46,5 +47,28 @@ public class TourServiceImpl extends GenericServiceImpl<Tour> implements TourSer
             map.replace(avgInt, tmpList);
         }
         return map;
+    }
+
+    @Override
+    public void removeMemberFromAllTours(Long memberId) {
+        List<Tour> allTours = tourDao.findAll();
+        List<Tour> tours = new LinkedList<>();
+        for (Tour tour : allTours) {
+            List<Member> members = tour.getParticipants();
+            int counter = 0;
+            for (Member member : members ){
+                if(member.getId() == memberId){
+                    members.remove(member);
+                    counter = 1;
+                }
+            }
+            tour.setParticipants(members);
+            if(counter == 1){
+                tours.add(tour);
+            }
+        }
+        for (Tour tour : tours) {
+            tourDao.update(tour);
+        }        
     }
 }

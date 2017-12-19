@@ -8,7 +8,10 @@ import cz.muni.fi.pa165.photographyclub.entity.Equipment;
 import cz.muni.fi.pa165.photographyclub.entity.Member;
 import cz.muni.fi.pa165.photographyclub.entity.Review;
 import cz.muni.fi.pa165.photographyclub.entity.Tour;
+import cz.muni.fi.pa165.photographyclub.service.EquipmentService;
 import cz.muni.fi.pa165.photographyclub.service.MemberService;
+import cz.muni.fi.pa165.photographyclub.service.ReviewService;
+import cz.muni.fi.pa165.photographyclub.service.TourService;
 import java.util.LinkedList;
 import java.util.List;
 import javax.inject.Inject;
@@ -28,6 +31,15 @@ public class MemberFacadeImpl implements MemberFacade {
 
     @Inject
     private MemberService memberService;
+    
+    @Inject
+    private ReviewService reviewService;
+    
+    @Inject
+    private EquipmentService equipmentService;
+    
+    @Inject
+    private TourService tourService;
 
     @Inject
     private BeanMappingService beanMappingService;
@@ -67,8 +79,29 @@ public class MemberFacadeImpl implements MemberFacade {
 
     @Override
     public void removeMember(Long memberId) {
-        Member m = memberService.findById(memberId);
+        Member m = memberService.findById(memberId);        
         if (m == null) throw new EntityNotFoundException();
+        if(m.getEquipment() != null){
+            if(m.getEquipment().size() > 0){
+                for (Equipment equipment : m.getEquipment()) {
+                    equipmentService.remove(equipment);
+                }                
+            }
+        }
+        if(m.getReviews() != null){
+            if(m.getReviews().size() > 0){
+                for (Review review : m.getReviews()) {
+                    reviewService.remove(review);
+                }
+            }
+        }
+        if(m.getTours() != null){
+            if(m.getTours().size() > 0){
+                for (Tour tour : m.getTours()) {
+                    tourService.removeMemberFromAllTours(m.getId());
+                }
+            }
+        }
         memberService.remove(m);
     }
 

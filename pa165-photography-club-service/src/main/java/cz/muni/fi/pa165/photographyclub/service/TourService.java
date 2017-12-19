@@ -18,4 +18,6 @@ public interface TourService extends GenericService<Tour> {
      */
     public Map<Integer, List<Tour>> getToursByAverageRating();
     
+    public void removeMemberFromAllTours(Long memberId);
+    
 }

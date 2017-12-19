@@ -279,6 +279,12 @@ curl -i -X DELETE 'http://localhost:8080/pa165/rest/members/11'
 ```
 
 ```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Content-Length: 0
+Date: Tue, 19 Dec 2017 00:13:33 GMT
 
 ```
 
