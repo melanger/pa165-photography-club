@@ -18,6 +18,7 @@ API allows manipulation of entities.
   "tours_uri": "/tours"
 }
 
+# Group Tours
 
 ## Tours collection [/tours]
 
@@ -49,7 +50,7 @@ API allows manipulation of entities.
 
 ### Delete a tour [DELETE]
 
-+ Response 200 (application/json)
++ Response 200
 
 ## Tour reviews [/tours/{id}/reviews]
 
@@ -66,3 +67,133 @@ API allows manipulation of entities.
 + Response 200 (application/json)
 
         []
+
+# Group Equipment
+
+## Equipment collection [/equipment]
+
+### Create an equipment [POST]
+
++ Request (application/json)
+
+        {"name":"TestEquipment","type":"CAMERA","ownerId":13}
+
++ Response 201 (application/json)
+
+    + Headers
+        Location: /pa165/rest/equipment/{id}
+
+## Single equipment [/equipment/{id}]
+
+### Get an equipment by ID [GET]
+
++ Response 200 (application/json)
+
+        {"id":15,"owner":{"id":13,"name":"Cyril","birthDate":"1999-05-28","address":"V Praze blaze","motivation":"want to try","experience":"none","gender":"MALE","photo":"link","email":"cyrul@mail","userRole":"MEMBER"},"name":"TestEquipment","type":"CAMERA"}
+
+### Delete Equipment [DELETE]
+
++ Response 200
+
+# Group Members
+
+## Members collection [/members{?name}]
+
+### Get all members [GET]
+
++ Response 200 (application/json)
+
+        [{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","userRole":"MANAGER"},{"id":12,"name":"Ben","birthDate":"1998-03-16","address":"address 11 Brno","motivation":"for fun","experience":"beginner","gender":"MALE","photo":"profilepic","email":"ben@mail.com","userRole":"MEMBER"},{"id":13,"name":"Cyril","birthDate":"1999-05-28","address":"V Praze blaze","motivation":"want to try","experience":"none","gender":"MALE","photo":"link","email":"cyrul@mail","userRole":"MEMBER"}]
+
+### Get a member by name [GET]
+
++ Parameters
+    + name (string, required, `Anton`)
+
++ Response 200 (application/json)
+
+        [{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","userRole":"MANAGER"}]
+
+### Create a member [POST]
+
++ Request (application/json)
+
+        {"name":"TestMember","birthDate":"1995-11-11"}
+
++ Response 201 (application/json)
+
+    + Headers
+        Location: /pa165/rest/members/{id}
+
+## Single member [/members/{id}]
+
+### Get a member by ID [GET]
+
++ Parameters
+    + id (string, required, `11`) - The id of the member
+
++ Response 200 (application/json)
+
+        {"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","userRole":"MANAGER"}
+
+### Remove a member [DELETE]
+
++ Parameters
+    + id (string, required, `16`) - The id of the member
+
++ Response 200
+
+## Member's equipment [/members/{id}/equipment]
+
+### Get equipment of a member [GET]
++ Parameters
+    + id (string, required, `11`) - id of the member
+
++ Response 200 (application/json)
+        [{"id":6,"owner":{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","userRole":"MANAGER"},"name":"Nikon 4x","type":"LENS"},{"id":7,"owner":{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","userRole":"MANAGER"},"name":"CanonG6","type":"CAMERA"},{"id":8,"owner":{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","userRole":"MANAGER"},"name":"MikonaZZ","type":"LIGHTNING"}]
+
+## Member's reviews [/members/{id}/reviews]
+
+### Get reviews of a member [GET]
++ Parameters
+    + id (string, required, `11`) - id of the member
+
++ Response 200 (application/json)
+        []
+
+
+# Group Reviews
+
+## Review collection [/reviews]
+
+### Get all reviews [GET]
+
++ Response 200 (application/json)
+
+        [{"id":1,"tour":null,"author":null,"comment":"great","rating":10},{"id":2,"tour":null,"author":null,"comment":"ok","rating":5},{"id":3,"tour":null,"author":null,"comment":"bad","rating":2}]
+
+### Create a review [POST]
+
++ Request (application/json)
+
+        {"tourId":"4","authorId":"12","comment":"TestingReview"}
+
++ Response 201 (application/json)
+
+    + Headers
+        Location: /pa165/rest/reviews/{id}
+
+## Single review [/reviews/{id}]
+
++ Parameters
+    + id (string, required, `17`) - The id of the review
+
+### Get a review by ID [GET]
+
++ Response 200 (application/json)
+
+        {"id":17,"tour":{"name":"Louvre","theme":"PORTRAITS","date":"2015-05-05","participants":[{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","userRole":"MANAGER"},{"id":13,"name":"Cyril","birthDate":"1999-05-28","address":"V Praze blaze","motivation":"want to try","experience":"none","gender":"MALE","photo":"link","email":"cyrul@mail","userRole":"MEMBER"}],"id":4},"author":{"id":12,"name":"Ben","birthDate":"1998-03-16","address":"address 11 Brno","motivation":"for fun","experience":"beginner","gender":"MALE","photo":"profilepic","email":"ben@mail.com","userRole":"MEMBER"},"comment":"TestingReview","rating":0}
+
+### Delete a review [DELETE]
+
++ Response 200
