@@ -13,7 +13,7 @@ for the true cURL to work.
 ### List all other endpoints
 
 ```
-curl -i 'http://localhost:8080/pa165/rest/'
+curl -i "http://localhost:8080/pa165/rest/"
 ```
 
 ```
@@ -33,7 +33,7 @@ Content-Length: 101
 ### Get all tours
 
 ```
-curl -i 'http://localhost:8080/pa165/rest/tours'
+curl -i "http://localhost:8080/pa165/rest/tours"
 ```
 
 ```
@@ -50,8 +50,13 @@ Content-Length: 167
         
 ### Create a tour
 
+#### Windows Powershell
 ```
-curl -i -X POST -H 'Content-Type: application/json' -d '{\"name\":\"Testovaci\",\"theme\":\"PORTRAITS\",\"date\":\"2017-11-11\"}' 'http://localhost:8080/pa165/rest/tours'
+curl -i -X POST -H "Content-Type: application/json" -d '{\"name\":\"Testovaci\",\"theme\":\"PORTRAITS\",\"date\":\"2017-11-11\"}' "http://localhost:8080/pa165/rest/tours"
+```
+#### Windows command line / Linux
+```
+curl -i -X POST -H "Content-Type: application/json" -d "{\"name\":\"Testovaci\",\"theme\":\"PORTRAITS\",\"date\":\"2017-11-11\"}" "http://localhost:8080/pa165/rest/tours"
 ```
 
 ```
@@ -68,7 +73,7 @@ Content-Length: 0
 ### Get a tour by ID
 
 ```
-curl -i 'http://localhost:8080/pa165/rest/tours/14'
+curl -i "http://localhost:8080/pa165/rest/tours/14"
 ```
 
 ```
@@ -86,7 +91,7 @@ Content-Length: 86
 ### Delete a tour
 
 ```
-curl -i -X DELETE 'http://localhost:8080/pa165/rest/tours/14'
+curl -i -X DELETE "http://localhost:8080/pa165/rest/tours/14"
 ```
 
 ```
@@ -102,7 +107,7 @@ Content-Length: 0
 ### Get reviews of a tour
 
 ```
-curl -i 'http://localhost:8080/pa165/rest/tours/4/reviews'
+curl -i "http://localhost:8080/pa165/rest/tours/4/reviews"
 ```
 
 ```
@@ -122,7 +127,7 @@ Content-Length: 2
 ### Get participants of a tour
 
 ```
-curl -i 'http://localhost:8080/pa165/rest/tours/4/members'
+curl -i "http://localhost:8080/pa165/rest/tours/4/members"
 ```
 
 ```
@@ -145,8 +150,13 @@ Content-Length: 2
 
 ### Create equipment
 
+#### Powershell
 ```
-curl -i -X POST -H 'Content-Type: application/json' -d '{\"name\":\"TestEquipment\",\"type\":\"CAMERA\",\"ownerId\":13}' 'http://localhost:8080/pa165/rest/equipment'
+curl -i -X POST -H "Content-Type: application/json" -d '{\"name\":\"TestEquipment\",\"type\":\"CAMERA\",\"ownerId\":13}' "http://localhost:8080/pa165/rest/equipment"
+```
+#### Windows command line / Linux
+```
+curl -i -X POST -H "Content-Type: application/json" -d "{\"name\":\"TestEquipment\",\"type\":\"CAMERA\",\"ownerId\":13}" "http://localhost:8080/pa165/rest/equipment"
 ```
 
 ```
@@ -163,7 +173,7 @@ Content-Length: 0
 ### Get a equipment by ID
 
 ```
-curl -i 'http://localhost:8080/pa165/rest/equipment/15'
+curl -i "http://localhost:8080/pa165/rest/equipment/15"
 ```
 
 ```
@@ -181,7 +191,7 @@ Content-Length: 270
 ### Delete Equipment
 
 ```
-curl -i -X DELETE 'http://localhost:8080/pa165/rest/equipment/15'
+curl -i -X DELETE "http://localhost:8080/pa165/rest/equipment/15"
 ```
 
 ```
@@ -199,7 +209,7 @@ Content-Length: 0
 ### Get all members
 
 ```
-curl -i 'http://localhost:8080/pa165/rest/members'
+curl -i "http://localhost:8080/pa165/rest/members"
 ```
 
 ```
@@ -220,7 +230,7 @@ Date: Mon, 18 Dec 2017 19:55:03 GMT
 ### Get member by ID
 
 ```
-curl -i 'http://localhost:8080/pa165/rest/members/11'
+curl -i "http://localhost:8080/pa165/rest/members/11"
 ```
 
 ```
@@ -239,7 +249,7 @@ Date: Mon, 18 Dec 2017 19:59:26 GMT
 ### Get member by Name
 
 ```
-curl -i 'http://localhost:8080/pa165/rest/members?name=Anton'
+curl -i "http://localhost:8080/pa165/rest/members?name=Anton"
 ```
 
 ```
@@ -257,9 +267,15 @@ Date: Mon, 18 Dec 2017 20:07:18 GMT
 
 ### Create member
 
+#### Powershell
 ```
-curl -i -X POST -H 'Content-Type: application/json' -d '{"name":"TestMember","birthDate":"1995-11-11"}' 'http://localhost:8080/pa165/rest/members'
+curl -i -X POST -H "Content-Type: application/json" -d '{\"name\":\"TestMember\",\"birthDate\":\"1995-11-11\"}' "http://localhost:8080/pa165/rest/members"
 ```
+#### Windows command line / Linux
+```
+curl -i -X POST -H "Content-Type: application/json" -d "{\"name\":\"TestMember\",\"birthDate\":\"1995-11-11\"}" "http://localhost:8080/pa165/rest/members"
+```
+
 
 ```
 HTTP/1.1 201 Created
@@ -275,7 +291,7 @@ Date: Mon, 18 Dec 2017 21:31:41 GMT
 ### Remove member
 
 ```
-curl -i -X DELETE 'http://localhost:8080/pa165/rest/members/11'
+curl -i -X DELETE "http://localhost:8080/pa165/rest/members/11"
 ```
 
 ```
@@ -291,7 +307,7 @@ Date: Tue, 19 Dec 2017 00:13:33 GMT
 ### Get equipment by member
 
 ```
-curl -i 'http://localhost:8080/pa165/rest/members/11/equipment'
+curl -i "http://localhost:8080/pa165/rest/members/11/equipment"
 ```
 
 ```
@@ -310,7 +326,7 @@ Date: Mon, 18 Dec 2017 20:38:31 GMT
 ### Get reviews by Author
 
 ```
-curl -i 'http://localhost:8080/pa165/rest/members/11/reviews'
+curl -i "http://localhost:8080/pa165/rest/members/11/reviews"
 ```
 
 ```
@@ -331,7 +347,7 @@ Date: Mon, 18 Dec 2017 20:47:37 GMT
 ### Get all reviews
 
 ```
-curl -i 'http://localhost:8080/pa165/rest/reviews'
+curl -i "http://localhost:8080/pa165/rest/reviews"
 ```
 
 ```
@@ -352,7 +368,7 @@ Date: Mon, 18 Dec 2017 20:54:20 GMT
 ### Get review by ID
 
 ```
-curl -i 'http://localhost:8080/pa165/rest/reviews/2'
+curl -i "http://localhost:8080/pa165/rest/reviews/2"
 ```
 
 ```
@@ -369,8 +385,14 @@ Date: Mon, 18 Dec 2017 20:55:10 GMT
 ```
 
 ### Create review
+
+#### Powershell
 ```
-curl -i -X POST -H 'Content-Type: application/json' -d '{"tourId":"4","authorId":"12","comment":"Testing Review"}' 'http://localhost:8080/pa165/rest/reviews'
+curl -i -X POST -H "Content-Type: application/json" -d '{\"tourId\":\"4\",\"authorId\":\"12\",\"comment\":\"Testing Review\"}' "http://localhost:8080/pa165/rest/reviews"
+```
+#### Windows command line / Linux
+```
+curl -i -X POST -H "Content-Type: application/json" -d "{\"tourId\":\"4\",\"authorId\":\"12\",\"comment\":\"Testing Review\"}" "http://localhost:8080/pa165/rest/reviews"
 ```
 
 ```
@@ -386,7 +408,7 @@ Date: Mon, 18 Dec 2017 21:12:03 GMT
 ### Delete review
 
 ```
-curl -i -X DELETE 'http://localhost:8080/pa165/rest/reviews/3'
+curl -i -X DELETE "http://localhost:8080/pa165/rest/reviews/3"
 ```
 
 ```
