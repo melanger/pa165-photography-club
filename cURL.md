@@ -170,7 +170,7 @@ Content-Length: 0
        
 ## Single equipment
 
-### Get a equipment by ID
+### Get an equipment by ID
 
 ```
 curl -i "http://localhost:8080/pa165/rest/equipment/15"
@@ -185,7 +185,7 @@ ETag: "0582c115e333c7c3efe2ac5aabb69d9cd"
 Content-Type: application/json;charset=UTF-8
 Content-Length: 270
 
-{"id":15,"owner":{"id":13,"name":"Cyril","birthDate":"1999-05-28","address":"V Praze blaze","motivation":"want to try","experience":"none","gender":"MALE","photo":"link","email":"cyrul@mail","password":"Cyrilko","userRole":"USER"},"name":"TestEquipment","type":"CAMERA"}
+{"id":15,"owner":{"id":13,"name":"Cyril","birthDate":"1999-05-28","address":"V Praze blaze","motivation":"want to try","experience":"none","gender":"MALE","photo":"link","email":"cyrul@mail","userRole":"MEMBER"},"name":"TestEquipment","type":"CAMERA"}
 ```
 
 ### Delete Equipment
@@ -222,31 +222,10 @@ Content-Type: application/json;charset=UTF-8
 Content-Length: 669
 Date: Mon, 18 Dec 2017 19:55:03 GMT
 
-[{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","password":"AntonIsBest","userRole":"MANAGER"},{"id":12,"name":"Ben","birthDate":"1998-03-16","address":"address 11 Brno","motivation":"for fun","experience":"beginner","gender":"MALE","photo":"profilepic","email":"ben@mail.com","password":"BenisBen","userRole":"MEMBER"},{"id":13,"name":"Cyril","birthDate":"1999-05-28","address":"V Praze blaze","motivation":"want to try","experience":"none","gender":"MALE","photo":"link","email":"cyrul@mail","password":"Cyrilko","userRole":"MEMBER"}]
+[{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","userRole":"MANAGER"},{"id":12,"name":"Ben","birthDate":"1998-03-16","address":"address 11 Brno","motivation":"for fun","experience":"beginner","gender":"MALE","photo":"profilepic","email":"ben@mail.com","userRole":"MEMBER"},{"id":13,"name":"Cyril","birthDate":"1999-05-28","address":"V Praze blaze","motivation":"want to try","experience":"none","gender":"MALE","photo":"link","email":"cyrul@mail","userRole":"MEMBER"}]
 ```
 
-## Single member
-
-### Get member by ID
-
-```
-curl -i "http://localhost:8080/pa165/rest/members/11"
-```
-
-```
-HTTP/1.1 200 OK
-Server: Apache-Coyote/1.1
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
-ETag: "0ea7860bb61f5c7fb24430338dca22704"
-Content-Type: application/json;charset=UTF-8
-Content-Length: 226
-Date: Mon, 18 Dec 2017 19:59:26 GMT
-
-{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","password":"AntonIsBest","userRole":"MANAGER"}
-```
-
-### Get member by Name
+### Get a member by name
 
 ```
 curl -i "http://localhost:8080/pa165/rest/members?name=Anton"
@@ -262,10 +241,10 @@ Content-Type: application/json;charset=UTF-8
 Content-Length: 228
 Date: Mon, 18 Dec 2017 20:07:18 GMT
 
-[{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","password":"AntonIsBest","userRole":"MANAGER"}]
+[{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","userRole":"MANAGER"}]
 ```
 
-### Create member
+### Create a member
 
 #### Powershell
 ```
@@ -282,16 +261,38 @@ HTTP/1.1 201 Created
 Server: Apache-Coyote/1.1
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
-Location: http://localhost:8084/pa165/rest/members/14
+Location: http://localhost:8084/pa165/rest/members/16
 Content-Length: 0
 Date: Mon, 18 Dec 2017 21:31:41 GMT
 ```
 
 
+
+## Single member
+
+### Get a member by ID
+
+```
+curl -i "http://localhost:8080/pa165/rest/members/11"
+```
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+ETag: "0ea7860bb61f5c7fb24430338dca22704"
+Content-Type: application/json;charset=UTF-8
+Content-Length: 226
+Date: Mon, 18 Dec 2017 19:59:26 GMT
+
+{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","userRole":"MANAGER"}
+```
+
 ### Remove member
 
 ```
-curl -i -X DELETE "http://localhost:8080/pa165/rest/members/11"
+curl -i -X DELETE "http://localhost:8080/pa165/rest/members/16"
 ```
 
 ```
@@ -320,7 +321,7 @@ Content-Type: application/json;charset=UTF-8
 Content-Length: 835
 Date: Mon, 18 Dec 2017 20:38:31 GMT
 
-[{"id":6,"owner":{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","password":"AntonIsBest","userRole":"MANAGER"},"name":"Nikon 4x","type":"LENS"},{"id":7,"owner":{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","password":"AntonIsBest","userRole":"MANAGER"},"name":"CanonG6","type":"CAMERA"},{"id":8,"owner":{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","password":"AntonIsBest","userRole":"MANAGER"},"name":"MikonaZZ","type":"LIGHTNING"}]
+[{"id":6,"owner":{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","userRole":"MANAGER"},"name":"Nikon 4x","type":"LENS"},{"id":7,"owner":{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","userRole":"MANAGER"},"name":"CanonG6","type":"CAMERA"},{"id":8,"owner":{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","userRole":"MANAGER"},"name":"MikonaZZ","type":"LIGHTNING"}]
 ```
 
 ### Get reviews by Author
@@ -363,36 +364,15 @@ Date: Mon, 18 Dec 2017 20:54:20 GMT
 [{"id":1,"tour":null,"author":null,"comment":"great","rating":10},{"id":2,"tour":null,"author":null,"comment":"ok","rating":5},{"id":3,"tour":null,"author":null,"comment":"bad","rating":2}]
 ```
 
-## Single review
-
-### Get review by ID
-
-```
-curl -i "http://localhost:8080/pa165/rest/reviews/2"
-```
-
-```
-HTTP/1.1 200 OK
-Server: Apache-Coyote/1.1
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
-ETag: "0140577e1554242a97308753cc26fa443"
-Content-Type: application/json;charset=UTF-8
-Content-Length: 60
-Date: Mon, 18 Dec 2017 20:55:10 GMT
-
-{"id":2,"tour":null,"author":null,"comment":"ok","rating":5}
-```
-
-### Create review
+### Create a review
 
 #### Powershell
 ```
-curl -i -X POST -H "Content-Type: application/json" -d '{\"tourId\":\"4\",\"authorId\":\"12\",\"comment\":\"Testing Review\"}' "http://localhost:8080/pa165/rest/reviews"
+curl -i -X POST -H "Content-Type: application/json" -d '{\"tourId\":\"4\",\"authorId\":\"12\",\"comment\":\"TestingReview\"}' "http://localhost:8080/pa165/rest/reviews"
 ```
 #### Windows command line / Linux
 ```
-curl -i -X POST -H "Content-Type: application/json" -d "{\"tourId\":\"4\",\"authorId\":\"12\",\"comment\":\"Testing Review\"}" "http://localhost:8080/pa165/rest/reviews"
+curl -i -X POST -H "Content-Type: application/json" -d "{\"tourId\":\"4\",\"authorId\":\"12\",\"comment\":\"TestingReview\"}" "http://localhost:8080/pa165/rest/reviews"
 ```
 
 ```
@@ -405,10 +385,34 @@ Content-Length: 0
 Date: Mon, 18 Dec 2017 21:12:03 GMT
 ```
 
-### Delete review
+
+
+## Single review
+
+### Get review by ID
 
 ```
-curl -i -X DELETE "http://localhost:8080/pa165/rest/reviews/3"
+curl -i "http://localhost:8080/pa165/rest/reviews/17"
+```
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+ETag: "0140577e1554242a97308753cc26fa443"
+Content-Type: application/json;charset=UTF-8
+Content-Length: 60
+Date: Mon, 18 Dec 2017 20:55:10 GMT
+
+{"id":17,"tour":{"name":"Louvre","theme":"PORTRAITS","date":"2015-05-05","participants":[{"id":11,"name":"Anton","birthDate":"1995-11-09","address":"unknown","motivation":"to be the best","experience":"moderate","gender":"MALE","photo":"photolink","email":"anton@mail","userRole":"MANAGER"},{"id":13,"name":"Cyril","birthDate":"1999-05-28","address":"V Praze blaze","motivation":"want to try","experience":"none","gender":"MALE","photo":"link","email":"cyrul@mail","userRole":"MEMBER"}],"id":4},"author":{"id":12,"name":"Ben","birthDate":"1998-03-16","address":"address 11 Brno","motivation":"for fun","experience":"beginner","gender":"MALE","photo":"profilepic","email":"ben@mail.com","userRole":"MEMBER"},"comment":"TestingReview","rating":0}
+```
+
+
+### Delete a review
+
+```
+curl -i -X DELETE "http://localhost:8080/pa165/rest/reviews/17"
 ```
 
 ```
