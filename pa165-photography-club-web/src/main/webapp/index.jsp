@@ -60,13 +60,13 @@
             <button type="button" class="close" aria-label="Close" ng-click="hideSuccessAlert()"> <span aria-hidden="true">&times;</span></button>
             <strong>Success !</strong> <span>{{successAlert}}</span>
         </div>
-        <div class="alert alert-info" role="alert" ng-if="currentUser">Welcome, {{ currentUser.name }}, you're logged in <div ng-if="isAuthorized(userRoles.manager)">as manager</div></div>
+        <div class="alert alert-info" role="alert" ng-if="currentUser">Welcome, {{ currentUser.name }}, you're logged in</div>
 
         <div ng-view></div>
     </div>
 
     <footer class="footer">
-        <p>&copy;&nbsp;2017</p>
+        <p>&copy;&nbsp;2017&nbsp;&mdash;&nbsp;2018</p>
     </footer>
 </div>
 </body>

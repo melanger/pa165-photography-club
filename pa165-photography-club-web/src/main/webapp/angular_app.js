@@ -137,8 +137,7 @@ pa165photoclubApp.run(function ($rootScope, AUTH_EVENTS, AuthService) {
 
 pa165photoclubApp.controller('AdminMemberProfileCtrl', function ($scope, $routeParams, $http, $location, $rootScope) {
     if (!$rootScope.currentUser) {
-      $scope.errorAlert = "You have to be logged in.";
-      return;
+      $rootScope.errorAlert = "You have to be logged in.";
     }
     $scope.equipment = {
             'name': '',
@@ -154,15 +153,15 @@ pa165photoclubApp.controller('AdminMemberProfileCtrl', function ($scope, $routeP
           data: equipment
       }).then(function success(response) {
           var equipment = response.data;
-          $scope.successAlert = 'A new equipment "' + equipment.name + '" was added';
+          $rootScope.successAlert = 'A new equipment "' + equipment.name + '" was added';
           $location.path("/admin/profile");
       }, function error(response) {
           switch (response.data.code) {
               case 'InvalidRequestException':
-                  $scope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                  $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
                   break;
               default:
-                  $scope.errorAlert = 'Cannot create equipment ! Reason given by the server: '+response.data.message;
+                  $rootScope.errorAlert = 'Cannot create equipment ! Reason given by the server: '+response.data.message;
                   break;
           }
       });
@@ -219,7 +218,7 @@ function loadAdminTours($http, $scope) {
 
 pa165photoclubApp.controller('AdminToursCtrl', function ($scope, $http, $rootScope) {
     loadAdminTours($http, $scope);
-    $scope.deleteTour = function (tour) {           
+    $scope.deleteTour = function (tour) {
         $http.delete('/pa165/rest/tours/' + tour.id).then(
             function success(response) {
                 $rootScope.successAlert = 'Deleted tour "' + tour.name + '"';
