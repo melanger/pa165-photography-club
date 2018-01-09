@@ -120,17 +120,19 @@ pa165photoclubApp.controller('ApplicationController', function ($scope,
 });
 
 pa165photoclubApp.run(function ($rootScope, AUTH_EVENTS, AuthService) {
-  $rootScope.$on('$stateChangeStart', function (event, next) {
+  $rootScope.$on('$routeChangeStart', function (event, next) {
     var authorizedRoles = next.roles || [];
-    if (authorizedRoles && !AuthService.isAuthorized(authorizedRoles)) {
+    if (authorizedRoles && authorizedRoles.length > 0 && !AuthService.isAuthorized(authorizedRoles)) {
       event.preventDefault();
       if (AuthService.isAuthenticated()) {
-        // user is not allowed
-        $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+        $rootScope.errorAlert = "You do not have sufficient permissions (user role).";
       } else {
-        // user is not logged in
-        $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+        $rootScope.errorAlert = "You have to be logged in.";
       }
+    } else {
+      $rootScope.hideSuccessAlert();
+      $rootScope.hideWarningAlert();
+      $rootScope.hideErrorAlert();
     }
   });
 });
@@ -217,6 +219,9 @@ function loadAdminTours($http, $scope) {
 }
 
 pa165photoclubApp.controller('AdminToursCtrl', function ($scope, $http, $rootScope) {
+    if (!$rootScope.currentUser) {
+      $rootScope.errorAlert = "You have to be logged in.";
+    }
     loadAdminTours($http, $scope);
     $scope.deleteTour = function (tour) {
         $http.delete('/pa165/rest/tours/' + tour.id).then(
@@ -243,6 +248,9 @@ pa165photoclubApp.controller('AdminToursCtrl', function ($scope, $http, $rootSco
 
 pa165photoclubApp.controller('AdminCreateTourCtrl',
     function ($scope, $routeParams, $http, $location, $rootScope) {
+        if (!$rootScope.currentUser) {
+          $rootScope.errorAlert = "You have to be logged in.";
+        }
         
         $scope.themes = ['PORTRAITS', 'LANDSCAPE'];
         $scope.tour = {

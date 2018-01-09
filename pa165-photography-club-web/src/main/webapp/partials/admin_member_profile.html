@@ -1,4 +1,4 @@
-<form name="form" novalidate class="form-horizontal">
+<form name="form" novalidate class="form-horizontal ng-hide" ng-show="currentUser">
     <h2>Add new equipment</h2>
     <input type=hidden value="{{ownerId}}" name=ownerId>
     <div class="form-group" ng-class="{'has-error': !(form.name.$valid)}">

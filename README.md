@@ -26,6 +26,18 @@ mvn tomcat7:run
 You can then access the web at http://localhost:8080/pa165/ or test the REST API using [cURL commands](https://github.com/melanger/pa165-photography-club/blob/master/cURL.md).
 You can also check out the API documentation at [pa165photographyclubrestapi.docs.apiary.io](https://pa165photographyclubrestapi.docs.apiary.io/) or view the API blueprint [apiary.apib](https://github.com/melanger/pa165-photography-club/blob/master/apiary.apib).
 
+Credentials for logging in:
+- regular user (member)
+  - ben@mail.com
+  - BenisBen
+- super user (manager)
+  - anton@mail
+  - AntonIsBest
+
+If you are not logged in, you can see public member profiles and tours.
+If you are logged in as a regular member, you can also add new equipment to your profile.
+If you are logged in as a manager, you can also manage tours (create and delete them).
+
 ## Team members
 - Pavel Břoušek (433364) aka @melanger
 - Denis Figula (410335) aka @DenisFigula
