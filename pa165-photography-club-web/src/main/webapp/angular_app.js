@@ -50,9 +50,11 @@ pa165photoclubApp.controller('LoginController', function ($scope, $rootScope, AU
   };
   $scope.login = function (credentials) {
     AuthService.login(credentials).then(function (user) {
+      $rootScope.hideErrorAlert();
       $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
       $rootScope.currentUser = user;
     }, function () {
+      $rootScope.errorAlert = "The username or the password were incorrect"
       $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
     });
   };
