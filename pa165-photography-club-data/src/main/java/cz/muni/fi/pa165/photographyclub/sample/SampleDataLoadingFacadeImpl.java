@@ -56,7 +56,10 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Review reviewsUfizzi[] = {negative};
         log.info("Reviews loaded");
         Tour louvre = tour("Louvre",LocalDate.of(2015,5,5),TourTheme.PORTRAITS, Arrays.asList(reviewsLouvre));
+        positive.setTour(louvre);
+        neutral.setTour(louvre);
         Tour ufizzi = tour("Ufizzi",LocalDate.of(2016,3,6),TourTheme.LANDSCAPE,Arrays.asList(reviewsUfizzi));
+        negative.setTour(ufizzi);
         Tour ufizziArr[] = {ufizzi};
         Tour allArr[] = {louvre,ufizzi};
         log.info("Tours loaded");
@@ -80,7 +83,19 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Member cyril = member(Collections.emptyList(),Collections.emptyList(),"Cyril","want to try","none",LocalDate.of(1999,5,28),
                 Gender.MALE,"link",UserRole.MEMBER,"V Praze blaze","cyrul@mail","Cyrilko",Collections.emptyList());
         Member members[] = {anton,cyril};
+        anton.getTours().add(louvre);
+        cyril.getTours().add(louvre);
         louvre.setParticipants(Arrays.asList(members));
+        
+        positive.setAuthor(anton);
+        neutral.setAuthor(cyril);
+        negative.setAuthor(ben);
+        
+        Member[] members2 = {anton,ben,cyril};
+        anton.getTours().add(ufizzi);
+        ben.getTours().add(ufizzi);
+        cyril.getTours().add(ufizzi);
+        ufizzi.setParticipants(Arrays.asList(members2));
         log.info("Members loaded");
     }
 

@@ -202,10 +202,10 @@ pa165photoclubApp.controller('TourDetailCtrl', function ($scope, $rootScope, $ro
     $http.get('/pa165/rest/tours/' + tourId).then(function success(response) {
         $scope.tour = response.data;
         $http.get('/pa165/rest/tours/' + tourId + '/members').then(function (response) {
-            $scope.tour.member = response.data;
+            $scope.tour.members = response.data;
         });
         $http.get('/pa165/rest/tours/' + tourId + '/reviews').then(function (response) {
-            $scope.tour.review = response.data;
+            $scope.tour.reviews = response.data;
         })
     }, function error(response) {
         console.log(response);
