@@ -155,7 +155,7 @@ pa165photoclubApp.controller('AdminMemberProfileCtrl', function ($scope, $routeP
           data: equipment
       }).then(function success(response) {
           var equipment = response.data;
-          $rootScope.successAlert = 'A new equipment "' + equipment.name + '" was added';
+          $rootScope.successAlert = 'New equipment was added';
           $location.path("/admin/profile");
       }, function error(response) {
           switch (response.data.code) {
